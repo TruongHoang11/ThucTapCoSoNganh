@@ -110,6 +110,7 @@
             this.btnHuy.TabStop = false;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // label4
             // 

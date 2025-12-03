@@ -61,6 +61,7 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPhanTramThi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPhanTramLop)).BeginInit();
@@ -111,8 +112,9 @@
             "H"});
             this.cmbLoai.Location = new System.Drawing.Point(839, 16);
             this.cmbLoai.Name = "cmbLoai";
-            this.cmbLoai.Size = new System.Drawing.Size(148, 30);
+            this.cmbLoai.Size = new System.Drawing.Size(135, 30);
             this.cmbLoai.TabIndex = 3;
+            this.cmbLoai.SelectedIndexChanged += new System.EventHandler(this.cmbLoai_SelectedIndexChanged);
             // 
             // cmbMaMonHoc
             // 
@@ -133,7 +135,7 @@
             // 
             // numPhanTramThi
             // 
-            this.numPhanTramThi.Location = new System.Drawing.Point(338, 63);
+            this.numPhanTramThi.Location = new System.Drawing.Point(333, 64);
             this.numPhanTramThi.Name = "numPhanTramThi";
             this.numPhanTramThi.Size = new System.Drawing.Size(70, 30);
             this.numPhanTramThi.TabIndex = 5;
@@ -141,51 +143,55 @@
             // 
             // numPhanTramLop
             // 
-            this.numPhanTramLop.Location = new System.Drawing.Point(127, 63);
+            this.numPhanTramLop.Location = new System.Drawing.Point(124, 63);
             this.numPhanTramLop.Name = "numPhanTramLop";
             this.numPhanTramLop.Size = new System.Drawing.Size(74, 30);
             this.numPhanTramLop.TabIndex = 4;
             // 
             // btnTaiLai
             // 
-            this.btnTaiLai.Location = new System.Drawing.Point(307, 112);
+            this.btnTaiLai.Location = new System.Drawing.Point(618, 114);
             this.btnTaiLai.Name = "btnTaiLai";
             this.btnTaiLai.Size = new System.Drawing.Size(101, 30);
             this.btnTaiLai.TabIndex = 2;
             this.btnTaiLai.Text = "Tải Lại";
             this.btnTaiLai.UseVisualStyleBackColor = true;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(207, 112);
+            this.btnXoa.Location = new System.Drawing.Point(492, 113);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(94, 30);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(110, 112);
+            this.btnSua.Location = new System.Drawing.Point(365, 114);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(91, 30);
             this.btnSua.TabIndex = 2;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(12, 112);
+            this.btnThem.Location = new System.Drawing.Point(257, 114);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(86, 30);
             this.btnThem.TabIndex = 2;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 67);
+            this.label4.Location = new System.Drawing.Point(219, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 22);
             this.label4.TabIndex = 0;
@@ -194,7 +200,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(807, 67);
+            this.label8.Location = new System.Drawing.Point(881, 67);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 22);
             this.label8.TabIndex = 0;
@@ -203,7 +209,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(610, 67);
+            this.label5.Location = new System.Drawing.Point(643, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 22);
             this.label5.TabIndex = 0;
@@ -211,15 +217,16 @@
             // 
             // txbDiemTB
             // 
-            this.txbDiemTB.Location = new System.Drawing.Point(899, 63);
+            this.txbDiemTB.Location = new System.Drawing.Point(977, 63);
             this.txbDiemTB.Name = "txbDiemTB";
             this.txbDiemTB.Size = new System.Drawing.Size(88, 30);
             this.txbDiemTB.TabIndex = 8;
+            this.txbDiemTB.TextChanged += new System.EventHandler(this.txbDiemTB_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(424, 67);
+            this.label6.Location = new System.Drawing.Point(424, 68);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 22);
             this.label6.TabIndex = 0;
@@ -227,7 +234,7 @@
             // 
             // txbDiemThi
             // 
-            this.txbDiemThi.Location = new System.Drawing.Point(702, 63);
+            this.txbDiemThi.Location = new System.Drawing.Point(740, 62);
             this.txbDiemThi.Name = "txbDiemThi";
             this.txbDiemThi.Size = new System.Drawing.Size(88, 30);
             this.txbDiemThi.TabIndex = 7;
@@ -253,7 +260,7 @@
             // 
             // txbDiemLop
             // 
-            this.txbDiemLop.Location = new System.Drawing.Point(521, 63);
+            this.txbDiemLop.Location = new System.Drawing.Point(526, 63);
             this.txbDiemLop.Name = "txbDiemLop";
             this.txbDiemLop.Size = new System.Drawing.Size(83, 30);
             this.txbDiemLop.TabIndex = 6;
@@ -308,7 +315,8 @@
             this.Column6,
             this.Column7,
             this.Column8,
-            this.Column9});
+            this.Column9,
+            this.Column10});
             this.dgvQuanLyDiem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQuanLyDiem.Location = new System.Drawing.Point(0, 157);
             this.dgvQuanLyDiem.MultiSelect = false;
@@ -321,6 +329,7 @@
             this.dgvQuanLyDiem.Size = new System.Drawing.Size(1103, 383);
             this.dgvQuanLyDiem.TabIndex = 7;
             this.dgvQuanLyDiem.TabStop = false;
+            this.dgvQuanLyDiem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyDiem_CellClick);
             this.dgvQuanLyDiem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyDiem_CellContentClick);
             // 
             // Column1
@@ -396,6 +405,15 @@
             this.Column9.ReadOnly = true;
             this.Column9.Width = 125;
             // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "NamHoc";
+            this.Column10.HeaderText = "NĂM HỌC";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 120;
+            // 
             // QuanLyDiem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -408,6 +426,7 @@
             this.Name = "QuanLyDiem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Điểm";
+            this.Load += new System.EventHandler(this.QuanLyDiem_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPhanTramThi)).EndInit();
@@ -434,15 +453,6 @@
         private System.Windows.Forms.TextBox txbID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvQuanLyDiem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.ComboBox cmbMaSinhVien;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
@@ -452,5 +462,15 @@
         private System.Windows.Forms.ComboBox cmbLoai;
         private System.Windows.Forms.ComboBox cmbMaMonHoc;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
     }
 }
