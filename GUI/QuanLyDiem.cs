@@ -51,12 +51,12 @@ namespace Dayone.GUI
         private void btnTaiLai_Click(object sender, EventArgs e)
         {
             dgvQuanLyDiem.DataSource = BLL_Diem.Instance.DanhSach();
-            cmbMaSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+            //cmbMaSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
             cmbMaSinhVien.DisplayMember = "TenSV";
             cmbMaSinhVien.ValueMember = "MaSV";
-            cmbMaMH.DataSource = BBL_MonHoc.Instance.DanhSach();
-            cmbMaMonHoc.DisplayMember = "TenMH";
-            cmbMaMonHoc.ValueMember = "MaMH";
+            cmbMaMH.DataSource = BLL_MonHoc.Instance.DanhSach();
+            cmbMaMH.DisplayMember = "TenMH";
+            cmbMaMH.ValueMember = "MaMH";
         }
 
         private void QuanLyDiem_Load(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace Dayone.GUI
         {
             
             string masv = cmbMaSinhVien.SelectedValue.ToString();
-            string mamh = cmbMaMonHoc.SelectedValue.ToString();
+            string mamh = cmbMaMH.SelectedValue.ToString();
             int phantramlop = (int)numPhanTramLop.Value;
             int phamtramthi = (int)numPhanTramThi.Value;
             float diemlop = float.Parse(txbDiemLop.Text);
@@ -88,7 +88,7 @@ namespace Dayone.GUI
         {
             int id = int.Parse(txbID.Text);
             string masv = cmbMaSinhVien.SelectedValue.ToString();
-            string mamh = cmbMaMonHoc.SelectedValue.ToString();
+            string mamh = cmbMaMH.SelectedValue.ToString();
             int phantramlop = (int)numPhanTramLop.Value;
             int phamtramthi = (int)numPhanTramThi.Value;
             float diemlop = float.Parse(txbDiemLop.Text);
@@ -117,7 +117,7 @@ namespace Dayone.GUI
         {
             txbID.Text = dgvQuanLyDiem.CurrentRow.Cells[0].Value.ToString();
             cmbMaSinhVien.SelectedValue = dgvQuanLyDiem.CurrentRow.Cells[1].Value.ToString();
-            cmbMaMonHoc.SelectedValue = dgvQuanLyDiem.CurrentRow.Cells[2].Value.ToString();
+            cmbMaMH.SelectedValue = dgvQuanLyDiem.CurrentRow.Cells[2].Value.ToString();
             numPhanTramLop.Value = int.Parse(dgvQuanLyDiem.CurrentRow.Cells[3].Value.ToString());
             numPhanTramThi.Value = int.Parse(dgvQuanLyDiem.CurrentRow.Cells[4].Value.ToString());
             txbDiemLop.Text = dgvQuanLyDiem.CurrentRow.Cells[5].Value.ToString();

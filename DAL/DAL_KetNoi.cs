@@ -9,20 +9,24 @@ using System.Data;
 
 namespace Dayone.DAL
 {
-    public class KetNoi
+    public class DAL_KetNoi
     {
         //Chuỗi kết nối cơ sở dữ liệu
         private string connectionString =
-            @"Data Source=LAPTOP-HSMJ4Q7E\MSSQLSERVER01; Initial Catalog=db_QLSV; Integrated Security=True;";
-
-        private static KetNoi instance; // ctr + r + e
-        public static KetNoi Instance
+            @"Data Source=HUY-TIEN\SQLEXPRESS; Initial Catalog=db_QLSV; Integrated Security=True;";
+        public string ConnectionString
         {
-            get { if (instance == null) instance = new KetNoi(); return instance; }
+            get { return connectionString; }
+        }
+
+        private static DAL_KetNoi instance; // ctr + r + e
+        public static DAL_KetNoi Instance
+        {
+            get { if (instance == null) instance = new DAL_KetNoi(); return instance; }
             private set => instance = value;
         }
 
-        private KetNoi() { }
+        private DAL_KetNoi() { }
 
         // lấy danh sách 
         public DataTable ExcuteQuery(string query, object[] parameter = null)

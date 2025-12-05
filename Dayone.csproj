@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLL_Diem.cs" />
+    <Compile Include="BLL\BLL_MonHoc.cs" />
     <Compile Include="BLL\BLL_TaiKhoan.cs" />
     <Compile Include="DAL\DAL_Diem.cs" />
-    <Compile Include="DAL\KetNoi.cs" />
+    <Compile Include="DAL\DAL_MonHoc.cs" />
+    <Compile Include="DAL\DAL_KetNoi.cs" />
     <Compile Include="DAL\DAL_TaiKhoan.cs" />
     <Compile Include="GUI\BangDiemSinhVien.cs">
       <SubType>Form</SubType>

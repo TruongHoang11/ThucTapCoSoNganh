@@ -30,7 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbLoai = new System.Windows.Forms.ComboBox();
-            this.cmbMaMonHoc = new System.Windows.Forms.ComboBox();
+            this.cmbMaMH = new System.Windows.Forms.ComboBox();
             this.cmbMaSinhVien = new System.Windows.Forms.ComboBox();
             this.numPhanTramThi = new System.Windows.Forms.NumericUpDown();
             this.numPhanTramLop = new System.Windows.Forms.NumericUpDown();
@@ -71,7 +71,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.cmbLoai);
-            this.panel1.Controls.Add(this.cmbMaMonHoc);
+            this.panel1.Controls.Add(this.cmbMaMH);
             this.panel1.Controls.Add(this.cmbMaSinhVien);
             this.panel1.Controls.Add(this.numPhanTramThi);
             this.panel1.Controls.Add(this.numPhanTramLop);
@@ -116,13 +116,13 @@
             this.cmbLoai.TabIndex = 3;
             this.cmbLoai.SelectedIndexChanged += new System.EventHandler(this.cmbLoai_SelectedIndexChanged);
             // 
-            // cmbMaMonHoc
+            // cmbMaMH
             // 
-            this.cmbMaMonHoc.FormattingEnabled = true;
-            this.cmbMaMonHoc.Location = new System.Drawing.Point(561, 16);
-            this.cmbMaMonHoc.Name = "cmbMaMonHoc";
-            this.cmbMaMonHoc.Size = new System.Drawing.Size(209, 30);
-            this.cmbMaMonHoc.TabIndex = 2;
+            this.cmbMaMH.FormattingEnabled = true;
+            this.cmbMaMH.Location = new System.Drawing.Point(561, 16);
+            this.cmbMaMH.Name = "cmbMaMH";
+            this.cmbMaMH.Size = new System.Drawing.Size(209, 30);
+            this.cmbMaMH.TabIndex = 2;
             // 
             // cmbMaSinhVien
             // 
@@ -460,7 +460,7 @@
         private System.Windows.Forms.TextBox txbDiemThi;
         private System.Windows.Forms.TextBox txbDiemLop;
         private System.Windows.Forms.ComboBox cmbLoai;
-        private System.Windows.Forms.ComboBox cmbMaMonHoc;
+        private System.Windows.Forms.ComboBox cmbMaMH;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

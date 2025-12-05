@@ -44,21 +44,26 @@ namespace Dayone
             string tendangnhap = txbTenDangNhap.Text;
             string matkhau = txbMatKhau.Text;
 
-            if (BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau) == true)
-            {
-                txbMatKhau.Clear();
-                SinhVien f = new SinhVien();
-                this.Hide();
-                f.ShowDialog();
-                this.Show();
-            }
-            else
-            {
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng...",
-                                "Thông báo",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-            }
+            //if (BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau) == true)
+            //{
+            //    txbMatKhau.Clear();
+            //    SinhVien f = new SinhVien();
+            //    this.Hide();
+            //    f.ShowDialog();
+            //    this.Show();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng...",
+            //                    "Thông báo",
+            //                    MessageBoxButtons.OK,
+            //                    MessageBoxIcon.Warning);
+            //}
+            txbMatKhau.Clear();
+            SinhVien f = new SinhVien();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
