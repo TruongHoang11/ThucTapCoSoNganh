@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.quảnLýToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnQuanLy = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýKhoaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýLớpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýCốVấnHọcTậpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +41,10 @@
             this.DoimatkhauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnTaiLai = new System.Windows.Forms.Button();
+            this.cbbMaLop = new System.Windows.Forms.ComboBox();
+            this.cbbMaCoVan = new System.Windows.Forms.ComboBox();
+            this.cbbMaKhoa = new System.Windows.Forms.ComboBox();
+            this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
@@ -49,11 +52,8 @@
             this.rbNam = new System.Windows.Forms.RadioButton();
             this.dtpkNgaySinh = new System.Windows.Forms.DateTimePicker();
             this.dtpkNhapHoc = new System.Windows.Forms.DateTimePicker();
-            this.txbMaCV = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.TxbMaKhoa = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txbMaLop = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txbQueQuan = new System.Windows.Forms.TextBox();
@@ -88,7 +88,7 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quảnLýToolStripMenuItem,
+            this.btnQuanLy,
             this.tàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -97,18 +97,19 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // quảnLýToolStripMenuItem
+            // btnQuanLy
             // 
-            this.quảnLýToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.quảnLýKhoaToolStripMenuItem,
             this.quảnLýLớpToolStripMenuItem,
             this.quảnLýCốVấnHọcTậpToolStripMenuItem,
             this.quảnLýMônHọcToolStripMenuItem,
             this.quảnLýTàiKhoảnToolStripMenuItem,
             this.quảnLýĐiểmToolStripMenuItem});
-            this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(79, 26);
-            this.quảnLýToolStripMenuItem.Text = "Quản Lý ";
+            this.btnQuanLy.Name = "btnQuanLy";
+            this.btnQuanLy.Size = new System.Drawing.Size(79, 24);
+            this.btnQuanLy.Text = "Quản Lý ";
+            this.btnQuanLy.Click += new System.EventHandler(this.quảnLýToolStripMenuItem_Click);
             // 
             // quảnLýKhoaToolStripMenuItem
             // 
@@ -159,7 +160,7 @@
             this.DoimatkhauToolStripMenuItem,
             this.đăngXuấtToolStripMenuItem1});
             this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
-            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(91, 26);
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(91, 24);
             this.tàiKhoảnToolStripMenuItem.Text = "Tài Khoản ";
             // 
             // ThongtinchitietToolStripMenuItem
@@ -183,7 +184,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnTaiLai);
+            this.panel1.Controls.Add(this.cbbMaLop);
+            this.panel1.Controls.Add(this.cbbMaCoVan);
+            this.panel1.Controls.Add(this.cbbMaKhoa);
+            this.panel1.Controls.Add(this.btnLamMoi);
             this.panel1.Controls.Add(this.btnXoa);
             this.panel1.Controls.Add(this.btnSua);
             this.panel1.Controls.Add(this.btnThem);
@@ -191,11 +195,8 @@
             this.panel1.Controls.Add(this.rbNam);
             this.panel1.Controls.Add(this.dtpkNgaySinh);
             this.panel1.Controls.Add(this.dtpkNhapHoc);
-            this.panel1.Controls.Add(this.txbMaCV);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.TxbMaKhoa);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.txbMaLop);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.txbQueQuan);
@@ -210,62 +211,90 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 30);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1200, 175);
             this.panel1.TabIndex = 1;
             this.panel1.TabStop = true;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // btnTaiLai
+            // cbbMaLop
             // 
-            this.btnTaiLai.Location = new System.Drawing.Point(386, 126);
-            this.btnTaiLai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Size = new System.Drawing.Size(114, 32);
-            this.btnTaiLai.TabIndex = 10;
-            this.btnTaiLai.TabStop = false;
-            this.btnTaiLai.Text = "Tải Lại";
-            this.btnTaiLai.UseVisualStyleBackColor = true;
+            this.cbbMaLop.FormattingEnabled = true;
+            this.cbbMaLop.Location = new System.Drawing.Point(544, 80);
+            this.cbbMaLop.Name = "cbbMaLop";
+            this.cbbMaLop.Size = new System.Drawing.Size(121, 30);
+            this.cbbMaLop.TabIndex = 1;
+            // 
+            // cbbMaCoVan
+            // 
+            this.cbbMaCoVan.FormattingEnabled = true;
+            this.cbbMaCoVan.Location = new System.Drawing.Point(1028, 78);
+            this.cbbMaCoVan.Name = "cbbMaCoVan";
+            this.cbbMaCoVan.Size = new System.Drawing.Size(121, 30);
+            this.cbbMaCoVan.TabIndex = 12;
+            // 
+            // cbbMaKhoa
+            // 
+            this.cbbMaKhoa.FormattingEnabled = true;
+            this.cbbMaKhoa.Location = new System.Drawing.Point(782, 80);
+            this.cbbMaKhoa.Name = "cbbMaKhoa";
+            this.cbbMaKhoa.Size = new System.Drawing.Size(121, 30);
+            this.cbbMaKhoa.TabIndex = 11;
+            // 
+            // btnLamMoi
+            // 
+            this.btnLamMoi.Location = new System.Drawing.Point(386, 126);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(114, 32);
+            this.btnLamMoi.TabIndex = 10;
+            this.btnLamMoi.TabStop = false;
+            this.btnLamMoi.Text = "Làm mới";
+            this.btnLamMoi.UseVisualStyleBackColor = true;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(264, 126);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(114, 32);
             this.btnXoa.TabIndex = 10;
             this.btnXoa.TabStop = false;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
             this.btnSua.Location = new System.Drawing.Point(142, 126);
-            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(114, 32);
             this.btnSua.TabIndex = 10;
             this.btnSua.TabStop = false;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
             this.btnThem.Location = new System.Drawing.Point(15, 126);
-            this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(4);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(114, 32);
             this.btnThem.TabIndex = 10;
             this.btnThem.TabStop = false;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // rbNu
             // 
             this.rbNu.AutoSize = true;
             this.rbNu.Location = new System.Drawing.Point(996, 21);
-            this.rbNu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbNu.Margin = new System.Windows.Forms.Padding(4);
             this.rbNu.Name = "rbNu";
             this.rbNu.Size = new System.Drawing.Size(56, 26);
             this.rbNu.TabIndex = 4;
@@ -278,7 +307,7 @@
             this.rbNam.AutoSize = true;
             this.rbNam.Checked = true;
             this.rbNam.Location = new System.Drawing.Point(931, 21);
-            this.rbNam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbNam.Margin = new System.Windows.Forms.Padding(4);
             this.rbNam.Name = "rbNam";
             this.rbNam.Size = new System.Drawing.Size(68, 26);
             this.rbNam.TabIndex = 4;
@@ -290,7 +319,7 @@
             // 
             this.dtpkNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpkNgaySinh.Location = new System.Drawing.Point(674, 18);
-            this.dtpkNgaySinh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpkNgaySinh.Margin = new System.Windows.Forms.Padding(4);
             this.dtpkNgaySinh.Name = "dtpkNgaySinh";
             this.dtpkNgaySinh.Size = new System.Drawing.Size(157, 30);
             this.dtpkNgaySinh.TabIndex = 3;
@@ -298,58 +327,31 @@
             // dtpkNhapHoc
             // 
             this.dtpkNhapHoc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpkNhapHoc.Location = new System.Drawing.Point(325, 77);
-            this.dtpkNhapHoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpkNhapHoc.Location = new System.Drawing.Point(325, 80);
+            this.dtpkNhapHoc.Margin = new System.Windows.Forms.Padding(4);
             this.dtpkNhapHoc.Name = "dtpkNhapHoc";
             this.dtpkNhapHoc.Size = new System.Drawing.Size(129, 30);
             this.dtpkNhapHoc.TabIndex = 6;
             // 
-            // txbMaCV
-            // 
-            this.txbMaCV.Location = new System.Drawing.Point(943, 77);
-            this.txbMaCV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txbMaCV.MaxLength = 255;
-            this.txbMaCV.Name = "txbMaCV";
-            this.txbMaCV.Size = new System.Drawing.Size(90, 30);
-            this.txbMaCV.TabIndex = 9;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(838, 85);
+            this.label10.Location = new System.Drawing.Point(927, 86);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(104, 22);
             this.label10.TabIndex = 0;
             this.label10.Text = "Mã cố vấn :";
             // 
-            // TxbMaKhoa
-            // 
-            this.TxbMaKhoa.Location = new System.Drawing.Point(732, 77);
-            this.TxbMaKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TxbMaKhoa.MaxLength = 255;
-            this.TxbMaKhoa.Name = "TxbMaKhoa";
-            this.TxbMaKhoa.Size = new System.Drawing.Size(98, 30);
-            this.TxbMaKhoa.TabIndex = 8;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(642, 85);
+            this.label9.Location = new System.Drawing.Point(691, 86);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(94, 22);
             this.label9.TabIndex = 0;
             this.label9.Text = "Mã Khoa :";
-            // 
-            // txbMaLop
-            // 
-            this.txbMaLop.Location = new System.Drawing.Point(542, 77);
-            this.txbMaLop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txbMaLop.MaxLength = 255;
-            this.txbMaLop.Name = "txbMaLop";
-            this.txbMaLop.Size = new System.Drawing.Size(100, 30);
-            this.txbMaLop.TabIndex = 7;
             // 
             // label8
             // 
@@ -373,8 +375,8 @@
             // 
             // txbQueQuan
             // 
-            this.txbQueQuan.Location = new System.Drawing.Point(99, 77);
-            this.txbQueQuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbQueQuan.Location = new System.Drawing.Point(99, 80);
+            this.txbQueQuan.Margin = new System.Windows.Forms.Padding(4);
             this.txbQueQuan.MaxLength = 255;
             this.txbQueQuan.Name = "txbQueQuan";
             this.txbQueQuan.Size = new System.Drawing.Size(90, 30);
@@ -413,7 +415,7 @@
             // txbTenSV
             // 
             this.txbTenSV.Location = new System.Drawing.Point(371, 18);
-            this.txbTenSV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbTenSV.Margin = new System.Windows.Forms.Padding(4);
             this.txbTenSV.MaxLength = 255;
             this.txbTenSV.Name = "txbTenSV";
             this.txbTenSV.Size = new System.Drawing.Size(195, 30);
@@ -432,7 +434,7 @@
             // txbMaSV
             // 
             this.txbMaSV.Location = new System.Drawing.Point(186, 18);
-            this.txbMaSV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMaSV.Margin = new System.Windows.Forms.Padding(4);
             this.txbMaSV.MaxLength = 255;
             this.txbMaSV.Name = "txbMaSV";
             this.txbMaSV.Size = new System.Drawing.Size(108, 30);
@@ -454,7 +456,7 @@
             // 
             this.txbID.Enabled = false;
             this.txbID.Location = new System.Drawing.Point(54, 18);
-            this.txbID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbID.Margin = new System.Windows.Forms.Padding(4);
             this.txbID.Name = "txbID";
             this.txbID.Size = new System.Drawing.Size(52, 30);
             this.txbID.TabIndex = 0;
@@ -474,7 +476,7 @@
             this.panel2.Controls.Add(this.dgvSinhVien);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 205);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1200, 296);
             this.panel2.TabIndex = 2;
@@ -497,7 +499,7 @@
             this.Column10});
             this.dgvSinhVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSinhVien.Location = new System.Drawing.Point(0, 0);
-            this.dgvSinhVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvSinhVien.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSinhVien.MultiSelect = false;
             this.dgvSinhVien.Name = "dgvSinhVien";
             this.dgvSinhVien.ReadOnly = true;
@@ -508,10 +510,12 @@
             this.dgvSinhVien.Size = new System.Drawing.Size(1200, 296);
             this.dgvSinhVien.TabIndex = 0;
             this.dgvSinhVien.TabStop = false;
+            this.dgvSinhVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellClick);
             this.dgvSinhVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellContentClick);
             // 
             // Column1
             // 
+            this.Column1.DataPropertyName = "Id";
             this.Column1.HeaderText = "ID";
             this.Column1.MaxInputLength = 255;
             this.Column1.MinimumWidth = 6;
@@ -521,6 +525,7 @@
             // 
             // Column2
             // 
+            this.Column2.DataPropertyName = "MaSV";
             this.Column2.HeaderText = "MÃ SINH VIÊN";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
@@ -529,6 +534,7 @@
             // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "TenSV";
             this.Column3.HeaderText = "TÊN SINH VIÊN";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
@@ -537,6 +543,7 @@
             // 
             // Column4
             // 
+            this.Column4.DataPropertyName = "NgaySinh";
             this.Column4.HeaderText = "NGÀY SINH ";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
@@ -545,6 +552,7 @@
             // 
             // Column5
             // 
+            this.Column5.DataPropertyName = "GioiTinh";
             this.Column5.HeaderText = "GIỚI TÍNH ";
             this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
@@ -553,6 +561,7 @@
             // 
             // Column6
             // 
+            this.Column6.DataPropertyName = "QueQuan";
             this.Column6.HeaderText = "QUÊ QUÁN";
             this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
@@ -561,6 +570,7 @@
             // 
             // Column7
             // 
+            this.Column7.DataPropertyName = "NgayNhapHoc";
             this.Column7.HeaderText = "NGÀY NHẬP HỌC";
             this.Column7.MinimumWidth = 6;
             this.Column7.Name = "Column7";
@@ -569,6 +579,7 @@
             // 
             // Column8
             // 
+            this.Column8.DataPropertyName = "MaLop";
             this.Column8.HeaderText = "MÃ LỚP";
             this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
@@ -577,6 +588,7 @@
             // 
             // Column9
             // 
+            this.Column9.DataPropertyName = "MaKhoa";
             this.Column9.HeaderText = "MÃ KHOA";
             this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
@@ -585,6 +597,7 @@
             // 
             // Column10
             // 
+            this.Column10.DataPropertyName = "MaCVHT";
             this.Column10.HeaderText = "MÃ CỐ VẤN";
             this.Column10.MinimumWidth = 6;
             this.Column10.Name = "Column10";
@@ -601,10 +614,11 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SinhVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Sinh Viên";
+            this.Load += new System.EventHandler(this.SinhVien_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -619,7 +633,7 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnQuanLy;
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýKhoaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýLớpToolStripMenuItem;
@@ -638,18 +652,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txbMaCV;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox TxbMaKhoa;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txbMaLop;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RadioButton rbNu;
         private System.Windows.Forms.RadioButton rbNam;
         private System.Windows.Forms.DateTimePicker dtpkNgaySinh;
         private System.Windows.Forms.DateTimePicker dtpkNhapHoc;
-        private System.Windows.Forms.Button btnTaiLai;
+        private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
@@ -658,6 +669,9 @@
         private System.Windows.Forms.ToolStripMenuItem quảnLýTàiKhoảnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem đăngXuấtToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem quảnLýĐiểmToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbbMaLop;
+        private System.Windows.Forms.ComboBox cbbMaCoVan;
+        private System.Windows.Forms.ComboBox cbbMaKhoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

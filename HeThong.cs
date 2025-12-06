@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace Dayone
 {
-    
-
-
     // mã hóa mật khẩu 
-
     public class HeThong
     {
-
         public static string TENDANGNHAP = "";
         public static string LOAITAIKHOAN = "";
         public static string Hash(string text)

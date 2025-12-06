@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Data;
 
 
 namespace Dayone.DAL
@@ -29,39 +30,96 @@ namespace Dayone.DAL
         private DAL_KetNoi() { }
 
         // lấy danh sách 
+        //public DataTable ExcuteQuery(string query, object[] parameter = null)
+        //{
+        //    DataTable data = new DataTable();
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+
+        //        SqlCommand command = new SqlCommand(query, connection);
+        //        if (parameter != null)
+        //        {
+        //            string[] listParams = query.Split(' ');
+
+        //            int i = 0;
+        //            foreach (string item in listParams)
+        //            {
+        //                if (item.Contains('@'))
+        //                {
+        //                    command.Parameters.AddWithValue(item, parameter[i]);
+        //                    i++;
+        //                }
+        //            }
+        //        }
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        //        adapter.Fill(data);
+        //        connection.Close();
+        //    }
+
+        //    return data;
+        //}
+
+
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 SqlCommand command = new SqlCommand(query, connection);
+
                 if (parameter != null)
                 {
-                    string[] listParams = query.Split(' ');
-
+                    var matches = Regex.Matches(query, @"@\w+");
                     int i = 0;
-                    foreach (string item in listParams)
+
+                    foreach (Match m in matches)
                     {
-                        if (item.Contains('@'))
-                        {
-                            command.Parameters.AddWithValue(item, parameter[i]);
-                            i++;
-                        }
+                        command.Parameters.AddWithValue(m.Value, parameter[i]);
+                        i++;
                     }
                 }
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(data);
-                connection.Close();
             }
-
             return data;
         }
 
 
         // thêm , sửa , xóa 
+        //public bool ExecuteNonQuery(string query, object[] parameter = null)
+        //{
+        //    int data = 0;
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+
+        //        SqlCommand command = new SqlCommand(query, connection);
+        //        if (parameter != null)
+        //        {
+        //            string[] listParams = query.Split(' ');
+        //            int i = 0;
+
+        //            foreach (string item in listParams)
+        //            {
+        //                if (item.Contains('@'))
+        //                {
+        //                    command.Parameters.AddWithValue(item, parameter[i]);
+        //                    i++;
+        //                }
+        //            }
+        //        }
+
+        //        data = command.ExecuteNonQuery();
+        //        connection.Close();
+        //    }
+        //    return data > 0;
+        //}
         public bool ExecuteNonQuery(string query, object[] parameter = null)
         {
             int data = 0;
@@ -70,23 +128,20 @@ namespace Dayone.DAL
                 connection.Open();
 
                 SqlCommand command = new SqlCommand(query, connection);
+
                 if (parameter != null)
                 {
-                    string[] listParams = query.Split(' ');
+                    var matches = Regex.Matches(query, @"@\w+");
                     int i = 0;
 
-                    foreach (string item in listParams)
+                    foreach (Match m in matches)
                     {
-                        if (item.Contains('@'))
-                        {
-                            command.Parameters.AddWithValue(item, parameter[i]);
-                            i++;
-                        }
+                        command.Parameters.AddWithValue(m.Value, parameter[i]);
+                        i++;
                     }
                 }
 
                 data = command.ExecuteNonQuery();
-                connection.Close();
             }
             return data > 0;
         }
