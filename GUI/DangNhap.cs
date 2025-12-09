@@ -71,7 +71,7 @@ namespace Dayone
             DoiMatKhau f = new DoiMatKhau();
             f.Show();
 
-            
+
         }
     }
 }

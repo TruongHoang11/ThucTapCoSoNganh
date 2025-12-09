@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BLL_CoVanHocTap.cs" />
     <Compile Include="BLL\BLL_Diem.cs" />
     <Compile Include="BLL\BLL_Khoa.cs" />
     <Compile Include="BLL\BLL_Lop.cs" />
     <Compile Include="BLL\BLL_MonHoc.cs" />
     <Compile Include="BLL\BLL_SinhVien.cs" />
     <Compile Include="BLL\BLL_TaiKhoan.cs" />
+    <Compile Include="DAL\DAL_CoVanHocTap.cs" />
     <Compile Include="DAL\DAL_Diem.cs" />
     <Compile Include="DAL\DAL_Khoa.cs" />
     <Compile Include="DAL\DAL_Lop.cs" />
@@ -107,7 +109,9 @@
     <Compile Include="GUI\QuanLyTaiKhoan.Designer.cs">
       <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\SinhVien.cs" />
+    <Compile Include="GUI\SinhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\SinhVien.Designer.cs">
       <DependentUpon>SinhVien.cs</DependentUpon>
     </Compile>
