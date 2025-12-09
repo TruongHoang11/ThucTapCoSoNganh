@@ -21,11 +21,11 @@ namespace Dayone.BLL
         {
             return DAL.DAL_CoVanHocTap.Instance.DanhSach();
         }
-        public bool Them(string macovan, string tencovan, string ngaysinh, string gioitinh, string makhoa, string malop)
+        public bool Them(string macovan, string tencovan, DateTime ngaysinh, string gioitinh, string makhoa, string malop)
         {
             return DAL.DAL_CoVanHocTap.Instance.Them(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop);
         }
-        public bool Sua(string macovan, string tencovan, string ngaysinh, string gioitinh, string makhoa, string malop, int id)
+        public bool Sua(string macovan, string tencovan, DateTime ngaysinh, string gioitinh, string makhoa, string malop, int id)
         {
             return DAL.DAL_CoVanHocTap.Instance.Sua(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop, id);
         }

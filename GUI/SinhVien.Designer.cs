@@ -225,6 +225,7 @@
             this.cbbMaLop.Name = "cbbMaLop";
             this.cbbMaLop.Size = new System.Drawing.Size(121, 30);
             this.cbbMaLop.TabIndex = 1;
+            this.cbbMaLop.SelectedIndexChanged += new System.EventHandler(this.cbbMaLop_SelectedIndexChanged);
             // 
             // cbbMaCoVan
             // 

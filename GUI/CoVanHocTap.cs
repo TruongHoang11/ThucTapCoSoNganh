@@ -33,7 +33,7 @@ namespace Dayone.GUI
 
         }
 
-        public object BLL_Khoa { get; private set; }
+        //public object BLL_Khoa { get; private set; }
 
         private void fQuanLyCoVanHocTap_Load(object sender, EventArgs e)
         {
@@ -42,29 +42,29 @@ namespace Dayone.GUI
         private void btnTaiLai_Click(object sender, EventArgs e)
         {
             dgvCoVanHocTap.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
-            //cmbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
+            cmbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cmbMaKhoa.DisplayMember = "TenKhoa";
             cmbMaKhoa.ValueMember = "MaKhoa";
-            //cmbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
+            cmbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
             cmbMaLop.DisplayMember = "TenLop";
             cmbMaLop.ValueMember = "MaLop";
         }
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            string macovan = txbMaCoVan.Text;
-            string tencovan = txbTenCoVan.Text;
-            string ngaysinh = dtpkNgaySinh.Value.ToShortDateString();
-            string gioitinh = rdNam.Checked ? "Nam" : "Nữ";
-            string makhoa = cmbMaKhoa.SelectedValue.ToString();
-            string malop = cmbMaLop.SelectedValue.ToString();
+        //private void btnThem_Click(object sender, EventArgs e)
+        //{
+        //    string macovan = txbMaCoVan.Text;
+        //    string tencovan = txbTenCoVan.Text;
+        //    DateTime ngaysinh = dtpkNgaySinh.Value;
+        //    string gioitinh = rdNam.Checked ? "Nam" : "Nữ";
+        //    string makhoa = cmbMaKhoa.SelectedValue.ToString();
+        //    string malop = cmbMaLop.SelectedValue.ToString();
 
-            if (BLL_CoVanHocTap.Instance.Them(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop) == true)
-            {
-                btnTaiLai.PerformClick();
+        //    if (BLL_CoVanHocTap.Instance.Them(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop) == true)
+        //    {
+        //        btnTaiLai.PerformClick();
 
-            }
+        //    }
 
-        }
+        //}
 
         private void dgvCoVanHocTap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -80,7 +80,43 @@ namespace Dayone.GUI
             cmbMaKhoa.SelectedValue = dgvCoVanHocTap.CurrentRow.Cells[5].Value.ToString().Trim();
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+
+        private void btnThem_Click_1(object sender, EventArgs e)
+        {
+
+            string macovan = txbMaCoVan.Text;
+            string tencovan = txbTenCoVan.Text;
+            DateTime ngaysinh = dtpkNgaySinh.Value;
+            string gioitinh = rdNam.Checked ? "Nam" : "Nữ";
+            string makhoa = cmbMaKhoa.SelectedValue.ToString();
+            string malop = cmbMaLop.SelectedValue.ToString();
+
+            if (BLL_CoVanHocTap.Instance.Them(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop) == true)
+            {
+                btnTaiLai.PerformClick();
+
+            }
+
+        }
+
+        private void btnSua_Click_1(object sender, EventArgs e)
+        {
+            int id = int.Parse(txbID.Text);
+            string macovan = txbMaCoVan.Text;
+            string tencovan = txbTenCoVan.Text;
+            DateTime ngaysinh = dtpkNgaySinh.Value;
+            string gioitinh = rdNam.Checked ? "Nam" : "Nữ";
+            string makhoa = cmbMaKhoa.SelectedValue.ToString();
+            string malop = cmbMaLop.SelectedValue.ToString();
+
+            if (BLL_CoVanHocTap.Instance.Sua(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop, id) == true)
+            {
+                btnTaiLai.PerformClick();
+
+            }
+        }
+
+        private void btnXoa_Click_1(object sender, EventArgs e)
         {
             int id = int.Parse(txbID.Text);
             string macovan = txbMaCoVan.Text;
@@ -90,23 +126,6 @@ namespace Dayone.GUI
                 {
                     btnTaiLai.PerformClick();
                 }
-            }
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            int id = int.Parse(txbID.Text);
-            string macovan = txbMaCoVan.Text;
-            string tencovan = txbTenCoVan.Text;
-            string ngaysinh = dtpkNgaySinh.Value.ToShortDateString();
-            string gioitinh = rdNam.Checked ? "Nam" : "Nữ";
-            string makhoa = cmbMaKhoa.SelectedValue.ToString();
-            string malop = cmbMaLop.SelectedValue.ToString();
-
-            if (BLL_CoVanHocTap.Instance.Sua(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop, id) == true)
-            {
-                btnTaiLai.PerformClick();
-
             }
         }
     }

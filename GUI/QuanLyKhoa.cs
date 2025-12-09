@@ -96,5 +96,12 @@ namespace Dayone.GUI
         {
             dgvKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
         }
+
+        private void dgvKhoa_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            txbID.Text = dgvKhoa.CurrentRow.Cells[0].Value.ToString().Trim();
+            txbMaKhoa.Text = dgvKhoa.CurrentRow.Cells[1].Value.ToString().Trim();
+            txbTenKhoa.Text = dgvKhoa.CurrentRow.Cells[2].Value.ToString().Trim();
+        }
     }
 }

@@ -116,11 +116,14 @@ namespace Dayone.GUI
         {
             dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
             cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
-            cbbMaKhoa.DisplayMember = "TenLop";
-            cbbMaKhoa.ValueMember = "MaLop";
+            cbbMaLop.DisplayMember = "TenLop";
+            cbbMaLop.ValueMember = "MaLop";
             cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cbbMaKhoa.DisplayMember = "TenKhoa";
             cbbMaKhoa.ValueMember = "MaKhoa";
+            cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
+            cbbMaCoVan.DisplayMember = "TenCVHT";
+            cbbMaCoVan.ValueMember = "MaCVHT";
         }
 
         private void quảnLýToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,6 +190,11 @@ namespace Dayone.GUI
                 if (BLL_SinhVien.Instance.Xoa(id) == true)
                     btnLamMoi.PerformClick();
             }
+        }
+
+        private void cbbMaLop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

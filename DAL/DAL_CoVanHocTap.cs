@@ -16,12 +16,12 @@ namespace Dayone.DAL
             private set => instance = value;
         }
         private DAL_CoVanHocTap() { }
-        public bool Them(string MaCoVan, string TenCoVan, string NgaySinh, string GioiTinh, string MaKhoa, string MaLop)
+        public bool Them(string MaCoVan, string TenCoVan, DateTime NgaySinh, string GioiTinh, string MaKhoa, string MaLop)
         {
             string sql = "insert into CoVanHocTap(MaCVHT, TenCVHT, NgaySinh, GioiTinh, MaKhoa, MaLop) values(@MaCVHT, @TenCVHT, @NgaySinh, @GioiTinh, @MaKhoa, @MaLop)";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaCoVan, TenCoVan, NgaySinh, GioiTinh, MaKhoa, MaLop });
         }
-        public bool Sua(string MaCoVan, string TenCoVan, string NgaySinh, string GioiTinh, string MaKhoa, string MaLop, int id)
+        public bool Sua(string MaCoVan, string TenCoVan, DateTime NgaySinh, string GioiTinh, string MaKhoa, string MaLop, int id)
         {
             string sql = "update CoVanHocTap set MaCVHT=@MaCVHT, TenCVHT = @TenCVHT, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, MaKhoa = @MaKhoa, MaLop = @MaLop where  id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaCoVan, TenCoVan, NgaySinh, GioiTinh, MaKhoa, MaLop, id });
