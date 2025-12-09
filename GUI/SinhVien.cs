@@ -115,12 +115,15 @@ namespace Dayone.GUI
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
-            //cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
-            cbbMaKhoa.DisplayMember = "TenLop";
-            cbbMaKhoa.ValueMember = "MaLop";
-            //cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
+            cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
+            cbbMaLop.DisplayMember = "TenLop";
+            cbbMaLop.ValueMember = "MaLop";
+            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cbbMaKhoa.DisplayMember = "TenKhoa";
             cbbMaKhoa.ValueMember = "MaKhoa";
+            cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
+            cbbMaCoVan.DisplayMember = "TenCVHT";
+            cbbMaCoVan.ValueMember = "MaCVHT";
         }
 
         private void quảnLýToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,13 +156,10 @@ namespace Dayone.GUI
             string gioitinh = (rbNam.Checked==true) ? "Nam" : "Nữ";
             string quequan = txbQueQuan.Text;
             DateTime ngaynhaphoc = (DateTime)dtpkNgaySinh.Value;
-            //string malop = cbbMaLop.SelectedValue.ToString();
-            //string makhoa = cbbMaKhoa.SelectedValue.ToString();
-            //string macvht = cbbMaCoVan.SelectedValue.ToString();
-            string malop = "1";
-            string makhoa = "1";
-            string macvht = "1";
-            
+            string malop = cbbMaLop.SelectedValue.ToString();
+            string makhoa = cbbMaKhoa.SelectedValue.ToString();
+            string macvht = cbbMaCoVan.SelectedValue.ToString();
+
 
             if (BLL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht) == true)
                 btnLamMoi.PerformClick();
@@ -190,6 +190,11 @@ namespace Dayone.GUI
                 if (BLL_SinhVien.Instance.Xoa(id) == true)
                     btnLamMoi.PerformClick();
             }
+        }
+
+        private void cbbMaLop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

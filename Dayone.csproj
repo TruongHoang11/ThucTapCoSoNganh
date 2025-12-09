@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BLL_CoVanHocTap.cs" />
     <Compile Include="BLL\BLL_Diem.cs" />
     <Compile Include="BLL\BLL_Khoa.cs" />
     <Compile Include="BLL\BLL_Lop.cs" />
     <Compile Include="BLL\BLL_MonHoc.cs" />
     <Compile Include="BLL\BLL_SinhVien.cs" />
     <Compile Include="BLL\BLL_TaiKhoan.cs" />
+    <Compile Include="DAL\DAL_CoVanHocTap.cs" />
     <Compile Include="DAL\DAL_Diem.cs" />
     <Compile Include="DAL\DAL_Khoa.cs" />
     <Compile Include="DAL\DAL_Lop.cs" />
@@ -59,12 +61,15 @@
     <Compile Include="DAL\DAL_KetNoi.cs" />
     <Compile Include="DAL\DAL_SinhVien.cs" />
     <Compile Include="DAL\DAL_TaiKhoan.cs" />
+<<<<<<< HEAD
     <Compile Include="GUI\QuanLyDiem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\QuanLyDiem.Designer.cs">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> 13be1a0d42e70ce2e63ccf900fedf99b7564848e
     <Compile Include="GUI\CoVanHocTap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,9 +127,12 @@
     <Compile Include="HeThong.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <EmbeddedResource Include="GUI\QuanLyDiem.resx">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 13be1a0d42e70ce2e63ccf900fedf99b7564848e
     <EmbeddedResource Include="GUI\CoVanHocTap.resx">
       <DependentUpon>CoVanHocTap.cs</DependentUpon>
     </EmbeddedResource>

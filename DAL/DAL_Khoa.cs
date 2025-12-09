@@ -32,7 +32,7 @@ namespace Dayone.DAL
             string sql = "update Khoa set MaKhoa = @MaKhoa , TenKhoa = @TenKhoa  where id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { makhoa, tenkhoa, id });
         }
-       
+
         public bool Xoa(int id)
         {
             string sql = "delete from Khoa where id = @id";
@@ -44,7 +44,5 @@ namespace Dayone.DAL
             string sql = "select * from Khoa";
             return DAL_KetNoi.Instance.ExcuteQuery(sql);
         }
-
-       
     }
 }

@@ -27,7 +27,7 @@ namespace Dayone.BLL
         public bool Them(string makhoa, string tenkhoa)
         {
 
-            return DAL_Khoa.Instance.Them(makhoa,tenkhoa);
+            return DAL_Khoa.Instance.Them(makhoa, tenkhoa);
             //return true;
             // return DAL_TaiKhoan.Instance.Them(ten, matkhau, loai);
         }
@@ -41,6 +41,5 @@ namespace Dayone.BLL
         {
             return DAL_Khoa.Instance.Xoa(id);
         }
-
     }
 }

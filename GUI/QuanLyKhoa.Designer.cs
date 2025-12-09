@@ -73,6 +73,7 @@
             this.btnTaiLai.TabIndex = 2;
             this.btnTaiLai.Text = "Tải Lại";
             this.btnTaiLai.UseVisualStyleBackColor = true;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // 
             // btnXoa
             // 
@@ -82,6 +83,7 @@
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -91,6 +93,7 @@
             this.btnSua.TabIndex = 2;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -100,6 +103,7 @@
             this.btnThem.TabIndex = 2;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // txbTenKhoa
             // 
@@ -171,9 +175,11 @@
             this.dgvKhoa.Size = new System.Drawing.Size(474, 318);
             this.dgvKhoa.TabIndex = 2;
             this.dgvKhoa.TabStop = false;
+            this.dgvKhoa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhoa_CellClick_1);
             // 
             // Column1
             // 
+            this.Column1.DataPropertyName = "Id";
             this.Column1.HeaderText = "ID";
             this.Column1.MaxInputLength = 255;
             this.Column1.MinimumWidth = 6;
@@ -183,6 +189,7 @@
             // 
             // Column2
             // 
+            this.Column2.DataPropertyName = "MaKhoa";
             this.Column2.HeaderText = "MÃ KHOA";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
@@ -191,6 +198,7 @@
             // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "TenKhoa";
             this.Column3.HeaderText = "TÊN KHOA";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
