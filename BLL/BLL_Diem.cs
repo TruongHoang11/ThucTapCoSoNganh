@@ -22,13 +22,13 @@ namespace Dayone.BLL
         {
             return DAL.DAL_Diem.Instance.DanhSach();
         }
-        public bool Them(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemLop, float DiemThi, float DiemTB, string Loai, int namhoc)
+        public bool Them(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemTrenLop, float DiemThi, float DiemTB, string Loai, int namhoc)
         {
-            return DAL_Diem.Instance.Them(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemLop, DiemThi, DiemTB, Loai, namhoc);
+            return DAL_Diem.Instance.Them(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemTrenLop, DiemThi, DiemTB, Loai, namhoc);
         }
-        public bool Sua(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemLop, float DiemThi, float DiemTB, string Loai, int namhoc, int id)
+        public bool Sua(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemTrenLop, float DiemThi, float DiemTB, string Loai, int namhoc, int id)
         {
-            return DAL_Diem.Instance.Sua(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemLop, DiemThi, DiemTB, Loai, namhoc, id);
+            return DAL_Diem.Instance.Sua(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemTrenLop, DiemThi, DiemTB, Loai, namhoc, id);
         }
         public bool Xoa(int id)
         {

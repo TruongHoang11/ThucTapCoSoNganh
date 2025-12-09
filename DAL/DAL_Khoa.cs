@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
-namespace QuanLySinhVien.DAL
+namespace Dayone.DAL
 {
     public class DAL_Khoa
     {
@@ -23,25 +24,25 @@ namespace QuanLySinhVien.DAL
         public bool Them(string makhoa, string tenkhoa)
         {
             string sql = "insert into Khoa(MaKhoa, TenKhoa) values( @MaKhoa, @TenKhoa)";
-            return KetNoi.Instance.ExecuteNonQuery(sql, new object[] { makhoa, tenkhoa });
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { makhoa, tenkhoa });
         }
 
         public bool Sua(string makhoa, string tenkhoa, int id)
         {
             string sql = "update Khoa set MaKhoa = @MaKhoa , TenKhoa = @TenKhoa  where id = @id";
-            return KetNoi.Instance.ExecuteNonQuery(sql, new object[] { makhoa, tenkhoa, id });
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { makhoa, tenkhoa, id });
         }
        
         public bool Xoa(int id)
         {
             string sql = "delete from Khoa where id = @id";
-            return KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
         }
 
         public DataTable DanhSach()
         {
             string sql = "select * from Khoa";
-            return KetNoi.Instance.ExcuteQuery(sql);
+            return DAL_KetNoi.Instance.ExcuteQuery(sql);
         }
 
        

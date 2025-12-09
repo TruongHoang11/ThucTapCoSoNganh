@@ -17,16 +17,16 @@ namespace Dayone.DAL
             private set => instance = value;
         }
         private DAL_Diem() { }
-        public bool Them(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemLop, float DiemThi, float DiemTB, string Loai, int namhoc)
+        public bool Them(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemTrenLop, float DiemThi, float DiemTB, string Loai, int namhoc)
         {
-            string sql = "insert into Diem(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemLop, DiemThi, DiemTB, Loai, NamHoc)" +
-                " values( @MaSV, @MaMH, @PhanTramTrenLop, @PhanTramThi, @DiemLop, @DiemThi, @DiemTB, @Loai, @NamHoc)";
-            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemLop, DiemThi, DiemTB, Loai, namhoc });
+            string sql = "insert into Diem(MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemTrenLop, DiemThi, DiemTB, Loai, NamHoc)" +
+                " values( @MaSV, @MaMH, @PhanTramTrenLop, @PhanTramThi, @DiemTrenLop, @DiemThi, @DiemTB, @Loai, @NamHoc)";
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemTrenLop, DiemThi, DiemTB, Loai, namhoc });
         }
-        public bool Sua(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemLop, float DiemThi, float DiemTB, string Loai, int namhoc, int id)
+        public bool Sua(string MaSV, string MaMH, int PhanTramTrenLop, int PhanTramThi, float DiemTrenLop, float DiemThi, float DiemTB, string Loai, int namhoc, int id)
         {
-            string sql = "update Diem set MaSV=@MaSV, MaMH = @MaMH, PhanTramTrenLop = @PhanTramTrenLop, PhanTramThi = @PhanTramThi, DiemLop = @DiemLop, DiemThi = @DiemThi, DiemTB = @DiemTB, Loai = @Loai, namhoc = @namhoc where  id = @id";
-            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemLop, DiemThi, DiemTB, Loai, namhoc, id });
+            string sql = "update Diem set MaSV=@MaSV, MaMH = @MaMH, PhanTramTrenLop = @PhanTramTrenLop, PhanTramThi = @PhanTramThi, DiemTrenLop = @DiemTrenLop, DiemThi = @DiemThi, DiemTB = @DiemTB, Loai = @Loai, namhoc = @namhoc where  id = @id";
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaMH, PhanTramTrenLop, PhanTramThi, DiemTrenLop, DiemThi, DiemTB, Loai, namhoc, id });
         }
         public bool Xoa(int id)
         {
