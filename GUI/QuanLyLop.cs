@@ -21,5 +21,10 @@ namespace Dayone.GUI
         {
 
         }
+
+        private void btnTaiLai_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

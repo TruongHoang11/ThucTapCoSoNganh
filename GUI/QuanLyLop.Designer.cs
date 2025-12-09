@@ -127,6 +127,7 @@
             this.btnTaiLai.TabIndex = 2;
             this.btnTaiLai.Text = "Tải Lại";
             this.btnTaiLai.UseVisualStyleBackColor = true;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // 
             // btnXoa
             // 

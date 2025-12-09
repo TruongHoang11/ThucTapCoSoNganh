@@ -1,4 +1,4 @@
-﻿using QuanLySinhVien.DAL;
+﻿using Dayone.DAL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLySinhVien.BLL
+namespace Dayone.BLL
 {
     public class BLL_Khoa
     {
@@ -27,7 +27,7 @@ namespace QuanLySinhVien.BLL
         public bool Them(string makhoa, string tenkhoa)
         {
 
-            return DAL_Khoa.Instance.Them(makhoa,tenkhoa);
+            return DAL_Khoa.Instance.Them(makhoa, tenkhoa);
             //return true;
             // return DAL_TaiKhoan.Instance.Them(ten, matkhau, loai);
         }
@@ -41,6 +41,5 @@ namespace QuanLySinhVien.BLL
         {
             return DAL_Khoa.Instance.Xoa(id);
         }
-
     }
 }
