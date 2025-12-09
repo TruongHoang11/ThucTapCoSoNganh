@@ -100,6 +100,7 @@
             this.btnXacNhan.TabStop = false;
             this.btnXacNhan.Text = "Xác Nhận ";
             this.btnXacNhan.UseVisualStyleBackColor = true;
+            this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click_1);
             // 
             // btnHuy
             // 

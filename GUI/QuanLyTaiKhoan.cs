@@ -67,11 +67,11 @@ namespace Dayone.GUI
             string matkhau = txbMatKhau.Text.Trim();
             string loaiTK = cmbLoaiTaiKhoan.SelectedItem.ToString();
 
-            if (tendangnhap.Length > 0  && loaiTK.Length > 0)
+            if (tendangnhap.Length > 0 && loaiTK.Length > 0)
             {
                 try
                 {   // khong sua mat khau
-                    if(matkhau.Length ==0)
+                    if (matkhau.Length == 0)
                     {
                         if (BLL_TaiKhoan.Instance.KhongSuaMatKhau(tendangnhap, loaiTK, id) == true)
                             btnTaiLai.PerformClick(); //Bấm lại btnLamMoi
@@ -82,7 +82,7 @@ namespace Dayone.GUI
                         if (BLL_TaiKhoan.Instance.SuaHet(tendangnhap, matkhau, loaiTK, id) == true)
                             btnTaiLai.PerformClick(); //Bấm lại btnLamMoi
                     }
-                    
+
                 }
                 catch
                 {
@@ -97,6 +97,7 @@ namespace Dayone.GUI
 
 
         }
+
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -145,12 +146,43 @@ namespace Dayone.GUI
 
         }
 
+        //private void dgvTaiKhoan_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    txbID.Text = dgvTaiKhoan.CurrentRow.Cells[0].Value.ToString().Trim();
+        //    txbTenDangNhap.Text = dgvTaiKhoan.CurrentRow.Cells[1].Value.ToString().Trim();
+        //    //txbMatKhau.Text = dgvTaiKhoan.CurrentRow.Cells[2].Value.ToString().Trim();
+        //    cmbLoaiTaiKhoan.SelectedItem = dgvTaiKhoan.CurrentRow.Cells[3].Value.ToString().Trim();
+        //}
         private void dgvTaiKhoan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txbID.Text = dgvTaiKhoan.CurrentRow.Cells[0].Value.ToString().Trim();
-            txbTenDangNhap.Text = dgvTaiKhoan.CurrentRow.Cells[1].Value.ToString().Trim();
-            //txbMatKhau.Text = dgvTaiKhoan.CurrentRow.Cells[2].Value.ToString().Trim();
-            cmbLoaiTaiKhoan.SelectedItem = dgvTaiKhoan.CurrentRow.Cells[3].Value.ToString().Trim();
+            if (e.RowIndex >= 0)
+            {
+                txbID.Text = dgvTaiKhoan.CurrentRow.Cells[0].Value.ToString();
+                txbTenDangNhap.Text = dgvTaiKhoan.CurrentRow.Cells[1].Value.ToString();
+                txbMatKhau.Text = dgvTaiKhoan.CurrentRow.Cells[2].Value.ToString();  // << THÊM DÒNG NÀY
+                cmbLoaiTaiKhoan.Text = dgvTaiKhoan.CurrentRow.Cells[3].Value.ToString();
+            }
+        }
+        private void dgvTaiKhoan_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string username = dgvTaiKhoan.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string matkhau = dgvTaiKhoan.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string loaiTK = dgvTaiKhoan.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                ThongTinChiTiet f = new ThongTinChiTiet(username, matkhau, loaiTK);
+                f.ShowDialog();
+            }
+        }
+
+
+
+
+        private void txbMatKhau_TextChanged(object sender, EventArgs e)
+        {
+            txbMatKhau.UseSystemPasswordChar = false;
+
         }
     }
 }

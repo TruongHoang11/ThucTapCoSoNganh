@@ -33,7 +33,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbMatKhau = new System.Windows.Forms.TextBox();
             this.btnDangNhap = new System.Windows.Forms.Button();
-            this.btnDoiMatKhau = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -86,22 +85,10 @@
             this.btnDangNhap.UseVisualStyleBackColor = true;
             this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
-            // btnDoiMatKhau
-            // 
-            this.btnDoiMatKhau.Location = new System.Drawing.Point(58, 232);
-            this.btnDoiMatKhau.Name = "btnDoiMatKhau";
-            this.btnDoiMatKhau.Size = new System.Drawing.Size(158, 33);
-            this.btnDoiMatKhau.TabIndex = 4;
-            this.btnDoiMatKhau.TabStop = false;
-            this.btnDoiMatKhau.Text = "Đổi Mật Khẩu ";
-            this.btnDoiMatKhau.UseVisualStyleBackColor = true;
-            this.btnDoiMatKhau.Click += new System.EventHandler(this.button1_Click);
-            // 
             // DangNhap
             // 
             this.AcceptButton = this.btnDangNhap;
-            this.ClientSize = new System.Drawing.Size(292, 301);
-            this.Controls.Add(this.btnDoiMatKhau);
+            this.ClientSize = new System.Drawing.Size(292, 239);
             this.Controls.Add(this.btnDangNhap);
             this.Controls.Add(this.txbMatKhau);
             this.Controls.Add(this.label2);
@@ -111,6 +98,7 @@
             this.Name = "DangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Nhập ";
+            this.Load += new System.EventHandler(this.DangNhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,7 +112,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbMatKhau;
         private System.Windows.Forms.Button btnDangNhap;
-        private System.Windows.Forms.Button btnDoiMatKhau;
     }
 }
 

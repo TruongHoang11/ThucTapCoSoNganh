@@ -44,6 +44,38 @@ namespace Dayone
             string tendangnhap = txbTenDangNhap.Text;
             string matkhau = txbMatKhau.Text;
 
+            if (BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau))
+            {
+                HeThong.TENDANGNHAP = tendangnhap;
+                HeThong.LOAITAIKHOAN = BLL_TaiKhoan.Instance.LayLoaiTaiKhoan(tendangnhap);
+
+                SinhVien f = new SinhVien();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+
+            if (BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau) == true)
+            {
+                txbMatKhau.Clear();
+                SinhVien f = new SinhVien();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng...",
+                                "Thông báo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+
+
+
+            //string tendangnhap = txbTenDangNhap.Text;
+            //string matkhau = txbMatKhau.Text;
+
             //if (BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau) == true)
             //{
             //    txbMatKhau.Clear();
@@ -58,12 +90,15 @@ namespace Dayone
             //                    "Thông báo",
             //                    MessageBoxButtons.OK,
             //                    MessageBoxIcon.Warning);
+
             //}
-            txbMatKhau.Clear();
-            SinhVien f = new SinhVien();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+
+
+
+            //SinhVien f = new SinhVien();
+            //this.Hide();
+            //f.ShowDialog();
+            //this.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +106,11 @@ namespace Dayone
             DoiMatKhau f = new DoiMatKhau();
             f.Show();
 
+
+        }
+
+        private void DangNhap_Load(object sender, EventArgs e)
+        {
 
         }
     }
