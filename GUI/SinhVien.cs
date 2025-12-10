@@ -21,12 +21,23 @@ namespace Dayone.GUI
 
         private void SinhVien_Load(object sender, EventArgs e)
         {
-            //if(HeThong.LOAITAIKHOAN!="Quản trị")
-            //    btnQuanLy.Visible=false;
-            //else
-            //    btnQuanLy.Visible = true;
+            ////if(HeThong.LOAITAIKHOAN!="Quản trị")
+            ////    btnQuanLy.Visible=false;
+            ////else
+            ////    btnQuanLy.Visible = true;
 
-            btnLamMoi.PerformClick();
+            //btnLamMoi.PerformClick();
+            var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
+
+            // Debug xem form nhận được gì
+            // MessageBox.Show("Form SinhVien nhận: '" + loai + "'");
+
+            btnQuanLy.Visible = loai.Equals("Quản trị", StringComparison.OrdinalIgnoreCase);
+
+            //if (HeThong.LOAITAIKHOAN != "Quản trị")
+            //    btnQuanly.Visible = false;
+            //else
+            //    btnQuanly.Visible = true;
         }
 
         private void quảnLýLớpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,7 +75,12 @@ namespace Dayone.GUI
 
         private void đổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ThongTinChiTiet().ShowDialog();
+            ThongTinChiTiet f = new ThongTinChiTiet(
+       HeThong.TENDANGNHAP,
+       "********",              // hoặc để mật khẩu thật nếu bạn muốn hiển thị
+       HeThong.LOAITAIKHOAN
+   );
+            f.ShowDialog();
         }
 
         private void quảnLýTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
@@ -195,6 +211,17 @@ namespace Dayone.GUI
         private void cbbMaLop_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void DoimatkhauToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoiMatKhau f = new DoiMatKhau(HeThong.TENDANGNHAP);
+            f.ShowDialog();
+        }
+
+        private void đăngXuấtToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -182,6 +182,11 @@ namespace Dayone.GUI
         {
             int id = int.Parse(txbID.Text);
             string macovan = txbMaCoVan.Text;
+            if (string.IsNullOrWhiteSpace(txbID.Text))
+            {
+                MessageBox.Show("Bạn chưa chọn cố vấn cần sửa!");
+                return;
+            }
             if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan, "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 if (BLL_CoVanHocTap.Instance.Xoa(id) == true)

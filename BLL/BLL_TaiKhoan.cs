@@ -13,8 +13,14 @@ namespace Dayone.BLL
         private static BLL_TaiKhoan instance; // ctr + r + e
         public static BLL_TaiKhoan Instance
         {
-            get { if (instance == null) instance = new BLL_TaiKhoan(); return instance; }
-            private set => instance = value;
+
+            get
+            {
+                if (instance == null) instance = new BLL_TaiKhoan();
+                return instance;
+            }
+            //get { if (instance == null) instance = new BLL_TaiKhoan(); return instance; }
+            //private set => instance = value;
         }
 
         private BLL_TaiKhoan() { }
@@ -27,15 +33,15 @@ namespace Dayone.BLL
         public bool them(string ten, string matkhau, string loai)
         {
 
-            matkhau = HeThong.Hash(matkhau);
+            //matkhau = HeThong.Hash(matkhau);
             return DAL_TaiKhoan.Instance.Them(ten, matkhau, loai);
             //return true;
             // return DAL_TaiKhoan.Instance.Them(ten, matkhau, loai);
         }
 
-        public bool SuaHet(string ten, string matkhau, string loai,int id)
+        public bool SuaHet(string ten, string matkhau, string loai, int id)
         {
-            matkhau = HeThong.Hash(matkhau);
+            // matkhau = HeThong.Hash(matkhau);
             return DAL_TaiKhoan.Instance.Sua_Het(ten, matkhau, loai, id);
         }
 
@@ -44,28 +50,72 @@ namespace Dayone.BLL
             return DAL_TaiKhoan.Instance.KhongSuaMatKhau(ten, loai, id);
         }
 
-        public bool Xoa( int id)
+        public bool Xoa(int id)
         {
-            return DAL_TaiKhoan.Instance.Xoa( id);
+            return DAL_TaiKhoan.Instance.Xoa(id);
         }
 
-        public bool DangNhap(string ten, string matkhau)
+        //public bool DangNhap(string ten, string matkhau)
+        //{
+        //    matkhau = HeThong.Hash(matkhau);
+
+        //    DataTable dulieu = DAL_TaiKhoan.Instance.DangNhap(ten, matkhau);
+
+        //    if (dulieu.Rows.Count == 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        HeThong.TENDANGNHAP = ten;
+        //        HeThong.LOAITAIKHOAN = dulieu.Rows[0]["LoaiTaiKhoan"].ToString().Trim();
+        //    }
+
+        //    return true;
+        //}
+        public string LayLoaiTaiKhoan(string tenDangNhap)
         {
-            matkhau = HeThong.Hash(matkhau);
+            return DAL_TaiKhoan.Instance.LayLoaiTaiKhoan(tenDangNhap);
+        }
 
-            DataTable dulieu = DAL_TaiKhoan.Instance.DangNhap(ten, matkhau);
+        public bool DangNhap(string tenDangNhap, string matKhau)
 
-            if (dulieu.Rows.Count == 0)
+        {
+            DataTable dt = DAL_TaiKhoan.Instance.DangNhap(tenDangNhap, matKhau);
+
+            if (dt.Rows.Count > 0)
             {
+                HeThong.LOAITAIKHOAN = dt.Rows[0]["LoaiTaiKhoan"]
+                                            .ToString()
+                                            .Trim();
+
+                // Debug thử xem giá trị là gì
+                // MessageBox.Show("Loai TK: '" + HeThong.LOAITAIKHOAN + "'");
+
+                return true;
+            }
+
+            HeThong.LOAITAIKHOAN = null;
+            return false;
+            //DataTable dt = DAL_TaiKhoan.Instance.DangNhap(tenDangNhap, matKhau);
+
+            //if (dt.Rows.Count > 0)
+            //{
+            //    HeThong.LOAITAIKHOAN = dt.Rows[0]["LoaiTaiKhoan"]
+            //                                .ToString()
+            //                                .Trim();
+            //    return true;
+            //}
+
+            //HeThong.LOAITAIKHOAN = null;
+            //return false;
+        }
+        public bool DoiMatKhau(string tenDangNhap, string matKhauMoi, string matKhauCu)
+        {
+            if (!DAL_TaiKhoan.Instance.KiemTraMatKhau(tenDangNhap, matKhauCu))
                 return false;
-            }
-            else
-            {
-                HeThong.TENDANGNHAP = ten;
-                HeThong.LOAITAIKHOAN = dulieu.Rows[0]["LoaiTaiKhoan"].ToString().Trim();
-            }
 
-            return true;
+            return DAL_TaiKhoan.Instance.DoiMatKhau(tenDangNhap, matKhauMoi, matKhauCu);
         }
 
 
