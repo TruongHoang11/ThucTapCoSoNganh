@@ -83,6 +83,7 @@
             this.dgvQuanLyMonHoc.Size = new System.Drawing.Size(733, 284);
             this.dgvQuanLyMonHoc.TabIndex = 8;
             this.dgvQuanLyMonHoc.TabStop = false;
+            this.dgvQuanLyMonHoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyMonHoc_CellClick_1);
             // 
             // Column1
             // 

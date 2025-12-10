@@ -19,12 +19,12 @@ namespace Dayone.DAL
         private DAL_SinhVien() { }
         public bool Them(string masv, string tensv, DateTime ngaysinh, string gioitinh, string quequan, DateTime ngaynh, string makhoa, string malop, string macvht)
         {
-            string sql = "insert into SinhVien(MaSV, TenSV, NgaySinh, GioiTinh,QueQuan,NgayNhapHoc, MaKhoa, MaLop, MaCVHT) values(@MaSV, @TenSV, @NgaySinh, @GioiTinh, @QueQuan, @NgayNhapHoc, @MaKhoa, @MaLop, @MaCVHT)";
+            string sql = "insert into SinhVien(MaSV, TenSV, NgaySinh, GioiTinh,QueQuan,NgayNhapHoc, MaLop, MaKhoa, MaCVHT) values(@MaSV, @TenSV, @NgaySinh, @GioiTinh, @QueQuan, @NgayNhapHoc, @MaLop, @MaKhoa, @MaCVHT)";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, makhoa, malop, macvht });
         }
         public bool Sua(string masv, string tensv, DateTime ngaysinh, string gioitinh, string quequan, DateTime ngaynh, string makhoa, string malop, string macvht, int id)
         {
-            string sql = "update SinhVien set MaSV=@MaSV, TenSV = @TenSV, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, QueQuan = @QueQuan, NgayNhapHoc = @NgayNhapHoc, MaKhoa = @MaKhoa, MaLop = @MaLop, MaCVHT = @MaCVHT where  id = @id";
+            string sql = "update SinhVien set MaSV=@MaSV, TenSV = @TenSV, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, QueQuan = @QueQuan, NgayNhapHoc = @NgayNhapHoc, MaLop = @MaLop, MaKhoa = @MaKhoa, MaCVHT = @MaCVHT where  id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, makhoa, malop, macvht, id });
         }
         public bool Xoa(int id)

@@ -130,16 +130,44 @@ namespace Dayone.GUI
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
-            cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
-            cbbMaLop.DisplayMember = "TenLop";
-            cbbMaLop.ValueMember = "MaLop";
-            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
-            cbbMaKhoa.DisplayMember = "TenKhoa";
-            cbbMaKhoa.ValueMember = "MaKhoa";
-            cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
-            cbbMaCoVan.DisplayMember = "TenCVHT";
-            cbbMaCoVan.ValueMember = "MaCVHT";
+            try
+            {
+                // Load SinhVien
+                var dsSV = BLL_SinhVien.Instance.DanhSach();
+                dgvSinhVien.DataSource = dsSV ?? throw new Exception("Không tải được danh sách sinh viên");
+
+                // Load Lớp
+                var dsLop = BLL_Lop.Instance.DanhSach();
+                if (dsLop == null)
+                    throw new Exception("Không tải được danh sách lớp");
+
+                cbbMaLop.DataSource = dsLop;
+                cbbMaLop.DisplayMember = "TenLop";
+                cbbMaLop.ValueMember = "MaLop";
+
+                // Load Khoa
+                var dsKhoa = BLL_Khoa.Instance.DanhSach();
+                if (dsKhoa == null)
+                    throw new Exception("Không tải được danh sách khoa");
+
+                cbbMaKhoa.DataSource = dsKhoa;
+                cbbMaKhoa.DisplayMember = "TenKhoa";
+                cbbMaKhoa.ValueMember = "MaKhoa";
+
+                // Load Cố Vấn
+                var dsCoVan = BLL_CoVanHocTap.Instance.DanhSach();
+                if (dsCoVan == null)
+                    throw new Exception("Không tải được danh sách cố vấn");
+
+                cbbMaCoVan.DataSource = dsCoVan;
+                cbbMaCoVan.DisplayMember = "TenCVHT";
+                cbbMaCoVan.ValueMember = "MaCVHT";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu:\n" + ex.Message,
+                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void quảnLýToolStripMenuItem_Click(object sender, EventArgs e)
@@ -166,45 +194,150 @@ namespace Dayone.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            string masv = txbMaSV.Text;
-            string tensv = txbTenSV.Text;
-            DateTime ngaysinh = (DateTime)dtpkNgaySinh.Value;
-            string gioitinh = (rbNam.Checked == true) ? "Nam" : "Nữ";
-            string quequan = txbQueQuan.Text;
-            DateTime ngaynhaphoc = (DateTime)dtpkNgaySinh.Value;
-            string malop = cbbMaLop.SelectedValue.ToString();
-            string makhoa = cbbMaKhoa.SelectedValue.ToString();
-            string macvht = cbbMaCoVan.SelectedValue.ToString();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txbMaSV.Text))
+                    throw new Exception("Mã sinh viên không được để trống.");
 
+                if (string.IsNullOrWhiteSpace(txbTenSV.Text))
+                    throw new Exception("Tên sinh viên không được để trống.");
 
-            if (BLL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht) == true)
-                btnLamMoi.PerformClick();
+                if (string.IsNullOrWhiteSpace(txbQueQuan.Text))
+                    throw new Exception("Quê quán không được để trống.");
+
+                if (cbbMaLop.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã lớp.");
+
+                if (cbbMaKhoa.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã khoa.");
+
+                if (cbbMaCoVan.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã cố vấn.");
+
+                string masv = txbMaSV.Text.Trim();
+                string tensv = txbTenSV.Text.Trim();
+                DateTime ngaysinh = dtpkNgaySinh.Value;
+                string gioitinh = rbNam.Checked ? "Nam" : "Nữ";
+                string quequan = txbQueQuan.Text.Trim();
+                DateTime ngaynhaphoc = dtpkNhapHoc.Value;
+                string malop = cbbMaLop.SelectedValue.ToString();
+                string makhoa = cbbMaKhoa.SelectedValue.ToString();
+                string macvht = cbbMaCoVan.SelectedValue.ToString();
+
+                bool kq = BLL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht);
+
+                if (kq)
+                {
+                    MessageBox.Show("Thêm sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnLamMoi.PerformClick();
+                }
+                else
+                {
+                    throw new Exception("Không thể thêm sinh viên. Có thể mã sinh viên đã tồn tại.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string masv = txbMaSV.Text;
-            string tensv = txbTenSV.Text;
-            DateTime ngaysinh = (DateTime)dtpkNgaySinh.Value;
-            string gioitinh = (rbNam.Checked == true) ? "Nam" : "Nữ";
-            string quequan = txbQueQuan.Text;
-            DateTime ngaynhaphoc = (DateTime)dtpkNgaySinh.Value;
-            string malop = cbbMaLop.SelectedValue.ToString();
-            string makhoa = cbbMaKhoa.SelectedValue.ToString();
-            string macvht = cbbMaCoVan.SelectedValue.ToString();
-            int id = int.Parse(txbID.Text);
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txbID.Text))
+                    throw new Exception("Không xác định được ID sinh viên cần sửa.");
 
-            if (BLL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht, id) == true)
-                btnLamMoi.PerformClick();
+                if (string.IsNullOrWhiteSpace(txbMaSV.Text))
+                    throw new Exception("Mã sinh viên không được để trống.");
+
+                if (string.IsNullOrWhiteSpace(txbTenSV.Text))
+                    throw new Exception("Tên sinh viên không được để trống.");
+
+                if (string.IsNullOrWhiteSpace(txbQueQuan.Text))
+                    throw new Exception("Quê quán không được để trống.");
+
+                if (cbbMaLop.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã lớp.");
+
+                if (cbbMaKhoa.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã khoa.");
+
+                if (cbbMaCoVan.SelectedValue == null)
+                    throw new Exception("Vui lòng chọn mã cố vấn.");
+
+                string masv = txbMaSV.Text.Trim();
+                string tensv = txbTenSV.Text.Trim();
+                DateTime ngaysinh = dtpkNgaySinh.Value;
+                string gioitinh = rbNam.Checked ? "Nam" : "Nữ";
+                string quequan = txbQueQuan.Text.Trim();
+                DateTime ngaynhaphoc = dtpkNhapHoc.Value;
+                string malop = cbbMaLop.SelectedValue.ToString();
+                string makhoa = cbbMaKhoa.SelectedValue.ToString();
+                string macvht = cbbMaCoVan.SelectedValue.ToString();
+
+                int id = int.Parse(txbID.Text);
+
+                bool kq = BLL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan,ngaynhaphoc, malop, makhoa, macvht, id);
+
+                if (kq)
+                {
+                    MessageBox.Show("Sửa sinh viên thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    btnLamMoi.PerformClick();
+                }
+                else
+                {
+                    throw new Exception("Không sửa được sinh viên. Có thể mã sinh viên bị trùng hoặc dữ liệu không hợp lệ.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(txbID.Text);
-            if (MessageBox.Show($"Bạn có muốn xoá sinh viên có ID: {id}?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            try
             {
-                if (BLL_SinhVien.Instance.Xoa(id) == true)
+                if (string.IsNullOrWhiteSpace(txbID.Text))
+                    throw new Exception("Vui lòng chọn sinh viên cần xoá.");
+
+                int id;
+                if (!int.TryParse(txbID.Text, out id))
+                    throw new Exception("ID sinh viên không hợp lệ.");
+
+                DialogResult dr = MessageBox.Show(
+                    $"Bạn có chắc chắn muốn xoá sinh viên có ID: {id}?",
+                    "Xác nhận",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (dr != DialogResult.Yes)
+                    return;
+
+                bool kq = BLL_SinhVien.Instance.Xoa(id);
+
+                if (kq)
+                {
+                    MessageBox.Show("Xoá sinh viên thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     btnLamMoi.PerformClick();
+                }
+                else
+                {
+                    throw new Exception("Không thể xoá sinh viên. Có thể đang tồn tại dữ liệu liên quan");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: Không thể xoá sinh viên. Có thể đang tồn tại dữ liệu liên quan",
+                    "Lỗi xoá sinh viên", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -14,11 +14,8 @@ namespace Dayone.DAL
     {
         //Chuỗi kết nối cơ sở dữ liệu
         private string connectionString =
-<<<<<<< HEAD
-            @"Data Source=EOBDZVAIO\MSQLSERVER; Initial Catalog=db_QLSinhVien; Integrated Security=True;";
-=======
-            @"Data Source=LAPTOP-HSMJ4Q7E\MSSQLSERVER01; Initial Catalog=db_QLSinhVien; Integrated Security=True;";
->>>>>>> d44298c8485871c8579cc5109a32823444b0d49a
+            @"Data Source=HUY-TIEN\SQLEXPRESS; Initial Catalog=db_QLSinhVien; Integrated Security=True;";
+
         public string ConnectionString
         {
             get { return connectionString; }
