@@ -356,5 +356,10 @@ namespace Dayone.GUI
         {
             this.Close();
         }
+
+        private void cbbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

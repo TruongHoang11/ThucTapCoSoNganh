@@ -244,6 +244,7 @@
             this.cbbMaKhoa.Name = "cbbMaKhoa";
             this.cbbMaKhoa.Size = new System.Drawing.Size(121, 30);
             this.cbbMaKhoa.TabIndex = 11;
+            this.cbbMaKhoa.SelectedIndexChanged += new System.EventHandler(this.cbbMaKhoa_SelectedIndexChanged);
             // 
             // btnLamMoi
             // 
