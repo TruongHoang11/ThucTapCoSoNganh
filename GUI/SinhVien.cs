@@ -361,5 +361,55 @@ namespace Dayone.GUI
         {
 
         }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string masv = txbMaSV.Text.Trim();
+                string tensv = txbTenSV.Text.Trim();
+
+                // ❗ Kiểm tra nếu tất cả ô tìm kiếm rỗng
+                if (string.IsNullOrWhiteSpace(masv) &&
+                    string.IsNullOrWhiteSpace(tensv))
+                {
+                    MessageBox.Show(
+                        "Vui lòng nhập ít nhất một thông tin để tìm kiếm!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+
+                // ❗ Gọi BLL tìm kiếm (nếu bỏ trống giá trị nào thì truyền null)
+                DataTable dt = BLL_SinhVien.Instance.TimKiem(
+                    string.IsNullOrWhiteSpace(masv) ? null : masv,
+                    string.IsNullOrWhiteSpace(tensv) ? null : tensv
+                );
+
+                // ❗ Kiểm tra kết quả null
+                if (dt == null)
+                {
+                    MessageBox.Show("Không thể tải dữ liệu tìm kiếm!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                dgvSinhVien.DataSource = dt;
+
+                // ❗ Không tìm thấy sinh viên
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy sinh viên phù hợp.",
+                        "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

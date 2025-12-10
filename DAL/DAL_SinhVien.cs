@@ -36,5 +36,25 @@ namespace Dayone.DAL
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from SinhVien");
         }
+        public DataTable TimKiem(string masv, string tensv)
+        {
+            string sql =
+                "SELECT * FROM SinhVien " +
+                "WHERE MaSV LIKE @MaSV " +
+                "AND TenSV LIKE @TenSV ";
+            
+           
+
+            return DAL_KetNoi.Instance.ExcuteQuery(
+                sql,
+                new object[]
+                {
+            "%" + masv + "%",
+            "%" + tensv + "%"
+           
+                }
+            );
+        }
+
     }
 }
