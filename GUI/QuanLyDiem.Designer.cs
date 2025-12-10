@@ -103,13 +103,13 @@
             this.cmbLoai.FormattingEnabled = true;
             this.cmbLoai.Items.AddRange(new object[] {
             "A",
+            "B+",
             "B",
+            "C+",
             "C",
+            "D+",
             "D",
-            "E",
-            "F",
-            "G",
-            "H"});
+            "F" });
             this.cmbLoai.Location = new System.Drawing.Point(839, 16);
             this.cmbLoai.Name = "cmbLoai";
             this.cmbLoai.Size = new System.Drawing.Size(135, 30);
@@ -221,7 +221,7 @@
             this.txbDiemTB.Name = "txbDiemTB";
             this.txbDiemTB.Size = new System.Drawing.Size(88, 30);
             this.txbDiemTB.TabIndex = 8;
-            this.txbDiemTB.TextChanged += new System.EventHandler(this.txbDiemTB_TextChanged);
+            //this.txbDiemTB.TextChanged += new System.EventHandler(this.txbDiemTB_TextChanged);
             // 
             // label6
             // 

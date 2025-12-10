@@ -32,17 +32,21 @@ namespace Dayone.GUI
 
             // Tính điểm trung bình
             float diemtb = (diemlop * ptLop / 100f) + (diemthi * ptThi / 100f);
+            diemtb = (float)Math.Round(diemtb, 2);
 
             // Gán vào textbox
             txbDiemTB.Text = diemtb.ToString("0.00");
 
             // Xếp loại
             string loai;
-            if (diemtb >= 8.5) loai = "Giỏi";
-            else if (diemtb >= 7) loai = "Khá";
-            else if (diemtb >= 5.5) loai = "Trung Bình";
-            else if (diemtb >= 4) loai = "Yếu";
-            else loai = "Kém";
+            if (diemtb >= 8.5) loai = "A";
+            else if (diemtb >= 7.7) loai = "B+";
+            else if (diemtb >= 7) loai = "B";
+            else if (diemtb >= 6.2) loai = "C+";
+            else if (diemtb >= 5.5) loai = "C";
+            else if (diemtb >= 4.7) loai = "D+";
+            else if (diemtb >= 4) loai = "D";
+            else loai = "F";
 
             cmbLoai.Text = loai;
         }
@@ -53,9 +57,9 @@ namespace Dayone.GUI
             {
                 // Load dữ liệu cho ComboBox Loại
                 cmbLoai.Items.Clear();
-                cmbLoai.Items.AddRange(new string[] { "Giỏi", "Khá", "Trung Bình", "Yếu", "Kém" });
+                cmbLoai.Items.AddRange(new string[] { "A", "B+", "B", "C+", "C", "D+", "D", "F" });
                 if (cmbLoai.Items.Count > 0)
-                    cmbLoai.SelectedIndex = 0;
+                    cmbLoai.SelectedIndex = -1;
 
                 btnTaiLai.PerformClick();
             }
@@ -69,15 +73,25 @@ namespace Dayone.GUI
         {
             try
             {
-                numPhanTramLop.Text = "";
-                numPhanTramThi.Text = "";
-                txbDiemLop.Text = "";
-                txbDiemThi.Text = "";
-                txbDiemTB.Text = "";
-                cmbLoai.SelectedIndex = -1;
+                //numPhanTramLop.Text = "";
+                //numPhanTramThi.Text = "";
+                //txbDiemLop.Text = "";
+                //txbDiemThi.Text = "";
+                //txbDiemTB.Text = "";
+                //cmbLoai.SelectedIndex = -1;
                 // Load bảng điểm
                 var dtDiem = BLL_Diem.Instance.DanhSach();
                 dgvQuanLyDiem.DataSource = dtDiem;
+                // Format hiển thị cột điểm
+                if (dgvQuanLyDiem.Columns.Contains("DiemLop"))
+                    dgvQuanLyDiem.Columns["DiemLop"].DefaultCellStyle.Format = "0.00";
+
+                if (dgvQuanLyDiem.Columns.Contains("DiemThi"))
+                    dgvQuanLyDiem.Columns["DiemThi"].DefaultCellStyle.Format = "0.00";
+
+                if (dgvQuanLyDiem.Columns.Contains("DiemTB"))
+                    dgvQuanLyDiem.Columns["DiemTB"].DefaultCellStyle.Format = "0.00";
+
 
                 // Load danh sách SinhVien
                 var dtSV = BLL_SinhVien.Instance.DanhSach();
@@ -139,7 +153,7 @@ namespace Dayone.GUI
             try
             {
                 // Kiểm tra điểm
-                if (string.IsNullOrWhiteSpace(numPhanTramLop.Text))                 
+                if (string.IsNullOrWhiteSpace(numPhanTramLop.Text))
                 {
                     MessageBox.Show("Phần trăm lớp không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -213,14 +227,21 @@ namespace Dayone.GUI
                 int phantramlop = (int)numPhanTramLop.Value;
                 int phantramthi = (int)numPhanTramThi.Value;
                 TinhDiemVaXepLoai();
+                if (phantramlop + phantramthi != 100)
+                {
+                    MessageBox.Show("Phần trăm lớp và phần trăm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Parse điểm
-                if (!float.TryParse(txbDiemLop.Text, out float diemlop))
+                if (!float.TryParse(txbDiemLop.Text, out float diemlop) || diemlop > 10)
                 {
                     MessageBox.Show("Điểm lớp không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (!float.TryParse(txbDiemThi.Text, out float diemthi))
+
+
+                if (!float.TryParse(txbDiemThi.Text, out float diemthi) || diemthi > 10)
                 {
                     MessageBox.Show("Điểm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -230,6 +251,7 @@ namespace Dayone.GUI
                     MessageBox.Show("Điểm TB không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                diemtb = (float)Math.Round(diemtb, 2);
 
                 // Lấy loại điểm
                 string loai = "";
@@ -241,11 +263,7 @@ namespace Dayone.GUI
                 {
                     loai = cmbLoai.Text.Trim();
                 }
-                else
-                {
-                    MessageBox.Show("Chưa chọn loại điểm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+
 
                 int nam = DateTime.Now.Year;
 
@@ -277,6 +295,7 @@ namespace Dayone.GUI
         {
             try
             {
+                TinhDiemVaXepLoai();
                 if (string.IsNullOrWhiteSpace(txbID.Text))
                 {
                     MessageBox.Show("Chưa chọn bản ghi để sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -315,6 +334,11 @@ namespace Dayone.GUI
 
                 int phantramlop = (int)numPhanTramLop.Value;
                 int phamtramthi = (int)numPhanTramThi.Value;
+                if (phantramlop + phamtramthi != 100)
+                {
+                    MessageBox.Show("Phần trăm lớp và phần trăm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 if (!float.TryParse(txbDiemLop.Text, out float diemlop) ||
                     !float.TryParse(txbDiemThi.Text, out float diemthi) ||
@@ -323,6 +347,17 @@ namespace Dayone.GUI
                     MessageBox.Show("Điểm không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (diemlop > 10)
+                {
+                    MessageBox.Show("Điểm lớp không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (diemthi > 10)
+                {
+                    MessageBox.Show("Điểm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
 
                 string loai = (cmbLoai.SelectedItem != null) ? cmbLoai.SelectedItem.ToString() : cmbLoai.Text.Trim();
                 int nam = DateTime.Now.Year;
@@ -393,12 +428,21 @@ namespace Dayone.GUI
                 if (!string.IsNullOrEmpty(valMaMH) && cmbMaMH.DataSource != null)
                     cmbMaMH.SelectedValue = valMaMH;
 
-                if (row.Cells[3].Value != null) numPhanTramLop.Value = Convert.ToDecimal(row.Cells[3].Value);
-                if (row.Cells[4].Value != null) numPhanTramThi.Value = Convert.ToDecimal(row.Cells[4].Value);
+                if (row.Cells[3].Value != null)
+                    numPhanTramLop.Value = Convert.ToDecimal(row.Cells[3].Value);
+
+                if (row.Cells[4].Value != null)
+                    numPhanTramThi.Value = Convert.ToDecimal(row.Cells[4].Value);
 
                 txbDiemLop.Text = row.Cells[5].Value?.ToString() ?? "";
                 txbDiemThi.Text = row.Cells[6].Value?.ToString() ?? "";
-                txbDiemTB.Text = row.Cells[7].Value?.ToString() ?? "";
+                if (row.Cells[7].Value != null)
+                {
+                    if (float.TryParse(row.Cells[7].Value.ToString(), out float tb))
+                        txbDiemTB.Text = tb.ToString("0.00");
+                    else
+                        txbDiemTB.Text = "0.00";
+                }
 
                 if (row.Cells[8].Value != null)
                 {
@@ -422,6 +466,6 @@ namespace Dayone.GUI
         private void cmbMaSinhVien_SelectedIndexChanged(object sender, EventArgs e) { }
         private void dgvQuanLyDiem_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void cmbLoai_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void txbDiemTB_TextChanged(object sender, EventArgs e) { }
+        //private void txbDiemTB_TextChanged(object sender, EventArgs e) { }
     }
 }
