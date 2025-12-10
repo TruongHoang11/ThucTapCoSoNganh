@@ -9,13 +9,26 @@ namespace Dayone.DAL
 {
     public class DAL_CoVanHocTap
     {
-        private static DAL_CoVanHocTap instance;
+        //private static DAL_CoVanHocTap instance;
+        //public static DAL_CoVanHocTap Instance
+        //{
+        //    get { if (instance == null) instance = new DAL_CoVanHocTap(); return instance; }
+        //    private set => instance = value;
+        //}
+        //private DAL_CoVanHocTap() { }
+        private static DAL_CoVanHocTap _Instance;
         public static DAL_CoVanHocTap Instance
         {
-            get { if (instance == null) instance = new DAL_CoVanHocTap(); return instance; }
-            private set => instance = value;
+            get
+            {
+                if (_Instance == null)
+                    _Instance = new DAL_CoVanHocTap();
+                return _Instance;
+            }
         }
+
         private DAL_CoVanHocTap() { }
+
         public bool Them(string MaCoVan, string TenCoVan, DateTime NgaySinh, string GioiTinh, string MaKhoa, string MaLop)
         {
             string sql = "insert into CoVanHocTap(MaCVHT, TenCVHT, NgaySinh, GioiTinh, MaKhoa, MaLop) values(@MaCVHT, @TenCVHT, @NgaySinh, @GioiTinh, @MaKhoa, @MaLop)";
@@ -35,5 +48,19 @@ namespace Dayone.DAL
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from CoVanHocTap");
         }
+        public bool KiemTraTrung(string maCVHT)
+        {
+            string sql = "select * from CoVanHocTap where MaCVHT = @MaCVHT";
+            DataTable dt = DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maCVHT });
+
+            return dt.Rows.Count > 0; // Có dòng → trùng
+        }
+        public bool KiemTraTrungKhiSua(string maCVHT, int id)
+        {
+            string sql = "select * from CoVanHocTap where MaCVHT = @MaCVHT and Id <> @Id";
+            DataTable dt = DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maCVHT, id });
+            return dt.Rows.Count > 0;
+        }
+
     }
 }
