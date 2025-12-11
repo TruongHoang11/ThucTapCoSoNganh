@@ -62,7 +62,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(474, 117);
+            this.panel1.Size = new System.Drawing.Size(545, 117);
             this.panel1.TabIndex = 1;
             // 
             // btnTaiLai
@@ -107,15 +107,15 @@
             // 
             // txbTenKhoa
             // 
-            this.txbTenKhoa.Location = new System.Drawing.Point(388, 23);
+            this.txbTenKhoa.Location = new System.Drawing.Point(375, 23);
             this.txbTenKhoa.Name = "txbTenKhoa";
-            this.txbTenKhoa.Size = new System.Drawing.Size(75, 30);
+            this.txbTenKhoa.Size = new System.Drawing.Size(159, 30);
             this.txbTenKhoa.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(290, 31);
+            this.label3.Location = new System.Drawing.Point(284, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 22);
             this.label3.TabIndex = 0;
@@ -125,7 +125,7 @@
             // 
             this.txbMaKhoa.Location = new System.Drawing.Point(190, 23);
             this.txbMaKhoa.Name = "txbMaKhoa";
-            this.txbMaKhoa.Size = new System.Drawing.Size(95, 30);
+            this.txbMaKhoa.Size = new System.Drawing.Size(78, 30);
             this.txbMaKhoa.TabIndex = 1;
             // 
             // label2
@@ -172,7 +172,7 @@
             this.dgvKhoa.RowHeadersWidth = 51;
             this.dgvKhoa.RowTemplate.Height = 30;
             this.dgvKhoa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKhoa.Size = new System.Drawing.Size(474, 318);
+            this.dgvKhoa.Size = new System.Drawing.Size(545, 318);
             this.dgvKhoa.TabIndex = 2;
             this.dgvKhoa.TabStop = false;
             this.dgvKhoa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhoa_CellClick_1);
@@ -203,13 +203,13 @@
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 200;
+            this.Column3.Width = 300;
             // 
             // QuanLyKhoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 435);
+            this.ClientSize = new System.Drawing.Size(545, 435);
             this.Controls.Add(this.dgvKhoa);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

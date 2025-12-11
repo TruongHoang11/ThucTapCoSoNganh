@@ -110,7 +110,7 @@
             "D+",
             "D",
             "F"});
-            this.cmbLoai.Location = new System.Drawing.Point(839, 16);
+            this.cmbLoai.Location = new System.Drawing.Point(871, 16);
             this.cmbLoai.Name = "cmbLoai";
             this.cmbLoai.Size = new System.Drawing.Size(135, 30);
             this.cmbLoai.TabIndex = 3;
@@ -119,9 +119,9 @@
             // cmbMaMH
             // 
             this.cmbMaMH.FormattingEnabled = true;
-            this.cmbMaMH.Location = new System.Drawing.Point(561, 16);
+            this.cmbMaMH.Location = new System.Drawing.Point(581, 16);
             this.cmbMaMH.Name = "cmbMaMH";
-            this.cmbMaMH.Size = new System.Drawing.Size(209, 30);
+            this.cmbMaMH.Size = new System.Drawing.Size(221, 30);
             this.cmbMaMH.TabIndex = 2;
             // 
             // cmbMaSinhVien
@@ -129,7 +129,7 @@
             this.cmbMaSinhVien.FormattingEnabled = true;
             this.cmbMaSinhVien.Location = new System.Drawing.Point(240, 16);
             this.cmbMaSinhVien.Name = "cmbMaSinhVien";
-            this.cmbMaSinhVien.Size = new System.Drawing.Size(192, 30);
+            this.cmbMaSinhVien.Size = new System.Drawing.Size(210, 30);
             this.cmbMaSinhVien.TabIndex = 1;
             this.cmbMaSinhVien.SelectedIndexChanged += new System.EventHandler(this.cmbMaSinhVien_SelectedIndexChanged);
             // 
@@ -251,7 +251,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(776, 20);
+            this.label9.Location = new System.Drawing.Point(808, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 22);
             this.label9.TabIndex = 0;
@@ -267,7 +267,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(438, 20);
+            this.label3.Location = new System.Drawing.Point(456, 19);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 22);
             this.label3.TabIndex = 0;

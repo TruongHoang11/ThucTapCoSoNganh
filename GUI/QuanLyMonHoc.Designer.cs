@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvQuanLyMonHoc = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.numThucHanh = new System.Windows.Forms.NumericUpDown();
             this.numLyThuyet = new System.Windows.Forms.NumericUpDown();
@@ -52,6 +46,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLyMonHoc)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThucHanh)).BeginInit();
@@ -80,65 +80,10 @@
             this.dgvQuanLyMonHoc.RowHeadersWidth = 51;
             this.dgvQuanLyMonHoc.RowTemplate.Height = 30;
             this.dgvQuanLyMonHoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuanLyMonHoc.Size = new System.Drawing.Size(733, 284);
+            this.dgvQuanLyMonHoc.Size = new System.Drawing.Size(746, 284);
             this.dgvQuanLyMonHoc.TabIndex = 8;
             this.dgvQuanLyMonHoc.TabStop = false;
             this.dgvQuanLyMonHoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyMonHoc_CellClick_1);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "ID";
-            this.Column1.MaxInputLength = 255;
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 80;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "MaMH";
-            this.Column2.HeaderText = "MÃ MÔN HỌC";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "TenMH";
-            this.Column3.HeaderText = "TÊN MÔN HỌC";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 145;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "SoTC";
-            this.Column4.HeaderText = "SỐ TÍN CHỈ ";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "TietLT";
-            this.Column5.HeaderText = "T. LÝ THUYẾT";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 125;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "TietTH";
-            this.Column6.HeaderText = "T. THỰC HÀNH ";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 125;
             // 
             // panel1
             // 
@@ -161,7 +106,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(733, 157);
+            this.panel1.Size = new System.Drawing.Size(746, 157);
             this.panel1.TabIndex = 7;
             // 
             // numThucHanh
@@ -302,11 +247,66 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID :";
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "ID";
+            this.Column1.MaxInputLength = 255;
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 80;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "MaMH";
+            this.Column2.HeaderText = "MÃ MÔN HỌC";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "TenMH";
+            this.Column3.HeaderText = "TÊN MÔN HỌC";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 175;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "SoTC";
+            this.Column4.HeaderText = "SỐ TÍN CHỈ ";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "TietLT";
+            this.Column5.HeaderText = "T. LÝ THUYẾT";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 125;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "TietTH";
+            this.Column6.HeaderText = "T. THỰC HÀNH ";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 125;
+            // 
             // QuanLyMonHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(733, 441);
+            this.ClientSize = new System.Drawing.Size(746, 441);
             this.Controls.Add(this.dgvQuanLyMonHoc);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -326,12 +326,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvQuanLyMonHoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NumericUpDown numThucHanh;
         private System.Windows.Forms.NumericUpDown numLyThuyet;
@@ -349,5 +343,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbID;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }

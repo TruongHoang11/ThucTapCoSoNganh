@@ -182,15 +182,15 @@
             this.cmbMaKhoa.FormattingEnabled = true;
             this.cmbMaKhoa.Location = new System.Drawing.Point(673, 70);
             this.cmbMaKhoa.Name = "cmbMaKhoa";
-            this.cmbMaKhoa.Size = new System.Drawing.Size(154, 30);
+            this.cmbMaKhoa.Size = new System.Drawing.Size(187, 30);
             this.cmbMaKhoa.TabIndex = 7;
             // 
             // cmbMaLop
             // 
             this.cmbMaLop.FormattingEnabled = true;
-            this.cmbMaLop.Location = new System.Drawing.Point(414, 70);
+            this.cmbMaLop.Location = new System.Drawing.Point(379, 69);
             this.cmbMaLop.Name = "cmbMaLop";
-            this.cmbMaLop.Size = new System.Drawing.Size(141, 30);
+            this.cmbMaLop.Size = new System.Drawing.Size(187, 30);
             this.cmbMaLop.TabIndex = 6;
             // 
             // btnXoa
@@ -279,7 +279,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(334, 73);
+            this.label8.Location = new System.Drawing.Point(304, 73);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(78, 22);
             this.label8.TabIndex = 6;
@@ -305,16 +305,16 @@
             // 
             // txbTenCoVan
             // 
-            this.txbTenCoVan.Location = new System.Drawing.Point(432, 20);
+            this.txbTenCoVan.Location = new System.Drawing.Point(399, 20);
             this.txbTenCoVan.MaxLength = 255;
             this.txbTenCoVan.Name = "txbTenCoVan";
-            this.txbTenCoVan.Size = new System.Drawing.Size(111, 30);
+            this.txbTenCoVan.Size = new System.Drawing.Size(178, 30);
             this.txbTenCoVan.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(323, 23);
+            this.label3.Location = new System.Drawing.Point(298, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 22);
             this.label3.TabIndex = 4;
@@ -322,7 +322,7 @@
             // 
             // txbMaCoVan
             // 
-            this.txbMaCoVan.Location = new System.Drawing.Point(202, 20);
+            this.txbMaCoVan.Location = new System.Drawing.Point(191, 18);
             this.txbMaCoVan.MaxLength = 255;
             this.txbMaCoVan.Name = "txbMaCoVan";
             this.txbMaCoVan.Size = new System.Drawing.Size(90, 30);

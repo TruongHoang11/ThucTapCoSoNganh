@@ -27,12 +27,12 @@ namespace Dayone.GUI
             ////    btnQuanLy.Visible = true;
 
             //btnLamMoi.PerformClick();
-            //var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
+            var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
 
             // Debug xem form nhận được gì
             // MessageBox.Show("Form SinhVien nhận: '" + loai + "'");
 
-            //btnQuanLy.Visible = loai.Equals("Quản trị", StringComparison.OrdinalIgnoreCase);
+            btnQuanLy.Visible = loai.Equals("Quản trị", StringComparison.OrdinalIgnoreCase);
 
             //if (HeThong.LOAITAIKHOAN != "Quản trị")
             //    btnQuanly.Visible = false;

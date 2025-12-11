@@ -69,7 +69,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(690, 187);
+            this.panel1.Size = new System.Drawing.Size(682, 187);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -82,7 +82,7 @@
             "Quản trị"});
             this.cmbLoaiTaiKhoan.Location = new System.Drawing.Point(465, 79);
             this.cmbLoaiTaiKhoan.Name = "cmbLoaiTaiKhoan";
-            this.cmbLoaiTaiKhoan.Size = new System.Drawing.Size(155, 30);
+            this.cmbLoaiTaiKhoan.Size = new System.Drawing.Size(167, 30);
             this.cmbLoaiTaiKhoan.TabIndex = 3;
             this.cmbLoaiTaiKhoan.SelectedIndexChanged += new System.EventHandler(this.cmbLoaiTaiKhoan_SelectedIndexChanged);
             // 
@@ -194,7 +194,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 187);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(690, 314);
+            this.panel2.Size = new System.Drawing.Size(682, 314);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -217,7 +217,7 @@
             this.dgvTaiKhoan.RowHeadersWidth = 51;
             this.dgvTaiKhoan.RowTemplate.Height = 30;
             this.dgvTaiKhoan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTaiKhoan.Size = new System.Drawing.Size(690, 314);
+            this.dgvTaiKhoan.Size = new System.Drawing.Size(682, 314);
             this.dgvTaiKhoan.TabIndex = 1;
             this.dgvTaiKhoan.TabStop = false;
             this.dgvTaiKhoan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTaiKhoan_CellClick);
@@ -264,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 501);
+            this.ClientSize = new System.Drawing.Size(682, 501);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
