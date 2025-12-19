@@ -123,6 +123,7 @@
             this.cmbMaMH.Name = "cmbMaMH";
             this.cmbMaMH.Size = new System.Drawing.Size(221, 30);
             this.cmbMaMH.TabIndex = 2;
+            this.cmbMaMH.SelectedIndexChanged += new System.EventHandler(this.cmbMaMH_SelectedIndexChanged);
             // 
             // cmbMaSinhVien
             // 

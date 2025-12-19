@@ -177,24 +177,56 @@ namespace Dayone.GUI
            
 
         }
-
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
-            int id = int.Parse(txbID.Text);
-            string macovan = txbMaCoVan.Text;
             if (string.IsNullOrWhiteSpace(txbID.Text))
             {
-                MessageBox.Show("Bạn chưa chọn cố vấn cần sửa!");
+                MessageBox.Show("Bạn chưa chọn cố vấn cần xóa!");
                 return;
             }
-            if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan, "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            int id = int.Parse(txbID.Text);
+            string macovan = txbMaCoVan.Text;
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan,
+                "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (BLL_CoVanHocTap.Instance.Xoa(id) == true)
+                bool kq = BLL_CoVanHocTap.Instance.Xoa(id);
+
+                if (kq)
                 {
                     MessageBox.Show("Xóa cố vấn thành công!");
                     btnTaiLai.PerformClick();
                 }
+                else
+                {
+                    MessageBox.Show(
+                        "Không thể xóa cố vấn này vì đang được sử dụng trong dữ liệu liên quan!",
+                        "Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
         }
+
+        //private void btnXoa_Click_1(object sender, EventArgs e)
+        //{
+        //    int id = int.Parse(txbID.Text);
+        //    string macovan = txbMaCoVan.Text;
+        //    if (string.IsNullOrWhiteSpace(txbID.Text))
+        //    {
+        //        MessageBox.Show("Bạn chưa chọn cố vấn cần sửa!");
+        //        return;
+        //    }
+        //    if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan, "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        //    {
+        //        if (BLL_CoVanHocTap.Instance.Xoa(id) == true)
+        //        {
+        //            MessageBox.Show("Xóa cố vấn thành công!");
+        //            btnTaiLai.PerformClick();
+        //        }
+        //    }
+        //}
     }
 }

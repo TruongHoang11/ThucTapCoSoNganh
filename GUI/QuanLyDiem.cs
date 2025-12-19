@@ -466,6 +466,11 @@ namespace Dayone.GUI
         private void cmbMaSinhVien_SelectedIndexChanged(object sender, EventArgs e) { }
         private void dgvQuanLyDiem_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void cmbLoai_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void cmbMaMH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         //private void txbDiemTB_TextChanged(object sender, EventArgs e) { }
     }
 }

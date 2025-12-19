@@ -41,6 +41,7 @@
             this.DoimatkhauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             this.cbbMaLop = new System.Windows.Forms.ComboBox();
             this.cbbMaCoVan = new System.Windows.Forms.ComboBox();
             this.cbbMaKhoa = new System.Windows.Forms.ComboBox();
@@ -166,26 +167,27 @@
             // ThongtinchitietToolStripMenuItem
             // 
             this.ThongtinchitietToolStripMenuItem.Name = "ThongtinchitietToolStripMenuItem";
-            this.ThongtinchitietToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ThongtinchitietToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.ThongtinchitietToolStripMenuItem.Text = "Thông tin chi tiêt ";
             this.ThongtinchitietToolStripMenuItem.Click += new System.EventHandler(this.đổiMậtKhẩuToolStripMenuItem_Click);
             // 
             // DoimatkhauToolStripMenuItem
             // 
             this.DoimatkhauToolStripMenuItem.Name = "DoimatkhauToolStripMenuItem";
-            this.DoimatkhauToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.DoimatkhauToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.DoimatkhauToolStripMenuItem.Text = "Đổi mật khẩu ";
             this.DoimatkhauToolStripMenuItem.Click += new System.EventHandler(this.DoimatkhauToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem1
             // 
             this.đăngXuấtToolStripMenuItem1.Name = "đăngXuấtToolStripMenuItem1";
-            this.đăngXuấtToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.đăngXuấtToolStripMenuItem1.Size = new System.Drawing.Size(208, 26);
             this.đăngXuấtToolStripMenuItem1.Text = "Đăng xuất ";
             this.đăngXuấtToolStripMenuItem1.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem1_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnTimKiem);
             this.panel1.Controls.Add(this.cbbMaLop);
             this.panel1.Controls.Add(this.cbbMaCoVan);
             this.panel1.Controls.Add(this.cbbMaKhoa);
@@ -219,6 +221,18 @@
             this.panel1.TabIndex = 1;
             this.panel1.TabStop = true;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Location = new System.Drawing.Point(518, 193);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(114, 32);
+            this.btnTimKiem.TabIndex = 13;
+            this.btnTimKiem.TabStop = false;
+            this.btnTimKiem.Text = "Tìm kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // cbbMaLop
             // 
@@ -686,5 +700,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.Button btnTimKiem;
     }
 }

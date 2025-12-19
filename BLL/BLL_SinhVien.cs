@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dayone.DAL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,5 +34,10 @@ namespace Dayone.BLL
         {
             return DAL.DAL_SinhVien.Instance.Xoa(id);
         }
+        public DataTable TimKiem(string masv, string tensv)
+        {
+            return DAL_SinhVien.Instance.TimKiem(masv, tensv);
+        }
+
     }
 }
