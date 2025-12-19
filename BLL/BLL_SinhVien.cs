@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Dayone.BLL
 {
@@ -39,5 +40,8 @@ namespace Dayone.BLL
             return DAL_SinhVien.Instance.TimKiem(masv, tensv);
         }
 
+        //BLL_SinhVien bllSV = new BLL_SinhVien();
+
+       
     }
 }

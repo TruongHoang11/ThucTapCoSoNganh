@@ -79,6 +79,7 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnimport = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -94,7 +95,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1198, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1200, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -187,6 +188,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnimport);
             this.panel1.Controls.Add(this.btnTimKiem);
             this.panel1.Controls.Add(this.cbbMaLop);
             this.panel1.Controls.Add(this.cbbMaCoVan);
@@ -217,7 +219,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 30);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1198, 243);
+            this.panel1.Size = new System.Drawing.Size(1200, 243);
             this.panel1.TabIndex = 1;
             this.panel1.TabStop = true;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -496,7 +498,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 273);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1198, 303);
+            this.panel2.Size = new System.Drawing.Size(1200, 303);
             this.panel2.TabIndex = 2;
             // 
             // dgvSinhVien
@@ -525,7 +527,7 @@
             this.dgvSinhVien.RowHeadersWidth = 51;
             this.dgvSinhVien.RowTemplate.Height = 30;
             this.dgvSinhVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSinhVien.Size = new System.Drawing.Size(1198, 303);
+            this.dgvSinhVien.Size = new System.Drawing.Size(1200, 303);
             this.dgvSinhVien.TabIndex = 0;
             this.dgvSinhVien.TabStop = false;
             this.dgvSinhVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellClick);
@@ -622,11 +624,21 @@
             this.Column10.ReadOnly = true;
             this.Column10.Width = 125;
             // 
+            // btnimport
+            // 
+            this.btnimport.Location = new System.Drawing.Point(660, 193);
+            this.btnimport.Name = "btnimport";
+            this.btnimport.Size = new System.Drawing.Size(104, 32);
+            this.btnimport.TabIndex = 14;
+            this.btnimport.Text = "Import";
+            this.btnimport.UseVisualStyleBackColor = true;
+            this.btnimport.Click += new System.EventHandler(this.btnimport_Click);
+            // 
             // SinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 576);
+            this.ClientSize = new System.Drawing.Size(1200, 576);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -701,5 +713,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.Button btnTimKiem;
+        private System.Windows.Forms.Button btnimport;
     }
 }

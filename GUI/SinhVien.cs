@@ -25,7 +25,7 @@ namespace Dayone.GUI
             ////    btnQuanLy.Visible=false;
             ////else
             ////    btnQuanLy.Visible = true;
-
+            LoadSinhVien();
             //btnLamMoi.PerformClick();
             var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
 
@@ -279,14 +279,14 @@ namespace Dayone.GUI
 
                 int id = int.Parse(txbID.Text);
 
-                bool kq = BLL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan,ngaynhaphoc, malop, makhoa, macvht, id);
+                bool kq = BLL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht, id);
 
                 if (kq)
                 {
                     MessageBox.Show("Sửa sinh viên thành công!",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    btnLamMoi.PerformClick();
+                    LoadSinhVien();
                 }
                 else
                 {
@@ -327,7 +327,7 @@ namespace Dayone.GUI
                     MessageBox.Show("Xoá sinh viên thành công!",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    btnLamMoi.PerformClick();
+                    LoadSinhVien();
                 }
                 else
                 {
@@ -411,5 +411,76 @@ namespace Dayone.GUI
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void LoadSinhVien()
+        {
+            try
+            {
+                dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+        }
+
+        private void btnimport_Click(object sender, EventArgs e)
+        {
+           
+                //    OpenFileDialog of = new OpenFileDialog();
+                //    of.Filter = "Excel Files|*.xlsx;*.xls";
+                //    if (of.ShowDialog() == DialogResult.OK)
+                //    {
+                //        BLL_Excel bllExcel = new BLL_Excel();
+                //        bool kq = bllExcel.ImportSinhVienToDatabase(of.FileName);
+
+                //        if (kq)
+                //        {
+                //            MessageBox.Show("Import thành công!", "Thông báo",
+                //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //            LoadSinhVien(); // load lại DGV
+                //        }
+                //        else
+                //        {
+                //            MessageBox.Show("Một số dòng không thêm được!", "Cảnh báo",
+                //                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //            LoadSinhVien();
+                //        }
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("Lỗi import: " + ex.Message,
+                //        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
+                try
+                {
+                    OpenFileDialog of = new OpenFileDialog();
+                    of.Filter = "Excel Files|*.xlsx;*.xls";
+                    if (of.ShowDialog() == DialogResult.OK)
+                    {
+                        BLL_Excel bllExcel = new BLL_Excel();
+                        var ketqua = bllExcel.ImportSinhVienToDatabase(of.FileName);
+
+                        LoadSinhVien(); // reload DGV
+
+                        string msg = $"✔ Thêm thành công: {ketqua.SuccessCount} dòng\n" +
+                                     $"❌ Lỗi: {ketqua.ErrorCount} dòng\n\n";
+
+                        if (ketqua.ErrorLines.Count > 0)
+                            msg += "🔎 Chi tiết lỗi:\n" + string.Join("\n", ketqua.ErrorLines);
+
+                        MessageBox.Show(msg, "Kết quả Import");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi import: " + ex.Message);
+                }
+
+            
+       }
     }
 }

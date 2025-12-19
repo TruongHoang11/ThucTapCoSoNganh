@@ -147,6 +147,31 @@ namespace Dayone.DAL
             return data > 0;
         }
 
+        public object ExecuteScalar(string sql, object[] parameters = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                if (parameters != null)
+                {
+                    string[] listPara = sql.Split(' ');
+                    int i = 0;
+                    foreach (string item in listPara)
+                    {
+                        if (item.Contains('@'))
+                        {
+                            cmd.Parameters.AddWithValue(item, parameters[i]);
+                            i++;
+                        }
+                    }
+                }
+
+                return cmd.ExecuteScalar();
+            }
+        }
+
     }
 
 }

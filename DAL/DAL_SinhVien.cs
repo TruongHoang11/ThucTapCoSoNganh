@@ -56,5 +56,11 @@ namespace Dayone.DAL
             );
         }
 
+        public bool TonTaiMaSV(string masv)
+        {
+            string sql = "SELECT COUNT(*) FROM SinhVien WHERE MaSV = @masv";
+            return (int)DAL_KetNoi.Instance.ExecuteScalar(sql, new object[] { masv }) > 0;
+        }
+
     }
 }
