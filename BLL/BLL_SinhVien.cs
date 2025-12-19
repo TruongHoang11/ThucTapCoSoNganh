@@ -35,13 +35,31 @@ namespace Dayone.BLL
         {
             return DAL.DAL_SinhVien.Instance.Xoa(id);
         }
-        public DataTable TimKiem(string masv, string tensv)
+        //public DataTable TimKiem(string masv, string tensv)
+        //{
+        //    return DAL_SinhVien.Instance.TimKiem(masv, tensv);
+        //}
+        public DataTable TimKiem(
+    string masv,
+    string tensv,
+    string quequan,
+    string malop,
+    string makhoa,
+    string macvht
+)
         {
-            return DAL_SinhVien.Instance.TimKiem(masv, tensv);
+            return DAL_SinhVien.Instance.TimKiem(
+                masv,
+                tensv,
+                quequan,
+                malop,
+                makhoa,
+                macvht
+            );
         }
 
         //BLL_SinhVien bllSV = new BLL_SinhVien();
 
-       
+
     }
 }

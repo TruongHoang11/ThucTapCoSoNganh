@@ -36,24 +36,76 @@ namespace Dayone.DAL
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from SinhVien");
         }
-        public DataTable TimKiem(string masv, string tensv)
+        //public DataTable TimKiem(string masv, string tensv)
+        //{
+        //    string sql =
+        //        "SELECT * FROM SinhVien " +
+        //        "WHERE MaSV LIKE @MaSV " +
+        //        "AND TenSV LIKE @TenSV ";
+
+
+
+        //    return DAL_KetNoi.Instance.ExcuteQuery(
+        //        sql,
+        //        new object[]
+        //        {
+        //    "%" + masv + "%",
+        //    "%" + tensv + "%"
+
+        //        }
+        //    );
+        //}
+        public DataTable TimKiem(
+    string masv,
+    string tensv,
+    string quequan,
+    string malop,
+    string makhoa,
+    string macvht
+)
         {
             string sql =
-                "SELECT * FROM SinhVien " +
-                "WHERE MaSV LIKE @MaSV " +
-                "AND TenSV LIKE @TenSV ";
-            
-           
+                "SELECT * FROM SinhVien WHERE 1 = 1 ";
 
-            return DAL_KetNoi.Instance.ExcuteQuery(
-                sql,
-                new object[]
-                {
-            "%" + masv + "%",
-            "%" + tensv + "%"
-           
-                }
-            );
+            List<object> parameters = new List<object>();
+
+            if (!string.IsNullOrWhiteSpace(masv))
+            {
+                sql += " AND MaSV LIKE @MaSV ";
+                parameters.Add("%" + masv + "%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(tensv))
+            {
+                sql += " AND TenSV LIKE @TenSV ";
+                parameters.Add("%" + tensv + "%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(quequan))
+            {
+                sql += " AND QueQuan LIKE @QueQuan ";
+                parameters.Add("%" + quequan + "%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(malop))
+            {
+                sql += " AND MaLop = @MaLop ";
+                parameters.Add(malop);
+            }
+
+            if (!string.IsNullOrWhiteSpace(makhoa))
+            {
+                sql += " AND MaKhoa = @MaKhoa ";
+                parameters.Add(makhoa);
+            }
+
+            if (!string.IsNullOrWhiteSpace(macvht))
+            {
+                sql += " AND MaCVHT = @MaCVHT ";
+                parameters.Add(macvht);
+            }
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, parameters.ToArray());
         }
 
         public bool TonTaiMaSV(string masv)

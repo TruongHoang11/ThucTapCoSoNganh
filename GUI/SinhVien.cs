@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+
 
 namespace Dayone.GUI
 {
@@ -21,23 +23,23 @@ namespace Dayone.GUI
 
         private void SinhVien_Load(object sender, EventArgs e)
         {
-            ////if(HeThong.LOAITAIKHOAN!="Quản trị")
-            ////    btnQuanLy.Visible=false;
+            //////if(HeThong.LOAITAIKHOAN!="Quản trị")
+            //////    btnQuanLy.Visible=false;
+            //////else
+            //////    btnQuanLy.Visible = true;
+            //LoadSinhVien();
+            ////btnLamMoi.PerformClick();
+            //var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
+
+            //// Debug xem form nhận được gì
+            //// MessageBox.Show("Form SinhVien nhận: '" + loai + "'");
+
+            //btnQuanLy.Visible = loai.Equals("Quản trị", StringComparison.OrdinalIgnoreCase);
+
+            ////if (HeThong.LOAITAIKHOAN != "Quản trị")
+            ////    btnQuanly.Visible = false;
             ////else
-            ////    btnQuanLy.Visible = true;
-            LoadSinhVien();
-            //btnLamMoi.PerformClick();
-            var loai = (HeThong.LOAITAIKHOAN ?? "").Trim();
-
-            // Debug xem form nhận được gì
-            // MessageBox.Show("Form SinhVien nhận: '" + loai + "'");
-
-            btnQuanLy.Visible = loai.Equals("Quản trị", StringComparison.OrdinalIgnoreCase);
-
-            //if (HeThong.LOAITAIKHOAN != "Quản trị")
-            //    btnQuanly.Visible = false;
-            //else
-            //    btnQuanly.Visible = true;
+            ////    btnQuanly.Visible = true;
         }
 
         private void quảnLýLớpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,12 +164,34 @@ namespace Dayone.GUI
                 cbbMaCoVan.DataSource = dsCoVan;
                 cbbMaCoVan.DisplayMember = "TenCVHT";
                 cbbMaCoVan.ValueMember = "MaCVHT";
+
+                // ✅ XÓA DỮ LIỆU TRÊN FORM
+                ClearForm();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi tải dữ liệu:\n" + ex.Message,
                                 "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void ClearForm()
+        {
+            txbID.Clear();
+            txbMaSV.Clear();
+            txbTenSV.Clear();
+            txbQueQuan.Clear();
+
+            dtpkNgaySinh.Value = DateTime.Now;
+            dtpkNhapHoc.Value = DateTime.Now;
+
+            rbNam.Checked = false;
+            rbNu.Checked = false;
+
+            cbbMaLop.SelectedIndex = -1;
+            cbbMaKhoa.SelectedIndex = -1;
+            cbbMaCoVan.SelectedIndex = -1;
+
+            dgvSinhVien.ClearSelection();
         }
 
         private void quảnLýToolStripMenuItem_Click(object sender, EventArgs e)
@@ -364,17 +388,80 @@ namespace Dayone.GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    string masv = txbMaSV.Text.Trim();
+            //    string tensv = txbTenSV.Text.Trim();
+
+            //    // ❗ Kiểm tra nếu tất cả ô tìm kiếm rỗng
+            //    if (string.IsNullOrWhiteSpace(masv) &&
+            //        string.IsNullOrWhiteSpace(tensv))
+            //    {
+            //        MessageBox.Show(
+            //            "Vui lòng nhập ít nhất một thông tin để tìm kiếm!",
+            //            "Thông báo",
+            //            MessageBoxButtons.OK,
+            //            MessageBoxIcon.Warning
+            //        );
+            //        return;
+            //    }
+
+            //    // ❗ Gọi BLL tìm kiếm (nếu bỏ trống giá trị nào thì truyền null)
+            //    DataTable dt = BLL_SinhVien.Instance.TimKiem(
+            //        string.IsNullOrWhiteSpace(masv) ? null : masv,
+            //        string.IsNullOrWhiteSpace(tensv) ? null : tensv
+            //    );
+
+            //    // ❗ Kiểm tra kết quả null
+            //    if (dt == null)
+            //    {
+            //        MessageBox.Show("Không thể tải dữ liệu tìm kiếm!", "Lỗi",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+
+            //    dgvSinhVien.DataSource = dt;
+
+            //    // ❗ Không tìm thấy sinh viên
+            //    if (dt.Rows.Count == 0)
+            //    {
+            //        MessageBox.Show("Không tìm thấy sinh viên phù hợp.",
+            //            "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Lỗi tìm kiếm: " + ex.Message,
+            //        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
             try
             {
                 string masv = txbMaSV.Text.Trim();
                 string tensv = txbTenSV.Text.Trim();
+                string quequan = txbQueQuan.Text.Trim();
 
-                // ❗ Kiểm tra nếu tất cả ô tìm kiếm rỗng
+                string malop = cbbMaLop.SelectedValue == null
+                    ? null
+                    : cbbMaLop.SelectedValue.ToString();
+
+                string makhoa = cbbMaKhoa.SelectedValue == null
+                    ? null
+                    : cbbMaKhoa.SelectedValue.ToString();
+
+                string macvht = cbbMaCoVan.SelectedValue == null
+                    ? null
+                    : cbbMaCoVan.SelectedValue.ToString();
+
+                // ❗ Kiểm tra nếu TẤT CẢ điều kiện đều rỗng
                 if (string.IsNullOrWhiteSpace(masv) &&
-                    string.IsNullOrWhiteSpace(tensv))
+                    string.IsNullOrWhiteSpace(tensv) &&
+                    string.IsNullOrWhiteSpace(quequan) &&
+                    malop == null &&
+                    makhoa == null &&
+                    macvht == null)
                 {
                     MessageBox.Show(
-                        "Vui lòng nhập ít nhất một thông tin để tìm kiếm!",
+                        "Vui lòng nhập hoặc chọn ít nhất một điều kiện tìm kiếm!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
@@ -382,23 +469,25 @@ namespace Dayone.GUI
                     return;
                 }
 
-                // ❗ Gọi BLL tìm kiếm (nếu bỏ trống giá trị nào thì truyền null)
+                // ❗ Gọi BLL tìm kiếm
                 DataTable dt = BLL_SinhVien.Instance.TimKiem(
                     string.IsNullOrWhiteSpace(masv) ? null : masv,
-                    string.IsNullOrWhiteSpace(tensv) ? null : tensv
+                    string.IsNullOrWhiteSpace(tensv) ? null : tensv,
+                    string.IsNullOrWhiteSpace(quequan) ? null : quequan,
+                    malop,
+                    makhoa,
+                    macvht
                 );
 
-                // ❗ Kiểm tra kết quả null
                 if (dt == null)
                 {
-                    MessageBox.Show("Không thể tải dữ liệu tìm kiếm!", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không thể tải dữ liệu tìm kiếm!",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 dgvSinhVien.DataSource = dt;
 
-                // ❗ Không tìm thấy sinh viên
                 if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy sinh viên phù hợp.",
@@ -410,6 +499,7 @@ namespace Dayone.GUI
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void LoadSinhVien()
@@ -482,5 +572,57 @@ namespace Dayone.GUI
 
             
        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvSinhVien.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo");
+                    return;
+                }
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Excel File (*.xlsx)|*.xlsx";
+                sfd.FileName = "DanhSachSinhVien.xlsx";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        var ws = wb.Worksheets.Add("SinhVien");
+
+                        // ===== HEADER =====
+                        for (int i = 0; i < dgvSinhVien.Columns.Count; i++)
+                        {
+                            ws.Cell(1, i + 1).Value = dgvSinhVien.Columns[i].HeaderText;
+                            ws.Cell(1, i + 1).Style.Font.Bold = true;
+                        }
+
+                        // ===== DATA =====
+                        for (int i = 0; i < dgvSinhVien.Rows.Count; i++)
+                        {
+                            for (int j = 0; j < dgvSinhVien.Columns.Count; j++)
+                            {
+                                ws.Cell(i + 2, j + 1).Value =
+                                    dgvSinhVien.Rows[i].Cells[j].Value?.ToString();
+                            }
+                        }
+
+                        ws.Columns().AdjustToContents();
+                        wb.SaveAs(sfd.FileName);
+                    }
+
+                    MessageBox.Show("Xuất Excel thành công!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xuất Excel:\n" + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
