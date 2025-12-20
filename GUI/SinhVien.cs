@@ -353,7 +353,6 @@ namespace Dayone.GUI
 
             
        }
-
         private void btnXuatExcel_Click(object sender, EventArgs e)
         {
             try
@@ -374,21 +373,34 @@ namespace Dayone.GUI
                     {
                         var ws = wb.Worksheets.Add("SinhVien");
 
-                        // ===== HEADER =====
+                        int colExcel = 1;
+
+                        // ===== HEADER (BỎ ID) =====
                         for (int i = 0; i < dgvSinhVien.Columns.Count; i++)
                         {
-                            ws.Cell(1, i + 1).Value = dgvSinhVien.Columns[i].HeaderText;
-                            ws.Cell(1, i + 1).Style.Font.Bold = true;
+                            if (i == 0) continue; // ❌ Bỏ cột ID
+
+                            ws.Cell(1, colExcel).Value = dgvSinhVien.Columns[i].HeaderText;
+                            ws.Cell(1, colExcel).Style.Font.Bold = true;
+                            colExcel++;
                         }
 
-                        // ===== DATA =====
+                        // ===== DATA (BỎ ID) =====
+                        int rowExcel = 2;
                         for (int i = 0; i < dgvSinhVien.Rows.Count; i++)
                         {
+                            if (dgvSinhVien.Rows[i].IsNewRow) continue;
+
+                            colExcel = 1;
                             for (int j = 0; j < dgvSinhVien.Columns.Count; j++)
                             {
-                                ws.Cell(i + 2, j + 1).Value =
+                                if (j == 0) continue; // ❌ Bỏ ID
+
+                                ws.Cell(rowExcel, colExcel).Value =
                                     dgvSinhVien.Rows[i].Cells[j].Value?.ToString();
+                                colExcel++;
                             }
+                            rowExcel++;
                         }
 
                         ws.Columns().AdjustToContents();
@@ -405,6 +417,7 @@ namespace Dayone.GUI
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnChonAnh_Click(object sender, EventArgs e)
         {
@@ -556,7 +569,59 @@ namespace Dayone.GUI
 
         private void cbbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
+
+        //private void btnXuatExcel_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (dgvSinhVien.Rows.Count == 0)
+        //        {
+        //            MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo");
+        //            return;
+        //        }
+
+        //        SaveFileDialog sfd = new SaveFileDialog();
+        //        sfd.Filter = "Excel File (*.xlsx)|*.xlsx";
+        //        sfd.FileName = "DanhSachSinhVien.xlsx";
+
+        //        if (sfd.ShowDialog() == DialogResult.OK)
+        //        {
+        //            using (XLWorkbook wb = new XLWorkbook())
+        //            {
+        //                var ws = wb.Worksheets.Add("SinhVien");
+
+        //                // ===== HEADER =====
+        //                for (int i = 0; i < dgvSinhVien.Columns.Count; i++)
+        //                {
+        //                    ws.Cell(1, i + 1).Value = dgvSinhVien.Columns[i].HeaderText;
+        //                    ws.Cell(1, i + 1).Style.Font.Bold = true;
+        //                }
+
+        //                // ===== DATA =====
+        //                for (int i = 0; i < dgvSinhVien.Rows.Count; i++)
+        //                {
+        //                    for (int j = 0; j < dgvSinhVien.Columns.Count; j++)
+        //                    {
+        //                        ws.Cell(i + 2, j + 1).Value =
+        //                            dgvSinhVien.Rows[i].Cells[j].Value?.ToString();
+        //                    }
+        //                }
+
+        //                ws.Columns().AdjustToContents();
+        //                wb.SaveAs(sfd.FileName);
+        //            }
+
+        //            MessageBox.Show("Xuất Excel thành công!", "Thông báo",
+        //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Lỗi xuất Excel:\n" + ex.Message,
+        //            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
     }
 }
