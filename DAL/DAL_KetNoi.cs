@@ -14,7 +14,7 @@ namespace Dayone.DAL
     {
         //Chuỗi kết nối cơ sở dữ liệu
         private string connectionString =
-            @"Data Source=EOBDZVAIO\MSQLSERVER; Initial Catalog=db_QLSinhVien; Integrated Security=True;";
+            @"Data Source=LAPTOP-4P8CHGI2; Initial Catalog=SinhVien; Integrated Security=True;";
 
         public string ConnectionString
         {
@@ -137,7 +137,16 @@ namespace Dayone.DAL
 
                     foreach (Match m in matches)
                     {
-                        command.Parameters.AddWithValue(m.Value, parameter[i]);
+                        object value = parameter[i];
+
+                        if (value is string s)
+                        {
+                            if (string.IsNullOrWhiteSpace(s))
+                                value = DBNull.Value;
+                        }
+
+                        command.Parameters.AddWithValue(m.Value, value ?? DBNull.Value);
+
                         i++;
                     }
                 }

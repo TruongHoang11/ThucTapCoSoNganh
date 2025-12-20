@@ -23,13 +23,13 @@ namespace Dayone.BLL
         {
             return DAL.DAL_SinhVien.Instance.DanhSach();
         }
-        public bool Them(string masv, string tensv, DateTime ngaysinh, string gioitinh, string quequan, DateTime ngaynh, string makhoa, string malop, string macvht)
+        public bool Them(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop,string makhoa, string macvht, string anh)
         {
-            return DAL.DAL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh,quequan, ngaynh, makhoa, malop, macvht);
+            return DAL.DAL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh,quequan, ngaynh, malop,makhoa , macvht, anh);
         }
-        public bool Sua(string masv, string tensv, DateTime ngaysinh, string gioitinh, string quequan, DateTime ngaynh, string makhoa, string malop, string macvht, int id)
+        public bool Sua(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop,string makhoa,  string macvht,string anh, int id)
         {
-            return DAL.DAL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, makhoa, malop, macvht, id);
+            return DAL.DAL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, malop,makhoa, macvht,anh, id);
         }
         public bool Xoa(int id)
         {

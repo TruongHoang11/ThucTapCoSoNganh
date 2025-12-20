@@ -53,13 +53,16 @@ namespace Dayone.BLL
                 {
                     string masv = row["masv"].ToString().Trim();
                     string tensv = row["tensv"].ToString().Trim();
-                    DateTime ngaysinh = DateTime.Parse(row["ngaysinh"].ToString());
+                    string ngaysinh = row["ngaysinh"].ToString();
                     string gioitinh = row["gioitinh"].ToString().Trim();
                     string quequan = row["quequan"].ToString().Trim();
-                    DateTime ngaynh = DateTime.Parse(row["ngaynh"].ToString());
+                    string ngaynh = row["ngaynh"].ToString();
                     string malop = row["malop"].ToString().Trim();
                     string makhoa = row["makhoa"].ToString().Trim();
                     string macvht = row["macvht"].ToString().Trim();
+                    string anh = row["anh"].ToString().Trim();
+
+
 
                     // Nếu trùng mã SV thì bỏ qua
                     if (DAL_SinhVien.Instance.TonTaiMaSV(masv))
@@ -69,7 +72,7 @@ namespace Dayone.BLL
                         continue;
                     }
 
-                    bool ok = DAL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, malop, makhoa, macvht);
+                    bool ok = DAL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, malop, makhoa, macvht,anh);
 
                     if (ok)
                         result.SuccessCount++;
