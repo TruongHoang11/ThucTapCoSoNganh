@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dgvLop = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnTaiLai = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -44,11 +49,6 @@
             this.numSoLuong = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).BeginInit();
@@ -78,6 +78,52 @@
             this.dgvLop.TabIndex = 4;
             this.dgvLop.TabStop = false;
             this.dgvLop.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLop_CellClick_1);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "ID";
+            this.Column1.MaxInputLength = 255;
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 40;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "MaLop";
+            this.Column2.HeaderText = "MÃ LỚP";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "TenLop";
+            this.Column3.HeaderText = "TÊN LỚP";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 120;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "SoLuong";
+            this.Column4.HeaderText = "S.LƯỢNG";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "MaKhoa";
+            this.Column5.HeaderText = "TÊN KHOA";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 150;
             // 
             // btnTaiLai
             // 
@@ -224,52 +270,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Tên Khoa:";
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "ID";
-            this.Column1.MaxInputLength = 255;
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 40;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "MaLop";
-            this.Column2.HeaderText = "MÃ LỚP";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "TenLop";
-            this.Column3.HeaderText = "TÊN LỚP";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 120;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "SoLuong";
-            this.Column4.HeaderText = "S.LƯỢNG";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "MaKhoa";
-            this.Column5.HeaderText = "TÊN KHOA";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 150;
-            // 
             // QuanLyLop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -281,6 +281,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "QuanLyLop";
             this.Text = "Quản Lý Lớp";
+            this.Load += new System.EventHandler(this.QuanLyLop_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
