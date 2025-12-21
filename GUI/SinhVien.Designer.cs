@@ -37,6 +37,7 @@
             this.quảnLýTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýĐiểmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngKýMônHọcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýLớpHọcPhầnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ThongtinchitietToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DoimatkhauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,11 +85,7 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-            this.quảnLýLớpHọcPhầnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnh)).BeginInit();
@@ -105,7 +102,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1225, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1300, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,6 +171,13 @@
             this.đăngKýMônHọcToolStripMenuItem.Text = "Đăng ký môn học";
             this.đăngKýMônHọcToolStripMenuItem.Click += new System.EventHandler(this.đăngKýMônHọcToolStripMenuItem_Click);
             // 
+            // quảnLýLớpHọcPhầnToolStripMenuItem
+            // 
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Name = "quảnLýLớpHọcPhầnToolStripMenuItem";
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Text = "Quản lý lớp học phần";
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýLớpHọcPhầnToolStripMenuItem_Click);
+            // 
             // tàiKhoảnToolStripMenuItem
             // 
             this.tàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -241,7 +245,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 30);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1225, 243);
+            this.panel1.Size = new System.Drawing.Size(1300, 243);
             this.panel1.TabIndex = 1;
             this.panel1.TabStop = true;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -559,7 +563,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 273);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1225, 303);
+            this.panel2.Size = new System.Drawing.Size(1300, 303);
             this.panel2.TabIndex = 2;
             // 
             // dgvSinhVien
@@ -588,7 +592,7 @@
             this.dgvSinhVien.RowHeadersWidth = 51;
             this.dgvSinhVien.RowTemplate.Height = 30;
             this.dgvSinhVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSinhVien.Size = new System.Drawing.Size(1225, 303);
+            this.dgvSinhVien.Size = new System.Drawing.Size(1299, 303);
             this.dgvSinhVien.TabIndex = 0;
             this.dgvSinhVien.TabStop = false;
             this.dgvSinhVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellClick);
@@ -685,14 +689,6 @@
             this.Column10.ReadOnly = true;
             this.Column10.Width = 125;
             // 
-
-            // quảnLýLớpHọcPhầnToolStripMenuItem
-            // 
-            this.quảnLýLớpHọcPhầnToolStripMenuItem.Name = "quảnLýLớpHọcPhầnToolStripMenuItem";
-            this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-            this.quảnLýLớpHọcPhầnToolStripMenuItem.Text = "Quản lý lớp học phần";
-            this.quảnLýLớpHọcPhầnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýLớpHọcPhầnToolStripMenuItem_Click);
-
             // Column11
             // 
             this.Column11.DataPropertyName = "Anh";
@@ -701,13 +697,12 @@
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             this.Column11.Width = 125;
-
             // 
             // SinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1225, 576);
+            this.ClientSize = new System.Drawing.Size(1300, 576);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
