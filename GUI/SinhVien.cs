@@ -60,6 +60,7 @@ namespace Dayone.GUI
             //cbbMaLop.ValueMember = "MaLop";
             //ClearForm();
         }
+        //hehe
         private void ClearForm()
         {
             txbID.Clear();
@@ -354,7 +355,7 @@ namespace Dayone.GUI
             }
 
             // Nếu đã chọn ảnh mới
-            
+            //đẩy lại
         }
 
         private void btnXoa_Click(object sender, EventArgs e)

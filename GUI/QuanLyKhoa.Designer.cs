@@ -127,6 +127,7 @@
             this.txbMaKhoa.Name = "txbMaKhoa";
             this.txbMaKhoa.Size = new System.Drawing.Size(78, 30);
             this.txbMaKhoa.TabIndex = 1;
+            this.txbMaKhoa.TextChanged += new System.EventHandler(this.txbMaKhoa_TextChanged);
             // 
             // label2
             // 

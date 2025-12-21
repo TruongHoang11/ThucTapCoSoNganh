@@ -20,7 +20,12 @@ namespace Dayone.DAL
         }
 
         private string connectionString =
-            @"Data Source=EOBDZVAIO\MSQLSERVER;Initial Catalog=QL_SVNEW1;Integrated Security=True";
+
+
+            @"Data Source=HUY-TIEN\SQLEXPRESS;Initial Catalog=QL_SVNEW1111;Integrated Security=True";
+        //jkfjasljasl
+
+
 
         public string ConnectionString
         {
