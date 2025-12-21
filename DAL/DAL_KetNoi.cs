@@ -1,152 +1,205 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
 
 namespace Dayone.DAL
 {
     public class DAL_KetNoi
     {
-        //Chuỗi kết nối cơ sở dữ liệu
+        private static DAL_KetNoi instance;
+        public static DAL_KetNoi Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new DAL_KetNoi();
+                return instance;
+            }
+        }
+
         private string connectionString =
-            @"Data Source=DESKTOP-JTVGARK; Initial Catalog=db_QLSinhVien; Integrated Security=True;";
+            @"Data Source=DESKTOP-JTVGARK;Initial Catalog=QL_SVNEW1;Integrated Security=True";
 
         public string ConnectionString
         {
             get { return connectionString; }
         }
 
-        private static DAL_KetNoi instance; // ctr + r + e
-        public static DAL_KetNoi Instance
-        {
-            get { if (instance == null) instance = new DAL_KetNoi(); return instance; }
-            private set => instance = value;
-        }
-
         private DAL_KetNoi() { }
 
-        // lấy danh sách 
-        //public DataTable ExcuteQuery(string query, object[] parameter = null)
-        //{
-        //    DataTable data = new DataTable();
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
+        // =====================================================
+        // ==================== QUERY ==========================
+        // =====================================================
 
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        if (parameter != null)
-        //        {
-        //            string[] listParams = query.Split(' ');
-
-        //            int i = 0;
-        //            foreach (string item in listParams)
-        //            {
-        //                if (item.Contains('@'))
-        //                {
-        //                    command.Parameters.AddWithValue(item, parameter[i]);
-        //                    i++;
-        //                }
-        //            }
-        //        }
-
-        //        SqlDataAdapter adapter = new SqlDataAdapter(command);
-        //        adapter.Fill(data);
-        //        connection.Close();
-        //    }
-
-        //    return data;
-        //}
-
-
+        // 👉 CÁCH CŨ (object[])
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                connection.Open();
-
-                SqlCommand command = new SqlCommand(query, connection);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
 
                 if (parameter != null)
                 {
                     var matches = Regex.Matches(query, @"@\w+");
                     int i = 0;
-
                     foreach (Match m in matches)
                     {
-                        command.Parameters.AddWithValue(m.Value, parameter[i]);
+                        cmd.Parameters.AddWithValue(m.Value, parameter[i]);
                         i++;
                     }
                 }
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(data);
             }
+
+            return data;
+        }
+
+        // 👉 CÁCH MỚI (Dictionary)
+        //public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters)
+        //{
+        //    DataTable data = new DataTable();
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        conn.Open();
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+
+        //        foreach (var p in parameters)
+        //        {
+        //            cmd.Parameters.AddWithValue(p.Key, p.Value);
+        //        }
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        //        adapter.Fill(data);
+        //    }
+
+        //    return data;
+        //}
+        public DataTable ExecuteQuery(string query, SqlParameter[] parameters)
+        {
+            DataTable data = new DataTable();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(data);
+            }
+
             return data;
         }
 
 
-        // thêm , sửa , xóa 
-        //public bool ExecuteNonQuery(string query, object[] parameter = null)
-        //{
-        //    int data = 0;
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
+        // =====================================================
+        // ================= NON QUERY =========================
+        // =====================================================
 
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        if (parameter != null)
-        //        {
-        //            string[] listParams = query.Split(' ');
-        //            int i = 0;
-
-        //            foreach (string item in listParams)
-        //            {
-        //                if (item.Contains('@'))
-        //                {
-        //                    command.Parameters.AddWithValue(item, parameter[i]);
-        //                    i++;
-        //                }
-        //            }
-        //        }
-
-        //        data = command.ExecuteNonQuery();
-        //        connection.Close();
-        //    }
-        //    return data > 0;
-        //}
         public bool ExecuteNonQuery(string query, object[] parameter = null)
         {
-            int data = 0;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+            int result;
 
-                SqlCommand command = new SqlCommand(query, connection);
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
 
                 if (parameter != null)
                 {
                     var matches = Regex.Matches(query, @"@\w+");
                     int i = 0;
-
                     foreach (Match m in matches)
                     {
-                        command.Parameters.AddWithValue(m.Value, parameter[i]);
+                        cmd.Parameters.AddWithValue(m.Value, parameter[i]);
                         i++;
                     }
                 }
 
-                data = command.ExecuteNonQuery();
+                result = cmd.ExecuteNonQuery();
             }
-            return data > 0;
+
+            return result > 0;
         }
 
-    }
+        public bool ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+        {
+            int result;
 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                foreach (var p in parameters)
+                {
+                    cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                result = cmd.ExecuteNonQuery();
+            }
+
+            return result > 0;
+        }
+
+        // =====================================================
+        // =================== SCALAR ==========================
+        // =====================================================
+
+        public object ExecuteScalar(string query, object[] parameter = null)
+        {
+            object result;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                if (parameter != null)
+                {
+                    var matches = Regex.Matches(query, @"@\w+");
+                    int i = 0;
+                    foreach (Match m in matches)
+                    {
+                        cmd.Parameters.AddWithValue(m.Value, parameter[i]);
+                        i++;
+                    }
+                }
+
+                result = cmd.ExecuteScalar();
+            }
+
+            return result;
+        }
+
+        public object ExecuteScalar(string query, Dictionary<string, object> parameters)
+        {
+            object result;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                foreach (var p in parameters)
+                {
+                    cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                result = cmd.ExecuteScalar();
+            }
+
+            return result;
+        }
+    }
 }

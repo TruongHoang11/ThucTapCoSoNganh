@@ -1,0 +1,209 @@
+﻿using Dayone.BLL;
+using System;
+using System.Data;
+using System.Windows.Forms;
+
+namespace Dayone.GUI
+{
+    public partial class DangKyMon : Form
+    {
+        public DangKyMon()
+        {
+            InitializeComponent();
+        }
+
+        private void DangKyMon_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // ✅ XÓA HẾT CỘT CŨ VÀ TỰ ĐỘNG TẠO MỚI
+                //dgvDangKyMon.Columns.Clear();
+                //dgvDangKyMon.AutoGenerateColumns = true;
+
+                //cmbMaSinhVien.SelectedIndexChanged -= cmbMaSinhVien_SelectedIndexChanged;
+
+                var dtSV = BLL_SinhVien.Instance.DanhSach();
+                if (dtSV != null && dtSV.Rows.Count > 0)
+                {
+                    cmbMaSinhVien.DataSource = dtSV;
+                    cmbMaSinhVien.DisplayMember = "TenSV";
+                    cmbMaSinhVien.ValueMember = "MaSV";
+                }
+
+                DataTable dt = BLL_DangKyMon.Instance.GetLopHocPhan();
+                cmbMaHocPhan.DataSource = dt;
+                cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
+                cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+
+                // LOAD TOÀN BỘ DỮ LIỆU ĐĂNG KÝ
+                DataTable dtDangKy = BLL_DangKyMon.Instance.DanhSachTatCa();
+                dgvDangKyMon.DataSource = dtDangKy;
+
+                // ✅ ĐỔI TÊN CỘT SANG TIẾNG VIỆT
+                //if (dgvDangKyMon.Columns.Contains("Id"))
+                //    dgvDangKyMon.Columns["Id"].HeaderText = "ID";
+                //if (dgvDangKyMon.Columns.Contains("MaSV"))
+                //    dgvDangKyMon.Columns["MaSV"].HeaderText = "MÃ SV";
+                //if (dgvDangKyMon.Columns.Contains("TenSV"))
+                //    dgvDangKyMon.Columns["TenSV"].HeaderText = "TÊN SV";
+                //if (dgvDangKyMon.Columns.Contains("MaLopHocPhan"))
+                //    dgvDangKyMon.Columns["MaLopHocPhan"].HeaderText = "MÃ H.PHẦN";
+                //if (dgvDangKyMon.Columns.Contains("TenLopHocPhan"))
+                //    dgvDangKyMon.Columns["TenLopHocPhan"].HeaderText = "TÊN H.PHẦN";
+                //if (dgvDangKyMon.Columns.Contains("TenMH"))
+                //    dgvDangKyMon.Columns["TenMH"].HeaderText = "TÊN MH";
+                //if (dgvDangKyMon.Columns.Contains("NgayDangKy"))
+                //    dgvDangKyMon.Columns["NgayDangKy"].HeaderText = "NGÀY ĐĂNG KÝ";
+
+                //dgvDangKyMon.AutoResizeColumns();
+                //dgvDangKyMon.Refresh();
+
+                //cmbMaSinhVien.SelectedIndexChanged += cmbMaSinhVien_SelectedIndexChanged;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load form:\n" + ex.Message);
+            }
+        }
+        private void btnTaiLai_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dtDangKy = BLL_DangKyMon.Instance.DanhSachTatCa();
+                dgvDangKyMon.DataSource = dtDangKy;
+                // Load danh sách SinhVien
+                var dtSV = BLL_SinhVien.Instance.DanhSach();
+                if (dtSV != null && dtSV.Rows.Count > 0)
+                {
+                    cmbMaSinhVien.DataSource = dtSV;
+                    cmbMaSinhVien.DisplayMember = "TenSV";
+                    cmbMaSinhVien.ValueMember = "MaSV";
+                }
+                else
+                {
+                    MessageBox.Show("Chưa có dữ liệu sinh viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                // Load danh sách Lớp Học Phần
+                var dtHP = BLL_DangKyMon.Instance.GetLopHocPhan();
+                if (dtHP != null && dtHP.Rows.Count > 0)
+                {
+                    cmbMaHocPhan.DataSource = dtHP;
+                    cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
+                    cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+                }
+
+                else
+                {
+                    MessageBox.Show("Chưa có dữ liệu lớp học phần", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadDangKy()
+        {
+            dgvDangKyMon.DataSource = BLL_DangKyMon.Instance.DanhSachTatCa();
+        }
+
+        // ================= ĐĂNG KÝ =================
+        private void btnDangKy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbMaSinhVien.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn sinh viên");
+                    return;
+                }
+
+                if (cmbMaHocPhan.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn lớp học phần");
+                    return;
+                }
+
+                string maSV = cmbMaSinhVien.SelectedValue.ToString();
+                string maLHP = cmbMaHocPhan.SelectedValue.ToString();
+
+                bool ok = BLL_DangKyMon.Instance.DangKy(maSV, maLHP);
+
+                if (ok)
+                {
+                    MessageBox.Show("Đăng ký môn thành công");
+
+                    // ✅ TẮT event để tránh xung đột
+                    cmbMaSinhVien.SelectedIndexChanged -= cmbMaSinhVien_SelectedIndexChanged;
+
+                    // ✅ LOAD TẤT CẢ DỮ LIỆU (không chỉ của sinh viên vừa đăng ký)
+                    DataTable dt = BLL_DangKyMon.Instance.DanhSachTatCa();
+
+                    // ✅ BIND VÀO CỘT ĐÃ THIẾT KẾ
+                    //dgvDangKyMon.DataSource = null;
+                    dgvDangKyMon.DataSource = dt;
+                    dgvDangKyMon.Refresh();
+                    this.Refresh();
+
+                    // ✅ BẬT lại event
+                    cmbMaSinhVien.SelectedIndexChanged += cmbMaSinhVien_SelectedIndexChanged;
+                }
+                else
+                {
+                    MessageBox.Show("Sinh viên đã đăng ký lớp học phần này rồi");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // ================= CHỌN SV =================
+        private void cmbMaSinhVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbMaSinhVien.SelectedValue == null) return;
+            if (cmbMaSinhVien.SelectedValue is DataRowView) return;
+
+            string maSV = cmbMaSinhVien.SelectedValue.ToString();
+            LoadDangKy();
+        }
+
+        // ================= CLICK GRID =================
+        private void dgvDangKyMon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0) return;
+
+                var row = dgvDangKyMon.Rows[e.RowIndex];
+
+                // ✅ Kiểm tra null cho từng cell
+                txbID.Text = row.Cells[0].Value?.ToString() ?? "";
+
+                var maSV = row.Cells[1].Value?.ToString();
+                if (!string.IsNullOrEmpty(maSV))
+                {
+                    cmbMaSinhVien.SelectedValue = maSV;
+                }
+
+                var maLHP = row.Cells[3].Value?.ToString();
+                if (!string.IsNullOrEmpty(maLHP))
+                {
+                    cmbMaHocPhan.SelectedValue = maLHP;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chọn dòng:\n" + ex.Message, "Lỗi");
+            }
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

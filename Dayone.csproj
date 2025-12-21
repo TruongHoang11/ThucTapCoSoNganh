@@ -47,20 +47,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLL_CoVanHocTap.cs" />
+    <Compile Include="BLL\BLL_DangKyMon.cs" />
     <Compile Include="BLL\BLL_Diem.cs" />
     <Compile Include="BLL\BLL_Khoa.cs" />
     <Compile Include="BLL\BLL_Lop.cs" />
+    <Compile Include="BLL\BLL_LopHocPhan.cs" />
     <Compile Include="BLL\BLL_MonHoc.cs" />
     <Compile Include="BLL\BLL_SinhVien.cs" />
     <Compile Include="BLL\BLL_TaiKhoan.cs" />
+    <Compile Include="DAL\DAL_DangKyMon.cs" />
     <Compile Include="DAL\DAL_CoVanHocTap.cs" />
     <Compile Include="DAL\DAL_Diem.cs" />
     <Compile Include="DAL\DAL_Khoa.cs" />
     <Compile Include="DAL\DAL_Lop.cs" />
+    <Compile Include="DAL\DAL_LopHocPhan.cs" />
     <Compile Include="DAL\DAL_MonHoc.cs" />
     <Compile Include="DAL\DAL_KetNoi.cs" />
     <Compile Include="DAL\DAL_SinhVien.cs" />
     <Compile Include="DAL\DAL_TaiKhoan.cs" />
+    <Compile Include="GUI\DangKyMon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\DangKyMon.Designer.cs">
+      <DependentUpon>DangKyMon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\LopHocPhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHocPhan.Designer.cs">
+      <DependentUpon>LopHocPhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\QuanLyDiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +140,12 @@
     <Compile Include="HeThong.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\DangKyMon.resx">
+      <DependentUpon>DangKyMon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHocPhan.resx">
+      <DependentUpon>LopHocPhan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyDiem.resx">
       <DependentUpon>QuanLyDiem.cs</DependentUpon>
     </EmbeddedResource>

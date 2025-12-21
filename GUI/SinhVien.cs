@@ -356,5 +356,21 @@ namespace Dayone.GUI
         {
             this.Close();
         }
+
+        private void đăngKýMônHọcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DangKyMon f = new DangKyMon();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void quảnLýLớpHọcPhầnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LopHocPhan f = new LopHocPhan();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }

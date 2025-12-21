@@ -13,13 +13,16 @@ namespace Dayone.GUI
 {
     public partial class QuanLyDiem : Form
     {
+        // Biến lưu trạng thái lọc
+        private string maLopHocPhanDangLoc = "";
+
         public QuanLyDiem()
         {
             InitializeComponent();
         }
+
         private void TinhDiemVaXepLoai()
         {
-            // Nếu thiếu dữ liệu thì không tính
             if (string.IsNullOrWhiteSpace(txbDiemLop.Text) ||
                 string.IsNullOrWhiteSpace(txbDiemThi.Text))
                 return;
@@ -30,14 +33,11 @@ namespace Dayone.GUI
             int ptLop = (int)numPhanTramLop.Value;
             int ptThi = (int)numPhanTramThi.Value;
 
-            // Tính điểm trung bình
             float diemtb = (diemlop * ptLop / 100f) + (diemthi * ptThi / 100f);
             diemtb = (float)Math.Round(diemtb, 2);
 
-            // Gán vào textbox
             txbDiemTB.Text = diemtb.ToString("0.00");
 
-            // Xếp loại
             string loai;
             if (diemtb >= 8.5) loai = "A";
             else if (diemtb >= 7.7) loai = "B+";
@@ -55,7 +55,6 @@ namespace Dayone.GUI
         {
             try
             {
-                // Load dữ liệu cho ComboBox Loại
                 cmbLoai.Items.Clear();
                 cmbLoai.Items.AddRange(new string[] { "A", "B+", "B", "C+", "C", "D+", "D", "F" });
                 if (cmbLoai.Items.Count > 0)
@@ -73,28 +72,54 @@ namespace Dayone.GUI
         {
             try
             {
-                //numPhanTramLop.Text = "";
-                //numPhanTramThi.Text = "";
-                //txbDiemLop.Text = "";
-                //txbDiemThi.Text = "";
-                //txbDiemTB.Text = "";
-                //cmbLoai.SelectedIndex = -1;
-                // Load bảng điểm
-                var dtDiem = BLL_Diem.Instance.DanhSach();
+                // Load bảng điểm - Kiểm tra có đang lọc không
+                DataTable dtDiem;
+                if (!string.IsNullOrEmpty(maLopHocPhanDangLoc))
+                {
+                    dtDiem = BLL_Diem.Instance.LayDiemTheoLopHocPhan(maLopHocPhanDangLoc);
+                }
+                else
+                {
+                    dtDiem = BLL_Diem.Instance.DanhSach();
+                }
                 dgvQuanLyDiem.DataSource = dtDiem;
-                // Format hiển thị cột điểm
-                if (dgvQuanLyDiem.Columns.Contains("DiemLop"))
-                    dgvQuanLyDiem.Columns["DiemLop"].DefaultCellStyle.Format = "0.00";
 
-                if (dgvQuanLyDiem.Columns.Contains("DiemThi"))
-                    dgvQuanLyDiem.Columns["DiemThi"].DefaultCellStyle.Format = "0.00";
+                if (dgvQuanLyDiem.Columns.Count > 0) dgvQuanLyDiem.Columns[0].HeaderText = "ID";
+                if (dgvQuanLyDiem.Columns.Count > 1) dgvQuanLyDiem.Columns[1].HeaderText = "Mã SV";
+                if (dgvQuanLyDiem.Columns.Count > 2) dgvQuanLyDiem.Columns[2].HeaderText = "Tên Sinh Viên";
+                if (dgvQuanLyDiem.Columns.Count > 3) dgvQuanLyDiem.Columns[3].HeaderText = "Mã Lớp HP";
+                if (dgvQuanLyDiem.Columns.Count > 4) dgvQuanLyDiem.Columns[4].HeaderText = "Tên Lớp HP";
+                if (dgvQuanLyDiem.Columns.Count > 5) dgvQuanLyDiem.Columns[5].HeaderText = "Tên Môn Học";
+                if (dgvQuanLyDiem.Columns.Count > 6) dgvQuanLyDiem.Columns[6].HeaderText = "PT Lớp (%)";
+                if (dgvQuanLyDiem.Columns.Count > 7) dgvQuanLyDiem.Columns[7].HeaderText = "PT Thi (%)";
+                if (dgvQuanLyDiem.Columns.Count > 8)
+                {
+                    dgvQuanLyDiem.Columns[8].HeaderText = "Điểm Lớp";
+                    dgvQuanLyDiem.Columns[8].DefaultCellStyle.Format = "0.00";
+                }
+                if (dgvQuanLyDiem.Columns.Count > 9)
+                {
+                    dgvQuanLyDiem.Columns[9].HeaderText = "Điểm Thi";
+                    dgvQuanLyDiem.Columns[9].DefaultCellStyle.Format = "0.00";
+                }
+                if (dgvQuanLyDiem.Columns.Count > 10)
+                {
+                    dgvQuanLyDiem.Columns[10].HeaderText = "Điểm TB";
+                    dgvQuanLyDiem.Columns[10].DefaultCellStyle.Format = "0.00";
+                }
+                if (dgvQuanLyDiem.Columns.Count > 11) dgvQuanLyDiem.Columns[11].HeaderText = "Xếp Loại";
 
-                if (dgvQuanLyDiem.Columns.Contains("DiemTB"))
-                    dgvQuanLyDiem.Columns["DiemTB"].DefaultCellStyle.Format = "0.00";
+                // Load danh sách SinhVien - Nếu đang lọc thì chỉ load sinh viên của lớp đó
+                DataTable dtSV;
+                if (!string.IsNullOrEmpty(maLopHocPhanDangLoc))
+                {
+                    dtSV = BLL_Diem.Instance.LaySinhVienTheoLopHocPhan(maLopHocPhanDangLoc);
+                }
+                else
+                {
+                    dtSV = BLL_SinhVien.Instance.DanhSach();
+                }
 
-
-                // Load danh sách SinhVien
-                var dtSV = BLL_SinhVien.Instance.DanhSach();
                 if (dtSV != null && dtSV.Rows.Count > 0)
                 {
                     cmbMaSinhVien.DataSource = dtSV;
@@ -106,17 +131,23 @@ namespace Dayone.GUI
                     MessageBox.Show("Chưa có dữ liệu sinh viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                // Load danh sách Môn Học
-                var dtMH = BLL_MonHoc.Instance.DanhSach();
-                if (dtMH != null && dtMH.Rows.Count > 0)
+                // Load danh sách Lớp Học Phần
+                var dtHP = BLL_LopHocPhan.Instance.DanhSach();
+                if (dtHP != null && dtHP.Rows.Count > 0)
                 {
-                    cmbMaMH.DataSource = dtMH;
-                    cmbMaMH.DisplayMember = "TenMH";
-                    cmbMaMH.ValueMember = "MaMH";
+                    cmbMaLopHP.DataSource = dtHP;
+                    cmbMaLopHP.DisplayMember = "TenLopHocPhan";
+                    cmbMaLopHP.ValueMember = "MaLopHocPhan";
+
+                    // Giữ lại lựa chọn lớp học phần đang lọc
+                    if (!string.IsNullOrEmpty(maLopHocPhanDangLoc))
+                    {
+                        cmbMaLopHP.SelectedValue = maLopHocPhanDangLoc;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Chưa có dữ liệu môn học", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Chưa có dữ liệu lớp học phần", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -124,7 +155,6 @@ namespace Dayone.GUI
                 MessageBox.Show("Lỗi khi tải dữ liệu:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void numPhanTramLop_ValueChanged(object sender, EventArgs e)
         {
@@ -135,24 +165,21 @@ namespace Dayone.GUI
         {
             TinhDiemVaXepLoai();
         }
+
         private void txbDiemLop_TextChanged(object sender, EventArgs e)
         {
             TinhDiemVaXepLoai();
         }
+
         private void txbDiemThi_TextChanged(object sender, EventArgs e)
         {
             TinhDiemVaXepLoai();
         }
 
-
-
-
-
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                // Kiểm tra điểm
                 if (string.IsNullOrWhiteSpace(numPhanTramLop.Text))
                 {
                     MessageBox.Show("Phần trăm lớp không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -174,7 +201,6 @@ namespace Dayone.GUI
                     return;
                 }
 
-                // Lấy giá trị sinh viên
                 string masv = "";
                 if (cmbMaSinhVien.SelectedValue != null)
                 {
@@ -184,68 +210,66 @@ namespace Dayone.GUI
                 {
                     masv = rowSV["MaSV"].ToString();
                 }
-                // neu SelectedBalue null, SelectedItem ko phai DataRowView
-                // hoặc người dùng tự gõ vào ComboBox (không chọn từ danh sách)
-                // thì sẽ lấy mà sinh viên từ chuỗi text mà người dùng nhập
-                // neu nguoi dung nhap 'sv001_Nguyen Van B
-                // -> tach ra thành "sv001", "Nguyen", "Van", "B"
-                // RemoveEmptyEntries -> loại bỏ phần rỗng nêu chuỗi nhiều khoảng trắng
-                //  [0] - lấy phần từ đầu tiên .Trim() để xoá khoangr trắng thừa
                 else if (!string.IsNullOrEmpty(cmbMaSinhVien.Text))
                 {
                     masv = cmbMaSinhVien.Text.Split(new[] { ' ', '-', '_' }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
                 }
 
-                // Lấy giá trị môn học
-                string mamh = "";
-                if (cmbMaMH.SelectedValue != null)
+                string mahp = "";
+                if (cmbMaLopHP.SelectedValue != null)
                 {
-                    mamh = cmbMaMH.SelectedValue.ToString();
+                    mahp = cmbMaLopHP.SelectedValue.ToString();
                 }
-                else if (cmbMaMH.SelectedItem is DataRowView rowMH)
+                else if (cmbMaLopHP.SelectedItem is DataRowView rowMH)
                 {
-                    mamh = rowMH["MaMH"].ToString();
+                    mahp = rowMH["MaLopHocPhan"].ToString();
                 }
-                else if (!string.IsNullOrEmpty(cmbMaMH.Text))
+                else if (!string.IsNullOrEmpty(cmbMaLopHP.Text))
                 {
-                    mamh = cmbMaMH.Text.Split(new[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                    mahp = cmbMaLopHP.Text.Split(new[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
                 }
 
-                // Kiểm tra đã lấy được mã chưa
                 if (string.IsNullOrEmpty(masv))
                 {
                     MessageBox.Show("Không thể lấy mã sinh viên. Vui lòng chọn lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (string.IsNullOrEmpty(mamh))
+                if (string.IsNullOrEmpty(mahp))
                 {
-                    MessageBox.Show("Không thể lấy mã môn học. Vui lòng chọn lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không thể lấy mã lớp học phần. Vui lòng chọn lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!BLL_Diem.Instance.KiemTraSinhVienDaDangKy(masv, mahp))
+                {
+                    MessageBox.Show($"Sinh viên {masv} chưa đăng ký lớp học phần này!\nVui lòng đăng ký môn học trước khi nhập điểm.",
+                        "Không được phép", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 int phantramlop = (int)numPhanTramLop.Value;
                 int phantramthi = (int)numPhanTramThi.Value;
                 TinhDiemVaXepLoai();
+
                 if (phantramlop + phantramthi != 100)
                 {
                     MessageBox.Show("Phần trăm lớp và phần trăm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Parse điểm
                 if (!float.TryParse(txbDiemLop.Text, out float diemlop) || diemlop > 10)
                 {
                     MessageBox.Show("Điểm lớp không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-
                 if (!float.TryParse(txbDiemThi.Text, out float diemthi) || diemthi > 10)
                 {
                     MessageBox.Show("Điểm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 if (!float.TryParse(txbDiemTB.Text, out float diemtb))
                 {
                     MessageBox.Show("Điểm TB không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -253,7 +277,6 @@ namespace Dayone.GUI
                 }
                 diemtb = (float)Math.Round(diemtb, 2);
 
-                // Lấy loại điểm
                 string loai = "";
                 if (cmbLoai.SelectedItem != null)
                 {
@@ -264,18 +287,13 @@ namespace Dayone.GUI
                     loai = cmbLoai.Text.Trim();
                 }
 
-
-                int nam = DateTime.Now.Year;
-
-                // Gọi BLL để thêm
-                bool ok = BLL_Diem.Instance.Them(masv, mamh, phantramlop, phantramthi, diemlop, diemthi, diemtb, loai, nam);
+                bool ok = BLL_Diem.Instance.Them(masv, mahp, phantramlop, phantramthi, diemlop, diemthi, diemtb, loai);
 
                 if (ok)
                 {
                     MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnTaiLai.PerformClick();
 
-                    // Clear form
                     txbDiemLop.Clear();
                     txbDiemThi.Clear();
                     txbDiemTB.Clear();
@@ -304,9 +322,8 @@ namespace Dayone.GUI
 
                 int id = int.Parse(txbID.Text);
 
-                // Lấy giá trị an toàn
                 string masv = "";
-                string mamh = "";
+                string mahp = "";
 
                 if (cmbMaSinhVien.SelectedValue != null)
                 {
@@ -317,23 +334,31 @@ namespace Dayone.GUI
                     masv = rowSV["MaSV"].ToString();
                 }
 
-                if (cmbMaMH.SelectedValue != null)
+                if (cmbMaLopHP.SelectedValue != null)
                 {
-                    mamh = cmbMaMH.SelectedValue.ToString();
+                    mahp = cmbMaLopHP.SelectedValue.ToString();
                 }
-                else if (cmbMaMH.SelectedItem is DataRowView rowMH)
+                else if (cmbMaLopHP.SelectedItem is DataRowView rowHP)
                 {
-                    mamh = rowMH["MaMH"].ToString();
+                    mahp = rowHP["MaLopHocPhan"].ToString();
                 }
 
-                if (string.IsNullOrEmpty(masv) || string.IsNullOrEmpty(mamh))
+                if (string.IsNullOrEmpty(masv) || string.IsNullOrEmpty(mahp))
                 {
-                    MessageBox.Show("Không thể lấy mã sinh viên hoặc môn học", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không thể lấy mã sinh viên hoặc lớp học phần", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!BLL_Diem.Instance.KiemTraSinhVienDaDangKy(masv, mahp))
+                {
+                    MessageBox.Show($"Sinh viên {masv} chưa đăng ký lớp học phần này!\nKhông thể sửa điểm cho sinh viên chưa đăng ký.",
+                        "Không được phép", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 int phantramlop = (int)numPhanTramLop.Value;
                 int phamtramthi = (int)numPhanTramThi.Value;
+
                 if (phantramlop + phamtramthi != 100)
                 {
                     MessageBox.Show("Phần trăm lớp và phần trăm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -347,22 +372,22 @@ namespace Dayone.GUI
                     MessageBox.Show("Điểm không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 if (diemlop > 10)
                 {
                     MessageBox.Show("Điểm lớp không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 if (diemthi > 10)
                 {
                     MessageBox.Show("Điểm thi không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-
                 string loai = (cmbLoai.SelectedItem != null) ? cmbLoai.SelectedItem.ToString() : cmbLoai.Text.Trim();
-                int nam = DateTime.Now.Year;
 
-                if (BLL_Diem.Instance.Sua(masv, mamh, phantramlop, phamtramthi, diemlop, diemthi, diemtb, loai, nam, id))
+                if (BLL_Diem.Instance.Sua(masv, mahp, phantramlop, phamtramthi, diemlop, diemthi, diemtb, loai, id))
                 {
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnTaiLai.PerformClick();
@@ -418,35 +443,58 @@ namespace Dayone.GUI
 
                 var row = dgvQuanLyDiem.CurrentRow;
 
-                txbID.Text = row.Cells[0].Value?.ToString() ?? "";
-                var valMaSV = row.Cells[1].Value?.ToString();
-                var valMaMH = row.Cells[2].Value?.ToString();
+                if (row.Cells[0].Value != null)
+                    txbID.Text = row.Cells[0].Value.ToString();
 
+                var valMaSV = row.Cells[1].Value?.ToString();
                 if (!string.IsNullOrEmpty(valMaSV) && cmbMaSinhVien.DataSource != null)
                     cmbMaSinhVien.SelectedValue = valMaSV;
 
-                if (!string.IsNullOrEmpty(valMaMH) && cmbMaMH.DataSource != null)
-                    cmbMaMH.SelectedValue = valMaMH;
+                var valMaHP = row.Cells[3].Value?.ToString();
+                if (!string.IsNullOrEmpty(valMaHP) && cmbMaLopHP.DataSource != null)
+                    cmbMaLopHP.SelectedValue = valMaHP;
 
-                if (row.Cells[3].Value != null)
-                    numPhanTramLop.Value = Convert.ToDecimal(row.Cells[3].Value);
-
-                if (row.Cells[4].Value != null)
-                    numPhanTramThi.Value = Convert.ToDecimal(row.Cells[4].Value);
-
-                txbDiemLop.Text = row.Cells[5].Value?.ToString() ?? "";
-                txbDiemThi.Text = row.Cells[6].Value?.ToString() ?? "";
-                if (row.Cells[7].Value != null)
+                if (row.Cells[6].Value != null && row.Cells[6].Value != DBNull.Value)
                 {
-                    if (float.TryParse(row.Cells[7].Value.ToString(), out float tb))
+                    if (int.TryParse(row.Cells[6].Value.ToString(), out int ptLop))
+                        numPhanTramLop.Value = ptLop;
+                    else
+                        numPhanTramLop.Value = 0;
+                }
+
+                if (row.Cells[7].Value != null && row.Cells[7].Value != DBNull.Value)
+                {
+                    if (int.TryParse(row.Cells[7].Value.ToString(), out int ptThi))
+                        numPhanTramThi.Value = ptThi;
+                    else
+                        numPhanTramThi.Value = 0;
+                }
+
+                if (row.Cells[8].Value != null && row.Cells[8].Value != DBNull.Value)
+                    txbDiemLop.Text = row.Cells[8].Value.ToString();
+                else
+                    txbDiemLop.Text = "";
+
+                if (row.Cells[9].Value != null && row.Cells[9].Value != DBNull.Value)
+                    txbDiemThi.Text = row.Cells[9].Value.ToString();
+                else
+                    txbDiemThi.Text = "";
+
+                if (row.Cells[10].Value != null && row.Cells[10].Value != DBNull.Value)
+                {
+                    if (float.TryParse(row.Cells[10].Value.ToString(), out float tb))
                         txbDiemTB.Text = tb.ToString("0.00");
                     else
                         txbDiemTB.Text = "0.00";
                 }
-
-                if (row.Cells[8].Value != null)
+                else
                 {
-                    string loaiValue = row.Cells[8].Value.ToString().Trim();
+                    txbDiemTB.Text = "0.00";
+                }
+
+                if (row.Cells[11].Value != null && row.Cells[11].Value != DBNull.Value)
+                {
+                    string loaiValue = row.Cells[11].Value.ToString().Trim();
                     int index = cmbLoai.FindStringExact(loaiValue);
                     if (index >= 0)
                         cmbLoai.SelectedIndex = index;
@@ -456,16 +504,125 @@ namespace Dayone.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi click bảng:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi click bảng:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string maLopHP = "";
+
+                if (cmbMaLopHP.SelectedValue != null)
+                {
+                    maLopHP = cmbMaLopHP.SelectedValue.ToString();
+                }
+                else if (cmbMaLopHP.SelectedItem is DataRowView rowHP)
+                {
+                    maLopHP = rowHP["MaLopHocPhan"].ToString();
+                }
+                else if (!string.IsNullOrEmpty(cmbMaLopHP.Text))
+                {
+                    maLopHP = cmbMaLopHP.Text.Split(new[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                }
+
+                if (string.IsNullOrEmpty(maLopHP))
+                {
+                    MessageBox.Show("Vui lòng chọn Mã Lớp Học Phần trước khi tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // LƯU TRẠNG THÁI LỌC
+                maLopHocPhanDangLoc = maLopHP;
+
+                var dtSinhVien = BLL_Diem.Instance.LaySinhVienTheoLopHocPhan(maLopHP);
+
+                if (dtSinhVien != null && dtSinhVien.Rows.Count > 0)
+                {
+                    cmbMaSinhVien.DataSource = dtSinhVien;
+                    cmbMaSinhVien.DisplayMember = "TenSV";
+                    cmbMaSinhVien.ValueMember = "MaSV";
+                }
+                else
+                {
+                    MessageBox.Show("Không có sinh viên nào đăng ký lớp học phần này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    var dtAllSV = BLL_SinhVien.Instance.DanhSach();
+                    if (dtAllSV != null)
+                    {
+                        cmbMaSinhVien.DataSource = dtAllSV;
+                        cmbMaSinhVien.DisplayMember = "TenSV";
+                        cmbMaSinhVien.ValueMember = "MaSV";
+                    }
+                }
+
+                var dtDiem = BLL_Diem.Instance.LayDiemTheoLopHocPhan(maLopHP);
+                dgvQuanLyDiem.DataSource = dtDiem;
+
+                if (dgvQuanLyDiem.Columns.Count > 0) dgvQuanLyDiem.Columns[0].HeaderText = "ID";
+                if (dgvQuanLyDiem.Columns.Count > 1) dgvQuanLyDiem.Columns[1].HeaderText = "Mã SV";
+                if (dgvQuanLyDiem.Columns.Count > 2) dgvQuanLyDiem.Columns[2].HeaderText = "Tên Sinh Viên";
+                if (dgvQuanLyDiem.Columns.Count > 3) dgvQuanLyDiem.Columns[3].HeaderText = "Mã Lớp HP";
+                if (dgvQuanLyDiem.Columns.Count > 4) dgvQuanLyDiem.Columns[4].HeaderText = "Tên Lớp HP";
+                if (dgvQuanLyDiem.Columns.Count > 5) dgvQuanLyDiem.Columns[5].HeaderText = "Tên Môn Học";
+                if (dgvQuanLyDiem.Columns.Count > 6) dgvQuanLyDiem.Columns[6].HeaderText = "PT Lớp (%)";
+                if (dgvQuanLyDiem.Columns.Count > 7) dgvQuanLyDiem.Columns[7].HeaderText = "PT Thi (%)";
+
+                if (dgvQuanLyDiem.Columns.Count > 8)
+                {
+                    dgvQuanLyDiem.Columns[8].HeaderText = "Điểm Lớp";
+                    dgvQuanLyDiem.Columns[8].DefaultCellStyle.Format = "0.00";
+                }
+
+                if (dgvQuanLyDiem.Columns.Count > 9)
+                {
+                    dgvQuanLyDiem.Columns[9].HeaderText = "Điểm Thi";
+                    dgvQuanLyDiem.Columns[9].DefaultCellStyle.Format = "0.00";
+                }
+
+                if (dgvQuanLyDiem.Columns.Count > 10)
+                {
+                    dgvQuanLyDiem.Columns[10].HeaderText = "Điểm TB";
+                    dgvQuanLyDiem.Columns[10].DefaultCellStyle.Format = "0.00";
+                }
+
+                if (dgvQuanLyDiem.Columns.Count > 11) dgvQuanLyDiem.Columns[11].HeaderText = "Xếp Loại";
+
+                int soDiem = (dtDiem != null) ? dtDiem.Rows.Count : 0;
+                MessageBox.Show($"Đã tìm thấy {dtSinhVien.Rows.Count} sinh viên và {soDiem} bản ghi điểm trong lớp học phần này!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tìm kiếm:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // NÚT BỎ LỌC - HỦY TÌM KIẾM VÀ HIỂN THỊ TẤT CẢ
+        private void btnBoLoc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xóa trạng thái lọc
+                maLopHocPhanDangLoc = "";
+
+                // Reload lại toàn bộ dữ liệu
+                btnTaiLai.PerformClick();
+
+                MessageBox.Show("Đã bỏ lọc và hiển thị tất cả bản ghi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi bỏ lọc:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // Event handlers không sử dụng
         private void label7_Click(object sender, EventArgs e) { }
-        //private void numPhanTramThi_ValueChanged(object sender, EventArgs e) { }
         private void cmbMaSinhVien_SelectedIndexChanged(object sender, EventArgs e) { }
         private void dgvQuanLyDiem_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void cmbLoai_SelectedIndexChanged(object sender, EventArgs e) { }
-        //private void txbDiemTB_TextChanged(object sender, EventArgs e) { }
+        private void cmbMaMH_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }

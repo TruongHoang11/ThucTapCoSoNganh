@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dayone.DAL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,5 +34,12 @@ namespace Dayone.BLL
         {
             return DAL.DAL_SinhVien.Instance.Xoa(id);
         }
+
+
+
+
+
+
+
     }
 }

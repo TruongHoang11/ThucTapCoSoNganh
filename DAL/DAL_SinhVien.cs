@@ -36,5 +36,9 @@ namespace Dayone.DAL
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from SinhVien");
         }
+
+
+
+
     }
 }

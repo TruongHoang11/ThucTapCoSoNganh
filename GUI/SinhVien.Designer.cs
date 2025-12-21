@@ -36,6 +36,7 @@
             this.quảnLýMônHọcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýĐiểmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.đăngKýMônHọcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ThongtinchitietToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DoimatkhauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +79,7 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quảnLýLớpHọcPhầnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -105,7 +107,9 @@
             this.quảnLýCốVấnHọcTậpToolStripMenuItem,
             this.quảnLýMônHọcToolStripMenuItem,
             this.quảnLýTàiKhoảnToolStripMenuItem,
-            this.quảnLýĐiểmToolStripMenuItem});
+            this.quảnLýĐiểmToolStripMenuItem,
+            this.đăngKýMônHọcToolStripMenuItem,
+            this.quảnLýLớpHọcPhầnToolStripMenuItem});
             this.btnQuanLy.Name = "btnQuanLy";
             this.btnQuanLy.Size = new System.Drawing.Size(79, 24);
             this.btnQuanLy.Text = "Quản Lý ";
@@ -152,6 +156,13 @@
             this.quảnLýĐiểmToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.quảnLýĐiểmToolStripMenuItem.Text = "Quản lý điểm";
             this.quảnLýĐiểmToolStripMenuItem.Click += new System.EventHandler(this.quảnLýĐiểmToolStripMenuItem_Click);
+            // 
+            // đăngKýMônHọcToolStripMenuItem
+            // 
+            this.đăngKýMônHọcToolStripMenuItem.Name = "đăngKýMônHọcToolStripMenuItem";
+            this.đăngKýMônHọcToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+            this.đăngKýMônHọcToolStripMenuItem.Text = "Đăng ký môn học";
+            this.đăngKýMônHọcToolStripMenuItem.Click += new System.EventHandler(this.đăngKýMônHọcToolStripMenuItem_Click);
             // 
             // tàiKhoảnToolStripMenuItem
             // 
@@ -607,6 +618,13 @@
             this.Column10.ReadOnly = true;
             this.Column10.Width = 125;
             // 
+            // quảnLýLớpHọcPhầnToolStripMenuItem
+            // 
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Name = "quảnLýLớpHọcPhầnToolStripMenuItem";
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Text = "Quản lý lớp học phần";
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýLớpHọcPhầnToolStripMenuItem_Click);
+            // 
             // SinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -685,5 +703,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.ToolStripMenuItem đăngKýMônHọcToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýLớpHọcPhầnToolStripMenuItem;
     }
 }
