@@ -116,5 +116,10 @@ namespace Dayone.GUI
             numSoLuong.Value = int.Parse(dgvLop.CurrentRow.Cells[3].Value.ToString());
             cmbMaKhoa.SelectedValue = dgvLop.CurrentRow.Cells[4].Value.ToString().Trim();
         }
+
+        private void QuanLyLop_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

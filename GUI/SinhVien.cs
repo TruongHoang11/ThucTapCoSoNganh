@@ -33,19 +33,38 @@ namespace Dayone.GUI
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-
             dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+
             cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
             cbbMaCoVan.DisplayMember = "TenCVHT";
             cbbMaCoVan.ValueMember = "MaCVHT";
-            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();///Hien thi danh sach khoa len combobox
+
+            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cbbMaKhoa.DisplayMember = "TenKhoa";
             cbbMaKhoa.ValueMember = "MaKhoa";
+
             cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
             cbbMaLop.DisplayMember = "TenLop";
             cbbMaLop.ValueMember = "MaLop";
+
             ClearForm();
         }
+
+            ClearForm(); // ⭐ xử lý hết ở đây
+            //dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+            //cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
+            //cbbMaCoVan.DisplayMember = "TenCVHT";
+            //cbbMaCoVan.ValueMember = "MaCVHT";
+            //cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();///Hien thi danh sach khoa len combobox
+            //cbbMaKhoa.DisplayMember = "TenKhoa";
+            //cbbMaKhoa.ValueMember = "MaKhoa";
+            //cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
+            //cbbMaLop.DisplayMember = "TenLop";
+            //cbbMaLop.ValueMember = "MaLop";
+            //ClearForm();
+        }
+        //hehe
+
         private void ClearForm()
         {
             txbID.Clear();
@@ -53,17 +72,41 @@ namespace Dayone.GUI
             txbTenSV.Clear();
             txbQueQuan.Clear();
 
-            dtpkNgaySinh.Value = DateTime.Now;
-            dtpkNhapHoc.Value = DateTime.Now;
+            // 👉 Làm DateTimePicker TRẮNG
+            dtpkNgaySinh.CustomFormat = " ";
+            dtpkNgaySinh.Format = DateTimePickerFormat.Custom;
+
+            dtpkNhapHoc.CustomFormat = " ";
+            dtpkNhapHoc.Format = DateTimePickerFormat.Custom;
 
             rbNam.Checked = false;
             rbNu.Checked = false;
 
-            cbbMaLop.SelectedIndex = -1;
             cbbMaKhoa.SelectedIndex = -1;
+            cbbMaLop.SelectedIndex = -1;
             cbbMaCoVan.SelectedIndex = -1;
 
+            picAnh.Image = null;
+            picAnh.ImageLocation = null;
+
             dgvSinhVien.ClearSelection();
+
+            //txbID.Clear();
+            //txbMaSV.Clear();
+            //txbTenSV.Clear();
+            //txbQueQuan.Clear();
+
+            //dtpkNgaySinh.Value = DateTime.Now;
+            //dtpkNhapHoc.Value = DateTime.Now;
+
+            //rbNam.Checked = false;
+            //rbNu.Checked = false;
+
+            //cbbMaLop.SelectedIndex = -1;
+            //cbbMaKhoa.SelectedIndex = -1;
+            //cbbMaCoVan.SelectedIndex = -1;
+
+            //dgvSinhVien.ClearSelection();
         }
 
         private void dgvSinhVien_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -210,6 +253,90 @@ namespace Dayone.GUI
                     return;
                 }
 
+
+                if (!int.TryParse(txbID.Text, out int id))
+                {
+                    MessageBox.Show("ID phải là số!");
+                    txbID.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbMaSV.Text))
+                {
+                    MessageBox.Show("Mã sinh viên không được để trống!");
+                    txbMaSV.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbTenSV.Text))
+                {
+                    MessageBox.Show("Tên sinh viên không được để trống!");
+                    txbTenSV.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbQueQuan.Text))
+                {
+                    MessageBox.Show("Quê quán không được để trống!");
+                    txbQueQuan.Focus();
+                    return;
+                }
+
+                if (cbbMaLop.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Mã lớp!");
+                    cbbMaLop.Focus();
+                    return;
+                }
+
+                if (cbbMaKhoa.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Mã khoa!");
+                    cbbMaKhoa.Focus();
+                    return;
+                }
+
+                if (cbbMaCoVan.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Cố vấn!");
+                    cbbMaCoVan.Focus();
+                    return;
+                }
+
+                // ==== LẤY GIÁ TRỊ ====
+                string masv = txbMaSV.Text.Trim();
+                string tensv = txbTenSV.Text.Trim();
+                string ngaysinh = dtpkNgaySinh.Value.ToShortDateString();
+                string gioitinh = rbNam.Checked ? "Nam" : "Nữ";
+                string quequan = txbQueQuan.Text.Trim();
+                string ngaynhaphoc = dtpkNhapHoc.Value.ToShortDateString();
+                string malop = cbbMaLop.SelectedValue.ToString();
+                string makhoa = cbbMaKhoa.SelectedValue.ToString();
+                string macovan = cbbMaCoVan.SelectedValue.ToString();
+                string anh;
+
+                if (!string.IsNullOrEmpty(tenAnh))
+                {
+                    anh = tenAnh;
+
+                }
+                else
+                {
+                    // Lấy ảnh cũ từ DataGridView
+                    anh = dgvSinhVien.CurrentRow.Cells["Anh"].Value?.ToString();
+
+                    if (anh == "\"\"" || string.IsNullOrWhiteSpace(anh))
+                        anh = ""; // hoặc NULL
+                }
+
+                // ==== GỌI BLL ====
+                bool result = BLL_SinhVien.Instance.Sua(
+                    masv, tensv, ngaysinh, gioitinh, quequan,
+                    ngaynhaphoc, malop, makhoa, macovan, anh, id
+                );
+
+
+
                 if (!int.TryParse(txbID.Text, out int id))
                 {
                     MessageBox.Show("ID phải là số!");
@@ -317,6 +444,21 @@ namespace Dayone.GUI
 
             // Nếu đã chọn ảnh mới
             
+
+            {
+                MessageBox.Show("Sai định dạng dữ liệu!");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Thiếu dữ liệu hoặc chưa chọn dòng trong bảng!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+            }
+
+            // Nếu đã chọn ảnh mới
+            //đẩy lại
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -726,6 +868,21 @@ namespace Dayone.GUI
             this.Hide();
             f.ShowDialog();
             this.Show();
+        }
+
+        private void picAnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpkNgaySinh_ValueChanged(object sender, EventArgs e)
+        {
+            dtpkNgaySinh.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void dtpkNhapHoc_ValueChanged(object sender, EventArgs e)
+        {
+            dtpkNhapHoc.CustomFormat = "dd/MM/yyyy";
         }
         //private void btnXuatExcel_Click(object sender, EventArgs e)
         //{

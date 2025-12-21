@@ -19,6 +19,7 @@ namespace Dayone.DAL
         WHERE dk.MaLopHocPhan = @maLopHP
           AND sv.MaSV = @maSV";
 
+
             return DAL_KetNoi.Instance.ExcuteQuery(
                 sql, new object[] { maLopHP, maSV }
             );
@@ -33,6 +34,21 @@ namespace Dayone.DAL
         }
 
 
+
+            return DAL_KetNoi.Instance.ExcuteQuery(
+                sql, new object[] { maLopHP, maSV }
+            );
+        }
+        public DataTable GetLopHocPhanByMonHoc(string maMH)
+        {
+            string sql = @"
+        SELECT MaLopHocPhan, TenLopHocPhan
+        FROM LopHocPhan
+        WHERE MaMH = @maMH
+    ";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maMH });
+        }
         public DataTable DanhSach()
         {
             // JOIN với MonHoc để lấy TenMH

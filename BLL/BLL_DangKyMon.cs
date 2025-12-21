@@ -40,6 +40,7 @@ namespace Dayone.BLL
         {
             return DAL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLopHP);
         }
+
         public bool Xoa(int id)
         {
             return DAL_DangKyMon.Instance.Xoa(id);
@@ -49,7 +50,8 @@ namespace Dayone.BLL
             return DAL_DangKyMon.Instance.Sua(id, maSV, maLHP, ngayDK);
         }
 
-      
+
+
 
         public DataTable GetLopHocPhan()
         {

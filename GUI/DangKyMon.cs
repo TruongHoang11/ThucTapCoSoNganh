@@ -212,6 +212,7 @@ namespace Dayone.GUI
             dgvDangKyMon.DataSource =
                 BLL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLHP);
         }
+
         private void LoadLopHocPhanByMon(string maMH)
         {
             var dt = BLL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
@@ -264,9 +265,33 @@ namespace Dayone.GUI
             //cmbMaHocPhan.ValueMember = "MaLopHocPhan";
             //cmbMaHocPhan.SelectedIndex = -1;
 
+
+        private void TenLop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TenLop.SelectedValue != null)
+            {
+                string MaMH = TenLop.SelectedValue.ToString();
+                // dùng maMH để đăng ký
+            }
+
+
+            if (TenLop.SelectedValue == null)
+                return;
+
+            string maMH = TenLop.SelectedValue.ToString();
+
+            DataTable dtLHP = BLL_LopHocPhan.Instance.GetByMonHoc(maMH);
+
+            cmbMaHocPhan.DataSource = dtLHP;
+            cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
+            cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+            cmbMaHocPhan.SelectedIndex = -1;
+
+
         }
         private void LoadMonHoc()
         {
+
             var dt = BLL_MonHoc.Instance.DanhSach();
 
             TenLop.DataSource = dt;
@@ -284,11 +309,20 @@ namespace Dayone.GUI
             cmbMaHocPhan.DisplayMember = "MaLopHocPhan"; // hoặc "TenLopHocPhan" nếu có
             cmbMaHocPhan.ValueMember = "MaLopHocPhan";
             cmbMaHocPhan.SelectedIndex = -1;
+
+            TenLop.DataSource = BLL_MonHoc.Instance.DanhSach();
+
+            TenLop.DisplayMember = "TenMH"; // HIỂN THỊ
+            TenLop.ValueMember = "MaMH";  // GIÁ TRỊ THẬT (lưu DB)
+
+            TenLop.SelectedIndex = -1; // chưa chọn gì
+
         }
 
         private void DangKyMon_Load_1(object sender, EventArgs e)
         {
             LoadMonHoc();
+
             LoadLopCoDinh();
             LoadLopHocPhan();
 
@@ -306,6 +340,7 @@ namespace Dayone.GUI
 
 
 
+
             // Load sinh viên
             cmbMaSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
             cmbMaSinhVien.DisplayMember = "TenSV";
@@ -316,12 +351,29 @@ namespace Dayone.GUI
             TenLop.DisplayMember = "TenMH";
             TenLop.ValueMember = "MaMH";
 
+
+            cmbTenMon.DataSource = BLL_MonHoc.Instance.DanhSach();
+            cmbTenMon.DisplayMember = "TenMH";
+            cmbTenMon.ValueMember = "MaMH";
+
             TenLop.SelectedIndex = -1;
 
             // Lớp học phần rỗng ban đầu
             cmbMaHocPhan.DataSource = null;
 
             TenLop.SelectedIndexChanged += TenLop_SelectedIndexChanged;
+
+            cmbTenMon.SelectedIndexChanged += TenLop_SelectedIndexChanged;
+
+            TenLop.DataSource = BLL_MonHoc.Instance.DanhSach();
+            TenLop.DisplayMember = "TenMH";
+            TenLop.ValueMember = "MaMH";
+
+            TenLop.SelectedIndex = -1;
+
+            // Lớp học phần rỗng ban đầu
+            cmbMaHocPhan.DataSource = null;
+
         }
 
         private void cmbMaHocPhan_SelectedIndexChanged(object sender, EventArgs e)
@@ -330,6 +382,7 @@ namespace Dayone.GUI
                 return;
 
             string maLHP = cmbMaHocPhan.SelectedValue.ToString();
+
 
         }
 
@@ -419,6 +472,7 @@ namespace Dayone.GUI
             txbID.Text = a.Cells[0].Value?.ToString();               // ID
             cmbMaSinhVien.SelectedValue = a.Cells[1].Value?.ToString(); // MaSV
             cmbMaHocPhan.SelectedValue = a.Cells[3].Value?.ToString(); // MaLHP
+
 
             if (DateTime.TryParse(a.Cells[6].Value?.ToString(), out DateTime ngayDK))
                 dtpkDangKy.Value = ngayDK;

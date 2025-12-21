@@ -68,6 +68,13 @@ namespace Dayone.GUI
             }
         }
 
+        private void ClearForm()
+        {
+
+            cmbMaSinhVien.SelectedIndex = -1;
+            cmbMaLopHP.SelectedIndex = -1;
+        }
+
         private void btnTaiLai_Click(object sender, EventArgs e)
         {
             try
@@ -125,6 +132,12 @@ namespace Dayone.GUI
                     cmbMaSinhVien.DataSource = dtSV;
                     cmbMaSinhVien.DisplayMember = "TenSV";
                     cmbMaSinhVien.ValueMember = "MaSV";
+
+                    // Nếu KHÔNG đang lọc thì để trống, còn đang lọc thì giữ nguyên
+                    if (string.IsNullOrEmpty(maLopHocPhanDangLoc))
+                    {
+                        cmbMaSinhVien.SelectedIndex = -1; // THÊM DÒNG NÀY
+                    }
                 }
                 else
                 {
@@ -154,6 +167,7 @@ namespace Dayone.GUI
             {
                 MessageBox.Show("Lỗi khi tải dữ liệu:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void numPhanTramLop_ValueChanged(object sender, EventArgs e)

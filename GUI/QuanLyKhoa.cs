@@ -28,7 +28,7 @@ namespace Dayone.GUI
             string makhoa = txbMaKhoa.Text;
             string tenkhoa = txbTenKhoa.Text;
 
-            if (makhoa.Length == 0 && tenkhoa.Length == 0)
+            if (makhoa.Length == 0 || tenkhoa.Length == 0)
                 MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
@@ -102,6 +102,11 @@ namespace Dayone.GUI
             txbID.Text = dgvKhoa.CurrentRow.Cells[0].Value.ToString().Trim();
             txbMaKhoa.Text = dgvKhoa.CurrentRow.Cells[1].Value.ToString().Trim();
             txbTenKhoa.Text = dgvKhoa.CurrentRow.Cells[2].Value.ToString().Trim();
+        }
+
+        private void txbMaKhoa_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
