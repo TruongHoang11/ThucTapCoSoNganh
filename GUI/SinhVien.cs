@@ -24,12 +24,12 @@ namespace Dayone.GUI
 
         private void SinhVien_Load(object sender, EventArgs e)
         {
-            
+
             btnLamMoi.PerformClick();
-        }       
+        }
 
         string duongDanAnh = "";
-        string tenAnh = "";       
+        string tenAnh = "";
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
@@ -83,7 +83,7 @@ namespace Dayone.GUI
 
             //Chon anh
             string anh = dgvSinhVien.CurrentRow.Cells[10].Value?.ToString().Trim();
-            
+
 
             if (!string.IsNullOrEmpty(anh))
             {
@@ -98,7 +98,7 @@ namespace Dayone.GUI
                     }
                     LoadImage(path);
                 }
-                
+
                 else
                     picAnh.Image = null;
             }
@@ -134,7 +134,7 @@ namespace Dayone.GUI
                 string ngaynhaphoc = dtpkNhapHoc.Value.ToShortDateString();
                 string malop = cbbMaLop.SelectedValue.ToString();
                 string makhoa = cbbMaKhoa.SelectedValue.ToString();
-                string macvht = cbbMaCoVan.SelectedValue.ToString();             
+                string macvht = cbbMaCoVan.SelectedValue.ToString();
 
                 if (!string.IsNullOrEmpty(duongDanAnh))
                 {
@@ -166,7 +166,7 @@ namespace Dayone.GUI
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-           
+
             int id = int.Parse(txbID.Text);
             string masv = txbMaSV.Text;
             string tensv = txbTenSV.Text;
@@ -183,7 +183,7 @@ namespace Dayone.GUI
             if (!string.IsNullOrEmpty(tenAnh))
             {
                 anh = tenAnh;
-     
+
             }
             else
             {
@@ -325,34 +325,34 @@ namespace Dayone.GUI
         }
 
         private void btnimport_Click(object sender, EventArgs e)
-        {             
-                try
+        {
+            try
+            {
+                OpenFileDialog of = new OpenFileDialog();
+                of.Filter = "Excel Files|*.xlsx;*.xls";
+                if (of.ShowDialog() == DialogResult.OK)
                 {
-                    OpenFileDialog of = new OpenFileDialog();
-                    of.Filter = "Excel Files|*.xlsx;*.xls";
-                    if (of.ShowDialog() == DialogResult.OK)
-                    {
-                        BLL_Excel bllExcel = new BLL_Excel();
-                        var ketqua = bllExcel.ImportSinhVienToDatabase(of.FileName);
+                    BLL_Excel bllExcel = new BLL_Excel();
+                    var ketqua = bllExcel.ImportSinhVienToDatabase(of.FileName);
 
-                        LoadSinhVien(); // reload DGV
+                    LoadSinhVien(); // reload DGV
 
-                        string msg = $"✔ Thêm thành công: {ketqua.SuccessCount} dòng\n" +
-                                     $"❌ Lỗi: {ketqua.ErrorCount} dòng\n\n";
+                    string msg = $"✔ Thêm thành công: {ketqua.SuccessCount} dòng\n" +
+                                 $"❌ Lỗi: {ketqua.ErrorCount} dòng\n\n";
 
-                        if (ketqua.ErrorLines.Count > 0)
-                            msg += "🔎 Chi tiết lỗi:\n" + string.Join("\n", ketqua.ErrorLines);
+                    if (ketqua.ErrorLines.Count > 0)
+                        msg += "🔎 Chi tiết lỗi:\n" + string.Join("\n", ketqua.ErrorLines);
 
-                        MessageBox.Show(msg, "Kết quả Import");
-                    }
+                    MessageBox.Show(msg, "Kết quả Import");
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi import: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi import: " + ex.Message);
+            }
 
-            
-       }
+
+        }
         private void btnXuatExcel_Click(object sender, EventArgs e)
         {
             try
@@ -567,7 +567,12 @@ namespace Dayone.GUI
             this.Close();
         }
 
-<<<<<<< HEAD
+        private void cbbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+
+
         private void đăngKýMônHọcToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DangKyMon f = new DangKyMon();
@@ -583,11 +588,6 @@ namespace Dayone.GUI
             f.ShowDialog();
             this.Show();
         }
-=======
-        private void cbbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         //private void btnXuatExcel_Click(object sender, EventArgs e)
         //{
         //    try
@@ -642,6 +642,7 @@ namespace Dayone.GUI
 
 
         //Comment trong file SinhVien
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
+
+
     }
 }

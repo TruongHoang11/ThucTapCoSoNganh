@@ -104,11 +104,7 @@
     <Compile Include="BLL\BLL_MonHoc.cs" />
     <Compile Include="BLL\BLL_SinhVien.cs" />
     <Compile Include="BLL\BLL_TaiKhoan.cs" />
-<<<<<<< HEAD
     <Compile Include="DAL\DAL_DangKyMon.cs" />
-=======
-    <Compile Include="BLL\ImportResult.cs" />
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
     <Compile Include="DAL\DAL_CoVanHocTap.cs" />
     <Compile Include="DAL\DAL_Diem.cs" />
     <Compile Include="DAL\DAL_Excel.cs" />

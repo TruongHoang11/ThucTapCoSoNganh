@@ -84,11 +84,11 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-<<<<<<< HEAD
+
             this.quảnLýLớpHọcPhầnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
+
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
+
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnh)).BeginInit();
@@ -685,14 +685,14 @@
             this.Column10.ReadOnly = true;
             this.Column10.Width = 125;
             // 
-<<<<<<< HEAD
+
             // quảnLýLớpHọcPhầnToolStripMenuItem
             // 
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Name = "quảnLýLớpHọcPhầnToolStripMenuItem";
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Text = "Quản lý lớp học phần";
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýLớpHọcPhầnToolStripMenuItem_Click);
-=======
+
             // Column11
             // 
             this.Column11.DataPropertyName = "Anh";
@@ -701,7 +701,7 @@
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             this.Column11.Width = 125;
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
+
             // 
             // SinhVien
             // 
@@ -785,13 +785,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-<<<<<<< HEAD
+
         private System.Windows.Forms.ToolStripMenuItem đăngKýMônHọcToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýLớpHọcPhầnToolStripMenuItem;
-=======
+
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.PictureBox picAnh;
         private System.Windows.Forms.Button btnChonAnh;
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
+
     }
 }

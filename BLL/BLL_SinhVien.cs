@@ -35,13 +35,7 @@ namespace Dayone.BLL
         {
             return DAL.DAL_SinhVien.Instance.Xoa(id);
         }
-<<<<<<< HEAD
 
-
-
-
-
-=======
         //public DataTable TimKiem(string masv, string tensv)
         //{
         //    return DAL_SinhVien.Instance.TimKiem(masv, tensv);
@@ -66,7 +60,7 @@ namespace Dayone.BLL
         }
 
         //BLL_SinhVien bllSV = new BLL_SinhVien();
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
+
 
 
     }

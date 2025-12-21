@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,12 +19,12 @@ namespace Dayone.DAL
             private set => instance = value;
         }
         private DAL_SinhVien() { }
-        public bool Them(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop,string makhoa , string macvht, string anh)
+        public bool Them(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop, string makhoa, string macvht, string anh)
         {
             string sql = "insert into SinhVien(MaSV, TenSV, NgaySinh, GioiTinh,QueQuan,NgayNhapHoc, MaLop, MaKhoa, MaCVHT, Anh) values(@MaSV, @TenSV, @NgaySinh, @GioiTinh, @QueQuan, @NgayNhapHoc, @MaLop, @MaKhoa, @MaCVHT, @Anh)";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, malop, makhoa, macvht, anh });
         }
-        public bool Sua(string masv, string tensv, string ngaysinh, string gioitinh,string quequan, string ngaynh, string malop, string makhoa, string macvht, string anh, int id)
+        public bool Sua(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop, string makhoa, string macvht, string anh, int id)
         {
             string sql = "update SinhVien set MaSV = @MaSV , TenSV = @TenSV, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, QueQuan = @QueQuan, NgayNhapHoc = @NgayNhapHoc, MaLop = @MaLop, MaKhoa = @MaKhoa, MaCVHT = @MaCVHT, Anh = @Anh   where id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { masv, tensv, ngaysinh, gioitinh, quequan, ngaynh, malop, makhoa, macvht, anh, id });
@@ -38,11 +39,6 @@ namespace Dayone.DAL
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from SinhVien");
         }
-<<<<<<< HEAD
-
-
-
-=======
         //public DataTable TimKiem(string masv, string tensv)
         //{
         //    string sql =
@@ -120,7 +116,6 @@ namespace Dayone.DAL
             string sql = "SELECT COUNT(*) FROM SinhVien WHERE MaSV = @masv";
             return (int)DAL_KetNoi.Instance.ExecuteScalar(sql, new object[] { masv }) > 0;
         }
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
 
     }
 }

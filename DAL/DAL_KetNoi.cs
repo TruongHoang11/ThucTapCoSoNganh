@@ -20,11 +20,7 @@ namespace Dayone.DAL
         }
 
         private string connectionString =
-<<<<<<< HEAD
             @"Data Source=DESKTOP-JTVGARK;Initial Catalog=QL_SVNEW1;Integrated Security=True";
-=======
-            @"Data Source=LAPTOP-4P8CHGI2; Initial Catalog=SinhVien; Integrated Security=True;";
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
 
         public string ConnectionString
         {
@@ -125,20 +121,7 @@ namespace Dayone.DAL
                     int i = 0;
                     foreach (Match m in matches)
                     {
-<<<<<<< HEAD
                         cmd.Parameters.AddWithValue(m.Value, parameter[i]);
-=======
-                        object value = parameter[i];
-
-                        if (value is string s)
-                        {
-                            if (string.IsNullOrWhiteSpace(s))
-                                value = DBNull.Value;
-                        }
-
-                        command.Parameters.AddWithValue(m.Value, value ?? DBNull.Value);
-
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
                         i++;
                     }
                 }
@@ -149,38 +132,9 @@ namespace Dayone.DAL
             return result > 0;
         }
 
-<<<<<<< HEAD
         public bool ExecuteNonQuery(string query, Dictionary<string, object> parameters)
         {
             int result;
-=======
-        public object ExecuteScalar(string sql, object[] parameters = null)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                if (parameters != null)
-                {
-                    string[] listPara = sql.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
-                    {
-                        if (item.Contains('@'))
-                        {
-                            cmd.Parameters.AddWithValue(item, parameters[i]);
-                            i++;
-                        }
-                    }
-                }
-
-                return cmd.ExecuteScalar();
-            }
-        }
-
-    }
->>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
