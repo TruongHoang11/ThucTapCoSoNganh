@@ -39,7 +39,11 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnTimKiem = new System.Windows.Forms.Button();
+
             this.cmbTenMon = new System.Windows.Forms.ComboBox();
+
+            this.TenLop = new System.Windows.Forms.ComboBox();
+
             this.label4 = new System.Windows.Forms.Label();
             this.btnTaiLai = new System.Windows.Forms.Button();
             this.dtpkDangKy = new System.Windows.Forms.DateTimePicker();
@@ -51,10 +55,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+
             this.btnSua = new System.Windows.Forms.Button();
             this.BtnXoa = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbLopCodinh = new System.Windows.Forms.ComboBox();
+
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDangKyMon)).BeginInit();
             this.panel2.SuspendLayout();
@@ -192,15 +198,24 @@
             // btnTimKiem
             // 
             this.btnTimKiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.btnTimKiem.Location = new System.Drawing.Point(646, 204);
             this.btnTimKiem.Margin = new System.Windows.Forms.Padding(4);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(118, 32);
             this.btnTimKiem.TabIndex = 10;
+
+            this.btnTimKiem.Location = new System.Drawing.Point(756, 174);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(200, 54);
+            this.btnTimKiem.TabIndex = 12;
+
             this.btnTimKiem.Text = "Tìm Kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
+
             // cmbTenMon
             // 
             this.cmbTenMon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -211,17 +226,35 @@
             this.cmbTenMon.Size = new System.Drawing.Size(184, 30);
             this.cmbTenMon.TabIndex = 2;
             this.cmbTenMon.SelectedIndexChanged += new System.EventHandler(this.TenLop_SelectedIndexChanged);
-            // 
+     // 
+            this.TenLop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TenLop.FormattingEnabled = true;
+            this.TenLop.Location = new System.Drawing.Point(869, 46);
+            this.TenLop.Margin = new System.Windows.Forms.Padding(4);
+            this.TenLop.Name = "TenLop";
+            this.TenLop.Size = new System.Drawing.Size(184, 30);
+            this.TenLop.TabIndex = 11;
+            this.TenLop.SelectedIndexChanged += new System.EventHandler(this.TenLop_SelectedIndexChanged);
+
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label4.Location = new System.Drawing.Point(60, 92);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 22);
             this.label4.TabIndex = 10;
             this.label4.Text = "Môn học:";
+
+            this.label4.Location = new System.Drawing.Point(752, 49);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 22);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Môn :";
+
             // 
             // btnTaiLai
             // 
@@ -334,6 +367,7 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID:";
             // 
+
             // btnSua
             // 
             this.btnSua.Location = new System.Drawing.Point(215, 204);
@@ -372,6 +406,8 @@
             this.cmbLopCodinh.TabIndex = 5;
             this.cmbLopCodinh.SelectedIndexChanged += new System.EventHandler(this.cmbLopCodinh_SelectedIndexChanged);
             // 
+
+
             // DangKyMon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);

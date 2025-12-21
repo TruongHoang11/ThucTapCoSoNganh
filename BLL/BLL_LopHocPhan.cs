@@ -18,6 +18,15 @@ namespace Dayone.BLL
         }
 
         private BLL_LopHocPhan() { }
+        public DataTable LayThongTinSinhVienTrongLop(string maLopHP, string maSV)
+        {
+            return DAL_LopHocPhan.Instance
+                .LayThongTinSinhVienTrongLop(maLopHP, maSV);
+        }
+        public DataTable GetByMonHoc(string maMH)
+        {
+            return DAL_LopHocPhan.Instance.GetLopHocPhanByMonHoc(maMH);
+        }
 
         public DataTable DanhSach()
         {
