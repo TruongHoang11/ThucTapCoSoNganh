@@ -82,26 +82,57 @@ namespace Dayone.GUI
             cbbMaCoVan.SelectedValue = dgvSinhVien.CurrentRow.Cells[9].Value.ToString();
 
             //Chon anh
-            string anh = dgvSinhVien.CurrentRow.Cells[10].Value?.ToString().Trim();
+            //string anh = dgvSinhVien.CurrentRow.Cells[10].Value?.ToString().Trim();
 
 
-            if (!string.IsNullOrEmpty(anh))
+            //if (!string.IsNullOrEmpty(anh))
+            //{
+            //    string path = Application.StartupPath + @"\Images\SinhVien\" + anh;
+
+            //    if (File.Exists(path))
+            //    {
+            //        if (picAnh.Image != null)
+            //        {
+            //            picAnh.Image.Dispose();
+            //            picAnh.Image = null;
+            //        }
+            //        LoadImage(path);
+            //    }
+
+            //    else
+            //        picAnh.Image = null;
+            //}
+
+            string anh = dgvSinhVien.CurrentRow.Cells[10].Value?.ToString() ?? "";
+
+            // xử lý sạch chuỗi
+            anh = anh.Trim()
+                     .Replace("\"", "")
+                     .Replace("\n", "")
+                     .Replace("\r", "");
+
+            // nếu rỗng → clear
+            if (string.IsNullOrWhiteSpace(anh))
             {
-                string path = Application.StartupPath + @"\Images\SinhVien\" + anh;
-
-                if (File.Exists(path))
-                {
-                    if (picAnh.Image != null)
-                    {
-                        picAnh.Image.Dispose();
-                        picAnh.Image = null;
-                    }
-                    LoadImage(path);
-                }
-
-                else
-                    picAnh.Image = null;
+                ShowImage(null);
+                return;
             }
+
+            // full path hay file name?
+            string fullPath = anh;
+
+            // nếu không phải root path → coi như tên file
+            if (!Path.IsPathRooted(anh))
+                fullPath = Path.Combine(Application.StartupPath, @"Images\SinhVien", anh);
+
+            // debug thử
+            // MessageBox.Show(fullPath);
+
+            // nếu file tồn tại → show
+            if (File.Exists(fullPath))
+                ShowImage(fullPath);
+            else
+                ShowImage(null);
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -415,6 +446,26 @@ namespace Dayone.GUI
             {
                 MessageBox.Show("Lỗi xuất Excel:\n" + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ShowImage(string path)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(path) && File.Exists(path))
+                {
+                    picAnh.Image = Image.FromFile(path);
+                    picAnh.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                else
+                {
+                    picAnh.Image = null; // hoặc ảnh mặc định
+                }
+            }
+            catch
+            {
+                picAnh.Image = null;
             }
         }
 

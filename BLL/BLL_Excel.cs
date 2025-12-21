@@ -12,34 +12,6 @@ namespace Dayone.BLL
     {
         DAL_Excel dalExcel = new DAL_Excel();
 
-        //public bool ImportSinhVienToDatabase(string filepath)
-        //{
-        //    DataTable dt = dalExcel.ReadExcel(filepath);
-        //    if (dt == null || dt.Rows.Count == 0)
-        //        throw new Exception("Không có dữ liệu trong Excel!");
-
-        //    bool result = true;
-
-        //    foreach (DataRow row in dt.Rows)
-        //    {
-        //        string masv = row["masv"].ToString();
-        //        string tensv = row["tensv"].ToString();
-        //        DateTime ngaysinh = Convert.ToDateTime(row["ngaysinh"]);
-        //        string gioitinh = row["gioitinh"].ToString();
-        //        string quequan = row["quequan"].ToString();
-        //        DateTime ngaynhaphoc = Convert.ToDateTime(row["ngaynh"]);
-        //        string malop = row["malop"].ToString().Trim();
-        //        string makhoa = row["makhoa"].ToString().Trim();
-        //        string macvht = row["macvht"].ToString().Trim();
-
-        //        bool kq = BLL_SinhVien.Instance.Them(
-        //            masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht
-        //        );
-
-        //        if (!kq) result = false;
-        //    }
-        //    return result;
-        //}
         public ImportResult ImportSinhVienToDatabase(string filePath)
         {
             ImportResult result = new ImportResult();
@@ -91,5 +63,7 @@ namespace Dayone.BLL
 
             return result;
         }
+
+
     }
 }

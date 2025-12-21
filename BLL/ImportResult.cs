@@ -8,8 +8,9 @@ namespace Dayone.BLL
 {
     public class ImportResult
     {
-        public int SuccessCount { get; set; }
-        public int ErrorCount { get; set; }
-        public List<string> ErrorLines { get; set; } = new List<string>();
+            public int SuccessCount { get; set; }
+            public int ErrorCount { get; set; }
+            public List<string> ErrorLines { get; set; } = new List<string>();
+        
     }
 }
