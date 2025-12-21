@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace Dayone.GUI
 {
+   
+
     public partial class CoVanHocTap : Form
     {
         public CoVanHocTap()
@@ -32,6 +34,7 @@ namespace Dayone.GUI
         {
 
         }
+        private string maCoVanGoc = "";
 
         //public object BLL_Khoa { get; private set; }
 
@@ -51,6 +54,7 @@ namespace Dayone.GUI
             cmbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
             cmbMaLop.DisplayMember = "TenLop";
             cmbMaLop.ValueMember = "MaLop";
+            ClearForm();
         }
         //private void btnThem_Click(object sender, EventArgs e)
         //{
@@ -76,6 +80,8 @@ namespace Dayone.GUI
 
             txbMaCoVan.Text = dgvCoVanHocTap.CurrentRow.Cells[1].Value.ToString();
             txbTenCoVan.Text = dgvCoVanHocTap.CurrentRow.Cells[2].Value.ToString();
+            maCoVanGoc = dgvCoVanHocTap.CurrentRow.Cells[1].Value.ToString().Trim(); // ⭐ LƯU MÃ GỐC
+            txbMaCoVan.Text = maCoVanGoc;
             dtpkNgaySinh.Value = (DateTime)dgvCoVanHocTap.CurrentRow.Cells[3].Value;
             if (dgvCoVanHocTap.CurrentRow.Cells[4].Value.ToString().Trim() == "Nam")
                 rdNam.Checked = true;
@@ -134,12 +140,25 @@ namespace Dayone.GUI
                 MessageBox.Show("Chưa chọn khoa!");
                 return;
             }
+            // ❌ KHÔNG CHO SỬA MÃ CỐ VẤN
+            if (txbMaCoVan.Text.Trim() != maCoVanGoc)
+            {
+                MessageBox.Show(
+                    "Không thể sửa mã cố vấn này!",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                txbMaCoVan.Text = maCoVanGoc; // trả lại mã cũ
+                return;
+            }
 
             if (cmbMaLop.SelectedValue == null)
             {
                 MessageBox.Show("Chưa chọn lớp!");
                 return;
             }
+
             //int id = int.Parse(txbID.Text);
             if (string.IsNullOrWhiteSpace(txbID.Text))
             {
@@ -177,24 +196,72 @@ namespace Dayone.GUI
            
 
         }
-
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
-            int id = int.Parse(txbID.Text);
-            string macovan = txbMaCoVan.Text;
             if (string.IsNullOrWhiteSpace(txbID.Text))
             {
-                MessageBox.Show("Bạn chưa chọn cố vấn cần sửa!");
+                MessageBox.Show("Bạn chưa chọn cố vấn cần xóa!");
                 return;
             }
-            if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan, "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            int id = int.Parse(txbID.Text);
+            string macovan = txbMaCoVan.Text;
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan,
+                "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (BLL_CoVanHocTap.Instance.Xoa(id) == true)
+                bool kq = BLL_CoVanHocTap.Instance.Xoa(id);
+
+                if (kq)
                 {
                     MessageBox.Show("Xóa cố vấn thành công!");
                     btnTaiLai.PerformClick();
                 }
+                else
+                {
+                    MessageBox.Show(
+                        "Không thể xóa cố vấn này vì đang được sử dụng trong dữ liệu liên quan!",
+                        "Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
         }
+        private void ClearForm()
+        {
+            txbID.Clear();
+            txbMaCoVan.Clear();
+            txbTenCoVan.Clear();
+
+            dtpkNgaySinh.Value = DateTime.Now;
+
+            rdNam.Checked = false;
+            rdNu.Checked = false;
+
+            cmbMaKhoa.SelectedIndex = -1;
+            cmbMaLop.SelectedIndex = -1;
+
+            dgvCoVanHocTap.ClearSelection();
+        }
+
+        //private void btnXoa_Click_1(object sender, EventArgs e)
+        //{
+        //    int id = int.Parse(txbID.Text);
+        //    string macovan = txbMaCoVan.Text;
+        //    if (string.IsNullOrWhiteSpace(txbID.Text))
+        //    {
+        //        MessageBox.Show("Bạn chưa chọn cố vấn cần sửa!");
+        //        return;
+        //    }
+        //    if (MessageBox.Show("Bạn có chắc muốn xóa cố vấn học tập có mã: " + macovan, "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        //    {
+        //        if (BLL_CoVanHocTap.Instance.Xoa(id) == true)
+        //        {
+        //            MessageBox.Show("Xóa cố vấn thành công!");
+        //            btnTaiLai.PerformClick();
+        //        }
+        //    }
+        //}
     }
 }

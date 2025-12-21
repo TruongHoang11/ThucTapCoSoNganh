@@ -124,7 +124,11 @@
             "D+",
             "D",
             "F"});
+<<<<<<< HEAD
             this.cmbLoai.Location = new System.Drawing.Point(1194, 20);
+=======
+            this.cmbLoai.Location = new System.Drawing.Point(871, 16);
+>>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
             this.cmbLoai.Name = "cmbLoai";
             this.cmbLoai.Size = new System.Drawing.Size(135, 30);
             this.cmbLoai.TabIndex = 3;
@@ -132,18 +136,31 @@
             // 
             // cmbMaLopHP
             // 
+<<<<<<< HEAD
             this.cmbMaLopHP.FormattingEnabled = true;
             this.cmbMaLopHP.Location = new System.Drawing.Point(793, 20);
             this.cmbMaLopHP.Name = "cmbMaLopHP";
             this.cmbMaLopHP.Size = new System.Drawing.Size(291, 30);
             this.cmbMaLopHP.TabIndex = 2;
+=======
+            this.cmbMaMH.FormattingEnabled = true;
+            this.cmbMaMH.Location = new System.Drawing.Point(581, 16);
+            this.cmbMaMH.Name = "cmbMaMH";
+            this.cmbMaMH.Size = new System.Drawing.Size(221, 30);
+            this.cmbMaMH.TabIndex = 2;
+            this.cmbMaMH.SelectedIndexChanged += new System.EventHandler(this.cmbMaMH_SelectedIndexChanged);
+>>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
             // 
             // cmbMaSinhVien
             // 
             this.cmbMaSinhVien.FormattingEnabled = true;
             this.cmbMaSinhVien.Location = new System.Drawing.Point(365, 20);
             this.cmbMaSinhVien.Name = "cmbMaSinhVien";
+<<<<<<< HEAD
             this.cmbMaSinhVien.Size = new System.Drawing.Size(270, 30);
+=======
+            this.cmbMaSinhVien.Size = new System.Drawing.Size(210, 30);
+>>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
             this.cmbMaSinhVien.TabIndex = 1;
             this.cmbMaSinhVien.SelectedIndexChanged += new System.EventHandler(this.cmbMaSinhVien_SelectedIndexChanged);
             // 
@@ -265,7 +282,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
+<<<<<<< HEAD
             this.label9.Location = new System.Drawing.Point(1131, 24);
+=======
+            this.label9.Location = new System.Drawing.Point(808, 20);
+>>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 22);
             this.label9.TabIndex = 0;
@@ -281,20 +302,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
+<<<<<<< HEAD
             this.label3.Location = new System.Drawing.Point(674, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 22);
             this.label3.TabIndex = 0;
             this.label3.Text = "Mã Lớp HP :";
+=======
+            this.label3.Location = new System.Drawing.Point(456, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(130, 22);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Tên Môn Học :";
+>>>>>>> 4bc873daf8fcab3d67683e9db56664c33fc38c97
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(231, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 22);
+            this.label2.Size = new System.Drawing.Size(132, 22);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Mã Sinh Viên :";
+            this.label2.Text = "Tên Sinh Viên :";
             // 
             // txbID
             // 

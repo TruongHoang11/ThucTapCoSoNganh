@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,11 +40,31 @@ namespace Dayone.DAL
             string sql = "update CoVanHocTap set MaCVHT=@MaCVHT, TenCVHT = @TenCVHT, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, MaKhoa = @MaKhoa, MaLop = @MaLop where  id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaCoVan, TenCoVan, NgaySinh, GioiTinh, MaKhoa, MaLop, id });
         }
+        //public bool Xoa(int id)
+        //{
+        //    string sql = "delete from CoVanHocTap where id = @id";
+        //    return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+        //}
         public bool Xoa(int id)
         {
-            string sql = "delete from CoVanHocTap where id = @id";
-            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+            try
+            {
+                string sql = "DELETE FROM CoVanHocTap WHERE Id = @id";
+                return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+            }
+            catch (SqlException ex)
+            {
+                // lỗi khóa ngoại (FK)
+                if (ex.Number == 547)
+                {
+                    return false; // báo về rằng không thể xóa
+                }
+
+                throw; // các lỗi khác vứt ra ngoài
+            }
         }
+
+
         public DataTable DanhSach()
         {
             return DAL_KetNoi.Instance.ExcuteQuery("select * from CoVanHocTap");

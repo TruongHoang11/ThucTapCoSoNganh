@@ -74,7 +74,7 @@
             this.dgvLop.RowHeadersWidth = 51;
             this.dgvLop.RowTemplate.Height = 30;
             this.dgvLop.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLop.Size = new System.Drawing.Size(547, 333);
+            this.dgvLop.Size = new System.Drawing.Size(562, 333);
             this.dgvLop.TabIndex = 4;
             this.dgvLop.TabStop = false;
             this.dgvLop.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLop_CellClick_1);
@@ -123,7 +123,7 @@
             // 
             this.txbTenLop.Location = new System.Drawing.Point(368, 23);
             this.txbTenLop.Name = "txbTenLop";
-            this.txbTenLop.Size = new System.Drawing.Size(140, 30);
+            this.txbTenLop.Size = new System.Drawing.Size(187, 30);
             this.txbTenLop.TabIndex = 2;
             // 
             // label3
@@ -188,7 +188,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 157);
+            this.panel1.Size = new System.Drawing.Size(562, 157);
             this.panel1.TabIndex = 3;
             // 
             // cmbMaKhoa
@@ -196,7 +196,7 @@
             this.cmbMaKhoa.FormattingEnabled = true;
             this.cmbMaKhoa.Location = new System.Drawing.Point(344, 74);
             this.cmbMaKhoa.Name = "cmbMaKhoa";
-            this.cmbMaKhoa.Size = new System.Drawing.Size(121, 30);
+            this.cmbMaKhoa.Size = new System.Drawing.Size(192, 30);
             this.cmbMaKhoa.TabIndex = 4;
             // 
             // numSoLuong
@@ -268,13 +268,13 @@
             this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
-            this.Column5.Width = 125;
+            this.Column5.Width = 150;
             // 
             // QuanLyLop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 490);
+            this.ClientSize = new System.Drawing.Size(562, 490);
             this.Controls.Add(this.dgvLop);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
