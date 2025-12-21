@@ -16,6 +16,7 @@ namespace Dayone.DAL
             private set => instance = value;
         }
         private DAL_MonHoc() { }
+
         public bool Them(string MaMH, string TenMH, int SoTC, int TietLT, int TietTH)
         {
             string sql = "insert into MonHoc(MaMH, TenMH, SoTC, TietLT, TietTH) values( @MaMH , @TenMH , @SoTC , @TietLT , @TietTH )";
@@ -30,6 +31,11 @@ namespace Dayone.DAL
         {
             string sql = "delete from MonHoc where id = @id";
             return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+        }
+        public DataTable DanhSachmon()
+        {
+            string sql = @"SELECT MaMH, TenMH FROM MonHoc";
+            return DAL_KetNoi.Instance.ExcuteQuery(sql);
         }
         public DataTable DanhSach()
         {

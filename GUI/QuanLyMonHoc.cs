@@ -99,7 +99,7 @@ namespace Dayone.GUI
                     "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
 
         private string connectionString = DAL_KetNoi.Instance.ConnectionString;
 
@@ -247,6 +247,16 @@ namespace Dayone.GUI
             numTinChi.Value = int.Parse(dgvQuanLyMonHoc.CurrentRow.Cells[3].Value.ToString());
             numLyThuyet.Value = int.Parse(dgvQuanLyMonHoc.CurrentRow.Cells[4].Value.ToString());
             numThucHanh.Value = int.Parse(dgvQuanLyMonHoc.CurrentRow.Cells[5].Value.ToString());
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void QuanLyMonHoc_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

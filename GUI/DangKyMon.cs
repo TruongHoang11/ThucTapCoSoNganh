@@ -131,34 +131,31 @@ namespace Dayone.GUI
 
                 bool ok = BLL_DangKyMon.Instance.DangKy(maSV, maLHP);
 
-                if (ok)
-                {
-                    MessageBox.Show("Đăng ký môn thành công");
-
-                    // ✅ TẮT event để tránh xung đột
-                    cmbMaSinhVien.SelectedIndexChanged -= cmbMaSinhVien_SelectedIndexChanged;
-
-                    // ✅ LOAD TẤT CẢ DỮ LIỆU (không chỉ của sinh viên vừa đăng ký)
-                    DataTable dt = BLL_DangKyMon.Instance.DanhSachTatCa();
-
-                    // ✅ BIND VÀO CỘT ĐÃ THIẾT KẾ
-                    //dgvDangKyMon.DataSource = null;
-                    dgvDangKyMon.DataSource = dt;
-                    dgvDangKyMon.Refresh();
-                    this.Refresh();
-
-                    // ✅ BẬT lại event
-                    cmbMaSinhVien.SelectedIndexChanged += cmbMaSinhVien_SelectedIndexChanged;
-                }
-                else
+                if (!ok)
                 {
                     MessageBox.Show("Sinh viên đã đăng ký lớp học phần này rồi");
+                    return;
                 }
+
+                MessageBox.Show("Đăng ký môn thành công");
+
+                // ✅ Load lại danh sách đăng ký
+                LoadDanhSachDangKy();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception:\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Lỗi đăng ký:\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
+        }
+        private void LoadDanhSachDangKy()
+        {
+            dgvDangKyMon.DataSource =
+                BLL_DangKyMon.Instance.DanhSachTatCa();
         }
 
         // ================= CHỌN SV =================
@@ -203,6 +200,75 @@ namespace Dayone.GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            if (cmbMaHocPhan.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp học phần");
+                return;
+            }
+
+            string maLHP = cmbMaHocPhan.SelectedValue.ToString();
+
+            dgvDangKyMon.DataSource =
+                BLL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLHP);
+        }
+
+        private void TenLop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTenMon.SelectedValue != null)
+            {
+                string MaMH = cmbTenMon.SelectedValue.ToString();
+                // dùng maMH để đăng ký
+            }
+
+
+            if (cmbTenMon.SelectedValue == null)
+                return;
+
+            string maMH = cmbTenMon.SelectedValue.ToString();
+
+            DataTable dtLHP = BLL_LopHocPhan.Instance.GetByMonHoc(maMH);
+
+            cmbMaHocPhan.DataSource = dtLHP;
+            cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
+            cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+            cmbMaHocPhan.SelectedIndex = -1;
+
+        }
+        private void LoadMonHoc()
+        {
+            cmbTenMon.DataSource = BLL_MonHoc.Instance.DanhSach();
+
+            cmbTenMon.DisplayMember = "TenMH"; // HIỂN THỊ
+            cmbTenMon.ValueMember = "MaMH";  // GIÁ TRỊ THẬT (lưu DB)
+
+            cmbTenMon.SelectedIndex = -1; // chưa chọn gì
+        }
+
+        private void DangKyMon_Load_1(object sender, EventArgs e)
+        {
+            LoadMonHoc();
+            // Load sinh viên
+            cmbMaSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+            cmbMaSinhVien.DisplayMember = "TenSV";
+            cmbMaSinhVien.ValueMember = "MaSV";
+
+            // Load môn học
+            cmbTenMon.DataSource = BLL_MonHoc.Instance.DanhSach();
+            cmbTenMon.DisplayMember = "TenMH";
+            cmbTenMon.ValueMember = "MaMH";
+
+            cmbTenMon.SelectedIndex = -1;
+
+            // Lớp học phần rỗng ban đầu
+            cmbMaHocPhan.DataSource = null;
+        }
+
+        private void cmbMaHocPhan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbMaHocPhan.SelectedValue == null)
+                return;
+
+            string maLHP = cmbMaHocPhan.SelectedValue.ToString();
 
         }
     }
