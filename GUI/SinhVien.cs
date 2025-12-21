@@ -33,18 +33,32 @@ namespace Dayone.GUI
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-
             dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+
             cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
             cbbMaCoVan.DisplayMember = "TenCVHT";
             cbbMaCoVan.ValueMember = "MaCVHT";
-            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();///Hien thi danh sach khoa len combobox
+
+            cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cbbMaKhoa.DisplayMember = "TenKhoa";
             cbbMaKhoa.ValueMember = "MaKhoa";
+
             cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
             cbbMaLop.DisplayMember = "TenLop";
             cbbMaLop.ValueMember = "MaLop";
-            ClearForm();
+
+            ClearForm(); // ⭐ xử lý hết ở đây
+            //dgvSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
+            //cbbMaCoVan.DataSource = BLL_CoVanHocTap.Instance.DanhSach();
+            //cbbMaCoVan.DisplayMember = "TenCVHT";
+            //cbbMaCoVan.ValueMember = "MaCVHT";
+            //cbbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();///Hien thi danh sach khoa len combobox
+            //cbbMaKhoa.DisplayMember = "TenKhoa";
+            //cbbMaKhoa.ValueMember = "MaKhoa";
+            //cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
+            //cbbMaLop.DisplayMember = "TenLop";
+            //cbbMaLop.ValueMember = "MaLop";
+            //ClearForm();
         }
         private void ClearForm()
         {
@@ -53,17 +67,41 @@ namespace Dayone.GUI
             txbTenSV.Clear();
             txbQueQuan.Clear();
 
-            dtpkNgaySinh.Value = DateTime.Now;
-            dtpkNhapHoc.Value = DateTime.Now;
+            // 👉 Làm DateTimePicker TRẮNG
+            dtpkNgaySinh.CustomFormat = " ";
+            dtpkNgaySinh.Format = DateTimePickerFormat.Custom;
+
+            dtpkNhapHoc.CustomFormat = " ";
+            dtpkNhapHoc.Format = DateTimePickerFormat.Custom;
 
             rbNam.Checked = false;
             rbNu.Checked = false;
 
-            cbbMaLop.SelectedIndex = -1;
             cbbMaKhoa.SelectedIndex = -1;
+            cbbMaLop.SelectedIndex = -1;
             cbbMaCoVan.SelectedIndex = -1;
 
+            picAnh.Image = null;
+            picAnh.ImageLocation = null;
+
             dgvSinhVien.ClearSelection();
+
+            //txbID.Clear();
+            //txbMaSV.Clear();
+            //txbTenSV.Clear();
+            //txbQueQuan.Clear();
+
+            //dtpkNgaySinh.Value = DateTime.Now;
+            //dtpkNhapHoc.Value = DateTime.Now;
+
+            //rbNam.Checked = false;
+            //rbNu.Checked = false;
+
+            //cbbMaLop.SelectedIndex = -1;
+            //cbbMaKhoa.SelectedIndex = -1;
+            //cbbMaCoVan.SelectedIndex = -1;
+
+            //dgvSinhVien.ClearSelection();
         }
 
         private void dgvSinhVien_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -726,6 +764,21 @@ namespace Dayone.GUI
             this.Hide();
             f.ShowDialog();
             this.Show();
+        }
+
+        private void picAnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpkNgaySinh_ValueChanged(object sender, EventArgs e)
+        {
+            dtpkNgaySinh.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void dtpkNhapHoc_ValueChanged(object sender, EventArgs e)
+        {
+            dtpkNhapHoc.CustomFormat = "dd/MM/yyyy";
         }
         //private void btnXuatExcel_Click(object sender, EventArgs e)
         //{
