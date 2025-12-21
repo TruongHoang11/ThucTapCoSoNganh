@@ -46,6 +46,7 @@ namespace Dayone.GUI
             cbbMaLop.ValueMember = "MaLop";
             ClearForm();
         }
+        //hehe
         private void ClearForm()
         {
             txbID.Clear();
