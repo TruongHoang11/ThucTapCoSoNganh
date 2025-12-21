@@ -225,13 +225,13 @@ namespace Dayone.GUI
         private void TenLop_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (cmbTenMon.SelectedValue == null)
+            if (TenLop.SelectedValue == null)
             {
                 cmbMaHocPhan.DataSource = null;
                 return;
             }
 
-            string maMH = cmbTenMon.SelectedValue.ToString();
+            string maMH = TenLop.SelectedValue.ToString();
             LoadLopHocPhanByMon(maMH);
 
 
@@ -269,10 +269,10 @@ namespace Dayone.GUI
         {
             var dt = BLL_MonHoc.Instance.DanhSach();
 
-            cmbTenMon.DataSource = dt;
-            cmbTenMon.DisplayMember = "TenMH";
-            cmbTenMon.ValueMember = "MaMH";
-            cmbTenMon.SelectedIndex = -1;
+            TenLop.DataSource = dt;
+            TenLop.DisplayMember = "TenMH";
+            TenLop.ValueMember = "MaMH";
+            TenLop.SelectedIndex = -1;
 
             cmbMaHocPhan.DataSource = null; // ban đầu chưa chọn môn
         }
@@ -312,16 +312,16 @@ namespace Dayone.GUI
             cmbMaSinhVien.ValueMember = "MaSV";
 
             // Load môn học
-            cmbTenMon.DataSource = BLL_MonHoc.Instance.DanhSach();
-            cmbTenMon.DisplayMember = "TenMH";
-            cmbTenMon.ValueMember = "MaMH";
+            TenLop.DataSource = BLL_MonHoc.Instance.DanhSach();
+            TenLop.DisplayMember = "TenMH";
+            TenLop.ValueMember = "MaMH";
 
-            cmbTenMon.SelectedIndex = -1;
+            TenLop.SelectedIndex = -1;
 
             // Lớp học phần rỗng ban đầu
             cmbMaHocPhan.DataSource = null;
 
-            cmbTenMon.SelectedIndexChanged += TenLop_SelectedIndexChanged;
+            TenLop.SelectedIndexChanged += TenLop_SelectedIndexChanged;
         }
 
         private void cmbMaHocPhan_SelectedIndexChanged(object sender, EventArgs e)
@@ -422,6 +422,16 @@ namespace Dayone.GUI
 
             if (DateTime.TryParse(a.Cells[6].Value?.ToString(), out DateTime ngayDK))
                 dtpkDangKy.Value = ngayDK;
+        }
+
+        private void cmbMaHocPhan_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbID_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

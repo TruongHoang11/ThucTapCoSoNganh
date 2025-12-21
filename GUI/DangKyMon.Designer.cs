@@ -38,8 +38,12 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbLopCodinh = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.BtnXoa = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
-            this.cmbTenMon = new System.Windows.Forms.ComboBox();
+            this.TenLop = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnTaiLai = new System.Windows.Forms.Button();
             this.dtpkDangKy = new System.Windows.Forms.DateTimePicker();
@@ -51,10 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.BtnXoa = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbLopCodinh = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDangKyMon)).BeginInit();
             this.panel2.SuspendLayout();
@@ -170,7 +170,7 @@
             this.panel2.Controls.Add(this.BtnXoa);
             this.panel2.Controls.Add(this.btnSua);
             this.panel2.Controls.Add(this.btnTimKiem);
-            this.panel2.Controls.Add(this.cmbTenMon);
+            this.panel2.Controls.Add(this.TenLop);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.btnTaiLai);
             this.panel2.Controls.Add(this.dtpkDangKy);
@@ -189,6 +189,44 @@
             this.panel2.Size = new System.Drawing.Size(1102, 274);
             this.panel2.TabIndex = 1;
             // 
+            // cmbLopCodinh
+            // 
+            this.cmbLopCodinh.FormattingEnabled = true;
+            this.cmbLopCodinh.Location = new System.Drawing.Point(611, 133);
+            this.cmbLopCodinh.Name = "cmbLopCodinh";
+            this.cmbLopCodinh.Size = new System.Drawing.Size(287, 30);
+            this.cmbLopCodinh.TabIndex = 5;
+            this.cmbLopCodinh.SelectedIndexChanged += new System.EventHandler(this.cmbLopCodinh_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(462, 133);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 22);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Lớp Cố Định :";
+            // 
+            // BtnXoa
+            // 
+            this.BtnXoa.Location = new System.Drawing.Point(351, 204);
+            this.BtnXoa.Name = "BtnXoa";
+            this.BtnXoa.Size = new System.Drawing.Size(107, 32);
+            this.BtnXoa.TabIndex = 8;
+            this.BtnXoa.Text = "Xóa";
+            this.BtnXoa.UseVisualStyleBackColor = true;
+            this.BtnXoa.Click += new System.EventHandler(this.BtnXoa_Click);
+            // 
+            // btnSua
+            // 
+            this.btnSua.Location = new System.Drawing.Point(215, 204);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(112, 32);
+            this.btnSua.TabIndex = 7;
+            this.btnSua.Text = "Sửa ";
+            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnTimKiem
             // 
             this.btnTimKiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,16 +239,16 @@
             this.btnTimKiem.UseVisualStyleBackColor = true;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
-            // cmbTenMon
+            // TenLop
             // 
-            this.cmbTenMon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbTenMon.FormattingEnabled = true;
-            this.cmbTenMon.Location = new System.Drawing.Point(177, 89);
-            this.cmbTenMon.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbTenMon.Name = "cmbTenMon";
-            this.cmbTenMon.Size = new System.Drawing.Size(184, 30);
-            this.cmbTenMon.TabIndex = 2;
-            this.cmbTenMon.SelectedIndexChanged += new System.EventHandler(this.TenLop_SelectedIndexChanged);
+            this.TenLop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TenLop.FormattingEnabled = true;
+            this.TenLop.Location = new System.Drawing.Point(177, 89);
+            this.TenLop.Margin = new System.Windows.Forms.Padding(4);
+            this.TenLop.Name = "TenLop";
+            this.TenLop.Size = new System.Drawing.Size(184, 30);
+            this.TenLop.TabIndex = 2;
+            this.TenLop.SelectedIndexChanged += new System.EventHandler(this.TenLop_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -300,6 +338,7 @@
             this.cmbMaHocPhan.Name = "cmbMaHocPhan";
             this.cmbMaHocPhan.Size = new System.Drawing.Size(287, 30);
             this.cmbMaHocPhan.TabIndex = 3;
+            this.cmbMaHocPhan.SelectedIndexChanged += new System.EventHandler(this.cmbMaHocPhan_SelectedIndexChanged_1);
             // 
             // label2
             // 
@@ -322,6 +361,7 @@
             this.txbID.ReadOnly = true;
             this.txbID.Size = new System.Drawing.Size(124, 30);
             this.txbID.TabIndex = 0;
+            this.txbID.TextChanged += new System.EventHandler(this.txbID_TextChanged);
             // 
             // label1
             // 
@@ -333,44 +373,6 @@
             this.label1.Size = new System.Drawing.Size(36, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID:";
-            // 
-            // btnSua
-            // 
-            this.btnSua.Location = new System.Drawing.Point(215, 204);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(112, 32);
-            this.btnSua.TabIndex = 7;
-            this.btnSua.Text = "Sửa ";
-            this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // BtnXoa
-            // 
-            this.BtnXoa.Location = new System.Drawing.Point(351, 204);
-            this.BtnXoa.Name = "BtnXoa";
-            this.BtnXoa.Size = new System.Drawing.Size(107, 32);
-            this.BtnXoa.TabIndex = 8;
-            this.BtnXoa.Text = "Xóa";
-            this.BtnXoa.UseVisualStyleBackColor = true;
-            this.BtnXoa.Click += new System.EventHandler(this.BtnXoa_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(462, 133);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 22);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Lớp Cố Định :";
-            // 
-            // cmbLopCodinh
-            // 
-            this.cmbLopCodinh.FormattingEnabled = true;
-            this.cmbLopCodinh.Location = new System.Drawing.Point(611, 133);
-            this.cmbLopCodinh.Name = "cmbLopCodinh";
-            this.cmbLopCodinh.Size = new System.Drawing.Size(287, 30);
-            this.cmbLopCodinh.TabIndex = 5;
-            this.cmbLopCodinh.SelectedIndexChanged += new System.EventHandler(this.cmbLopCodinh_SelectedIndexChanged);
             // 
             // DangKyMon
             // 
@@ -415,7 +417,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button btnTimKiem;
-        private System.Windows.Forms.ComboBox cmbTenMon;
+        private System.Windows.Forms.ComboBox TenLop;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button BtnXoa;
         private System.Windows.Forms.Button btnSua;
