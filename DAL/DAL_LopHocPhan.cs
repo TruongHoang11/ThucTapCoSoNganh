@@ -19,6 +19,22 @@ namespace Dayone.DAL
         WHERE dk.MaLopHocPhan = @maLopHP
           AND sv.MaSV = @maSV";
 
+
+            return DAL_KetNoi.Instance.ExcuteQuery(
+                sql, new object[] { maLopHP, maSV }
+            );
+        }
+        public DataTable GetLopHocPhanByMon(string maMH)
+        {
+            string sql = @"SELECT MaLopHocPhan, TenLopHocPhan
+                   FROM LopHocPhan
+                   WHERE MaMH = @maMH";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maMH });
+        }
+
+
+
             return DAL_KetNoi.Instance.ExcuteQuery(
                 sql, new object[] { maLopHP, maSV }
             );

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
+
 
 namespace Dayone.DAL
 {
@@ -85,6 +87,27 @@ namespace Dayone.DAL
                 new object[] { }
             );
         }
+      
+
+        public bool Xoa(int id)
+        {
+            string sql = "DELETE FROM DangKyMon WHERE Id = @id";
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+        }
+        public bool Sua(int id, string maSV, string maLHP, DateTime ngayDK)
+        {
+            string sql = @"UPDATE DangKyMon
+                   SET MaSV = @maSV,
+                       MaLopHocPhan = @maLHP,
+                       NgayDangKy = @ngayDK
+                   WHERE Id = @id";
+
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[]
+            {
+        maSV, maLHP, ngayDK, id
+            });
+        }
+
 
         // ================= LOAD LỚP HỌC PHẦN =================
         public DataTable GetLopHocPhan()

@@ -102,7 +102,11 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 3, 0, 3);
+
+            this.menuStrip1.Size = new System.Drawing.Size(1300, 30);
+
             this.menuStrip1.Size = new System.Drawing.Size(1300, 25);
+
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,7 +178,11 @@
             // quảnLýLớpHọcPhầnToolStripMenuItem
             // 
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Name = "quảnLýLớpHọcPhầnToolStripMenuItem";
+
+            this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Text = "Quản lý lớp học phần";
             this.quảnLýLớpHọcPhầnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýLớpHọcPhầnToolStripMenuItem_Click);
             // 
@@ -566,7 +574,11 @@
             this.panel2.Location = new System.Drawing.Point(0, 268);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
+
+            this.panel2.Size = new System.Drawing.Size(1300, 303);
+
             this.panel2.Size = new System.Drawing.Size(1300, 308);
+
             this.panel2.TabIndex = 2;
             // 
             // dgvSinhVien

@@ -22,6 +22,8 @@ namespace Dayone.DAL
         private string connectionString =
 
 
+
+
             @"Data Source=HUY-TIEN\SQLEXPRESS;Initial Catalog=QL_SVNEW1111;Integrated Security=True";
         //jkfjasljasl
 

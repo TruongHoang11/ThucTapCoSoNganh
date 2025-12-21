@@ -15,6 +15,11 @@ namespace Dayone.DAL
             get { if (instance == null) instance = new DAL_Lop(); return instance; }
             private set => instance = value;
         }
+        public DataTable GetDanhSachLop()
+        {
+            string sql = "SELECT MaLop, TenLop FROM Lop";
+            return DAL_KetNoi.Instance.ExcuteQuery(sql);
+        }
 
         public object DataProvider { get; private set; }
 

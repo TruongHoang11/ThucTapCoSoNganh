@@ -32,7 +32,19 @@ namespace Dayone.BLL
         {
             return DAL_LopHocPhan.Instance.DanhSach();
         }
-
+        public DataTable LayThongTinSinhVienTrongLop(string maLopHP, string maSV)
+        {
+            return DAL_LopHocPhan.Instance
+                .LayThongTinSinhVienTrongLop(maLopHP, maSV);
+        }
+        public DataTable GetLopHocPhanByMon(string maMH)
+        {
+            return DAL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
+        }
+        public DataTable GetByMonHoc(string maMH)
+        {
+            return DAL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
+        }
         public bool Them(string MaLopHocPhan, string MaMH, string TenLopHocPhan, int NamHoc, int SoLuong)
         {
             return DAL_LopHocPhan.Instance.Them( MaLopHocPhan,  MaMH,  TenLopHocPhan,  NamHoc,  SoLuong);
