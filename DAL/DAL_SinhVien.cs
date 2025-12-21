@@ -18,6 +18,15 @@ namespace Dayone.DAL
             get { if (instance == null) instance = new DAL_SinhVien(); return instance; }
             private set => instance = value;
         }
+        public DataTable GetSinhVienTheoLop(string maLop)
+        {
+            string sql = @"SELECT MaSV, TenSV
+                   FROM SinhVien
+                   WHERE MaLop = @maLop";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maLop });
+        }
+
         private DAL_SinhVien() { }
         public bool Them(string masv, string tensv, string ngaysinh, string gioitinh, string quequan, string ngaynh, string malop, string makhoa, string macvht, string anh)
         {

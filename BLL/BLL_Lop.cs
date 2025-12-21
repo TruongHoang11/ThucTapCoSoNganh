@@ -18,6 +18,10 @@ namespace Dayone.BLL
         }
 
         private BLL_Lop() { }
+        public DataTable GetDanhSachLop()
+        {
+            return DAL_Lop.Instance.GetDanhSachLop();
+        }
 
         public DataTable DanhSach()
         {

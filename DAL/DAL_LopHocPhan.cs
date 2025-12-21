@@ -23,16 +23,15 @@ namespace Dayone.DAL
                 sql, new object[] { maLopHP, maSV }
             );
         }
-        public DataTable GetLopHocPhanByMonHoc(string maMH)
+        public DataTable GetLopHocPhanByMon(string maMH)
         {
-            string sql = @"
-        SELECT MaLopHocPhan, TenLopHocPhan
-        FROM LopHocPhan
-        WHERE MaMH = @maMH
-    ";
+            string sql = @"SELECT MaLopHocPhan, TenLopHocPhan
+                   FROM LopHocPhan
+                   WHERE MaMH = @maMH";
 
             return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maMH });
         }
+
 
         public DataTable DanhSach()
         {

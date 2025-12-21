@@ -1,4 +1,5 @@
 ﻿using Dayone.BLL;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -211,42 +212,100 @@ namespace Dayone.GUI
             dgvDangKyMon.DataSource =
                 BLL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLHP);
         }
+        private void LoadLopHocPhanByMon(string maMH)
+        {
+            var dt = BLL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
+
+            cmbMaHocPhan.DataSource = dt;
+            cmbMaHocPhan.DisplayMember = "TenLopHocPhan";   // HIỆN TÊN
+            cmbMaHocPhan.ValueMember = "MaLopHocPhan";    // GIỮ MÃ ĐỂ XỬ LÝ
+            cmbMaHocPhan.SelectedIndex = -1;
+        }
 
         private void TenLop_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbTenMon.SelectedValue != null)
-            {
-                string MaMH = cmbTenMon.SelectedValue.ToString();
-                // dùng maMH để đăng ký
-            }
-
 
             if (cmbTenMon.SelectedValue == null)
+            {
+                cmbMaHocPhan.DataSource = null;
                 return;
+            }
 
             string maMH = cmbTenMon.SelectedValue.ToString();
+            LoadLopHocPhanByMon(maMH);
 
-            DataTable dtLHP = BLL_LopHocPhan.Instance.GetByMonHoc(maMH);
 
-            cmbMaHocPhan.DataSource = dtLHP;
-            cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
-            cmbMaHocPhan.ValueMember = "MaLopHocPhan";
-            cmbMaHocPhan.SelectedIndex = -1;
+            //if (dgvDangKyMon.CurrentRow == null) return;
+
+            //var r = dgvDangKyMon.CurrentRow;
+
+            //txbID.Text = r.Cells["ID"].Value.ToString();
+
+            //cmbMaSinhVien.SelectedValue = r.Cells["MA SV"].Value.ToString();
+            //cmbMaHocPhan.SelectedValue = r.Cells["MA H.PHAN"].Value.ToString();
+
+            //dtpkDangKy.Value = Convert.ToDateTime(r.Cells["NGAY DK"].Value);
+
+            //if (cmbTenMon.SelectedValue != null)
+            //{
+            //    string MaMH = cmbTenMon.SelectedValue.ToString();
+            //    // dùng maMH để đăng ký
+            //}
+
+            //if (cmbTenMon.SelectedValue == null)
+            //    return;
+
+            //string maMH = cmbTenMon.SelectedValue.ToString();
+
+            //DataTable dtLHP = BLL_LopHocPhan.Instance.GetByMonHoc(maMH);
+
+            //cmbMaHocPhan.DataSource = dtLHP;
+            //cmbMaHocPhan.DisplayMember = "TenLopHocPhan";
+            //cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+            //cmbMaHocPhan.SelectedIndex = -1;
 
         }
         private void LoadMonHoc()
         {
-            cmbTenMon.DataSource = BLL_MonHoc.Instance.DanhSach();
+            var dt = BLL_MonHoc.Instance.DanhSach();
 
-            cmbTenMon.DisplayMember = "TenMH"; // HIỂN THỊ
-            cmbTenMon.ValueMember = "MaMH";  // GIÁ TRỊ THẬT (lưu DB)
+            cmbTenMon.DataSource = dt;
+            cmbTenMon.DisplayMember = "TenMH";
+            cmbTenMon.ValueMember = "MaMH";
+            cmbTenMon.SelectedIndex = -1;
 
-            cmbTenMon.SelectedIndex = -1; // chưa chọn gì
+            cmbMaHocPhan.DataSource = null; // ban đầu chưa chọn môn
+        }
+        private void LoadLopHocPhan()
+        {
+            var dt = BLL_LopHocPhan.Instance.DanhSach(); // bạn đang có hàm này trả DataTable
+
+            cmbMaHocPhan.DataSource = dt;
+            cmbMaHocPhan.DisplayMember = "MaLopHocPhan"; // hoặc "TenLopHocPhan" nếu có
+            cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+            cmbMaHocPhan.SelectedIndex = -1;
         }
 
         private void DangKyMon_Load_1(object sender, EventArgs e)
         {
             LoadMonHoc();
+            LoadLopCoDinh();
+            LoadLopHocPhan();
+
+
+            cmbMaHocPhan.DataSource = BLL_LopHocPhan.Instance.DanhSach();
+            cmbMaHocPhan.DisplayMember = "MaLopHocPhan"; // hoặc "TenLopHocPhan" nếu có
+            cmbMaHocPhan.ValueMember = "MaLopHocPhan";
+            cmbMaHocPhan.SelectedIndex = -1;
+
+
+            cmbLopCodinh.DataSource = BLL_Lop.Instance.GetDanhSachLop();
+            cmbLopCodinh.DisplayMember = "TenLop";
+            cmbLopCodinh.ValueMember = "MaLop";
+            cmbLopCodinh.SelectedIndex = -1;
+
+
+
             // Load sinh viên
             cmbMaSinhVien.DataSource = BLL_SinhVien.Instance.DanhSach();
             cmbMaSinhVien.DisplayMember = "TenSV";
@@ -261,6 +320,8 @@ namespace Dayone.GUI
 
             // Lớp học phần rỗng ban đầu
             cmbMaHocPhan.DataSource = null;
+
+            cmbTenMon.SelectedIndexChanged += TenLop_SelectedIndexChanged;
         }
 
         private void cmbMaHocPhan_SelectedIndexChanged(object sender, EventArgs e)
@@ -270,6 +331,97 @@ namespace Dayone.GUI
 
             string maLHP = cmbMaHocPhan.SelectedValue.ToString();
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txbID.Text))
+            {
+                MessageBox.Show("Chưa chọn dòng để sửa");
+                return;
+            }
+
+            int id = int.Parse(txbID.Text);
+            string maSV = cmbMaSinhVien.SelectedValue.ToString();
+            string maLHP = cmbMaHocPhan.SelectedValue.ToString();
+            DateTime ngayDK = dtpkDangKy.Value;
+
+            bool ok = BLL_DangKyMon.Instance.Sua(id, maSV, maLHP, ngayDK);
+
+            if (ok)
+            {
+                MessageBox.Show("Sửa thành công");
+                dgvDangKyMon.DataSource = BLL_DangKyMon.Instance.DanhSachTatCa();
+            }
+            else
+            {
+                MessageBox.Show("Sửa thất bại");
+            }
+        }
+
+        private void BtnXoa_Click(object sender, EventArgs e)
+        {
+            if (dgvDangKyMon.CurrentRow == null)
+            {
+                MessageBox.Show("Chưa chọn dòng để xóa");
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvDangKyMon.CurrentRow.Cells[0].Value);
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa?",
+                "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (BLL_DangKyMon.Instance.Xoa(id))
+                {
+                    MessageBox.Show("Xóa thành công");
+                    dgvDangKyMon.DataSource = BLL_DangKyMon.Instance.DanhSachTatCa();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa thất bại");
+                }
+            }
+
+        }
+        private void LoadLopCoDinh()
+        {
+            cmbLopCodinh.DataSource = BLL_Lop.Instance.GetDanhSachLop();
+            cmbLopCodinh.DisplayMember = "TenLop";
+            cmbLopCodinh.ValueMember = "MaLop";
+            cmbLopCodinh.SelectedIndex = -1;
+        }
+
+
+        private void cmbLopCodinh_SelectedIndexChanged(object sender, EventArgs e)
+        {       
+
+
+
+            if (cmbLopCodinh.SelectedIndex == -1) return;
+
+            string maLop = cmbLopCodinh.SelectedValue.ToString();
+
+            cmbMaSinhVien.DataSource =
+                BLL_SinhVien.Instance.GetSinhVienTheoLop(maLop);
+
+            cmbMaSinhVien.DisplayMember = "TenSV";
+            cmbMaSinhVien.ValueMember = "MaSV";
+            cmbMaSinhVien.SelectedIndex = -1;
+        }
+
+        private void dgvDangKyMon_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDangKyMon.CurrentRow == null) return;
+
+            var a = dgvDangKyMon.CurrentRow;
+
+            txbID.Text = a.Cells[0].Value?.ToString();               // ID
+            cmbMaSinhVien.SelectedValue = a.Cells[1].Value?.ToString(); // MaSV
+            cmbMaHocPhan.SelectedValue = a.Cells[3].Value?.ToString(); // MaLHP
+
+            if (DateTime.TryParse(a.Cells[6].Value?.ToString(), out DateTime ngayDK))
+                dtpkDangKy.Value = ngayDK;
         }
     }
 }

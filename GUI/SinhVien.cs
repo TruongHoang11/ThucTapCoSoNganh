@@ -44,6 +44,7 @@ namespace Dayone.GUI
             cbbMaLop.DataSource = BLL_Lop.Instance.DanhSach();
             cbbMaLop.DisplayMember = "TenLop";
             cbbMaLop.ValueMember = "MaLop";
+            ClearForm();
         }
         private void ClearForm()
         {
@@ -198,37 +199,124 @@ namespace Dayone.GUI
         private void btnSua_Click(object sender, EventArgs e)
         {
 
-            int id = int.Parse(txbID.Text);
-            string masv = txbMaSV.Text;
-            string tensv = txbTenSV.Text;
-            string ngaysinh = dtpkNgaySinh.Value.ToShortDateString();
-            string gioitinh = (rbNam.Checked == true) ? "Nam" : "Nữ";
-            string quequan = txbQueQuan.Text;
-            string ngaynhaphoc = dtpkNhapHoc.Value.ToShortDateString();
-            string malop = cbbMaLop.SelectedValue.ToString();
-            string makhoa = cbbMaKhoa.SelectedValue.ToString();
-            string macovan = cbbMaCoVan.SelectedValue.ToString();
-            string anh;
+            try
+            {
+                // ==== KIỂM TRA THIẾU DỮ LIỆU ====
+
+                if (string.IsNullOrWhiteSpace(txbID.Text))
+                {
+                    MessageBox.Show("ID không được để trống!");
+                    txbID.Focus();
+                    return;
+                }
+
+                if (!int.TryParse(txbID.Text, out int id))
+                {
+                    MessageBox.Show("ID phải là số!");
+                    txbID.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbMaSV.Text))
+                {
+                    MessageBox.Show("Mã sinh viên không được để trống!");
+                    txbMaSV.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbTenSV.Text))
+                {
+                    MessageBox.Show("Tên sinh viên không được để trống!");
+                    txbTenSV.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txbQueQuan.Text))
+                {
+                    MessageBox.Show("Quê quán không được để trống!");
+                    txbQueQuan.Focus();
+                    return;
+                }
+
+                if (cbbMaLop.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Mã lớp!");
+                    cbbMaLop.Focus();
+                    return;
+                }
+
+                if (cbbMaKhoa.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Mã khoa!");
+                    cbbMaKhoa.Focus();
+                    return;
+                }
+
+                if (cbbMaCoVan.SelectedValue == null)
+                {
+                    MessageBox.Show("Chưa chọn Cố vấn!");
+                    cbbMaCoVan.Focus();
+                    return;
+                }
+
+                // ==== LẤY GIÁ TRỊ ====
+                string masv = txbMaSV.Text.Trim();
+                string tensv = txbTenSV.Text.Trim();
+                string ngaysinh = dtpkNgaySinh.Value.ToShortDateString();
+                string gioitinh = rbNam.Checked ? "Nam" : "Nữ";
+                string quequan = txbQueQuan.Text.Trim();
+                string ngaynhaphoc = dtpkNhapHoc.Value.ToShortDateString();
+                string malop = cbbMaLop.SelectedValue.ToString();
+                string makhoa = cbbMaKhoa.SelectedValue.ToString();
+                string macovan = cbbMaCoVan.SelectedValue.ToString();
+                string anh;
+
+                if (!string.IsNullOrEmpty(tenAnh))
+                {
+                    anh = tenAnh;
+
+                }
+                else
+                {
+                    // Lấy ảnh cũ từ DataGridView
+                    anh = dgvSinhVien.CurrentRow.Cells["Anh"].Value?.ToString();
+
+                    if (anh == "\"\"" || string.IsNullOrWhiteSpace(anh))
+                        anh = ""; // hoặc NULL
+                }
+
+                // ==== GỌI BLL ====
+                bool result = BLL_SinhVien.Instance.Sua(
+                    masv, tensv, ngaysinh, gioitinh, quequan,
+                    ngaynhaphoc, malop, makhoa, macovan, anh, id
+                );
+
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật thành công!");
+                    btnLamMoi.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại!");
+                }
+            }
+
+            catch (FormatException)
+            {
+                MessageBox.Show("Sai định dạng dữ liệu!");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Thiếu dữ liệu hoặc chưa chọn dòng trong bảng!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+            }
 
             // Nếu đã chọn ảnh mới
-            if (!string.IsNullOrEmpty(tenAnh))
-            {
-                anh = tenAnh;
-
-            }
-            else
-            {
-                // Lấy ảnh cũ từ DataGridView
-                anh = dgvSinhVien.CurrentRow.Cells["Anh"].Value?.ToString();
-
-                if (anh == "\"\"" || string.IsNullOrWhiteSpace(anh))
-                    anh = ""; // hoặc NULL
-            }
-
-            if (BLL_SinhVien.Instance.Sua(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macovan, anh, id) == true)
-            {
-                btnLamMoi.PerformClick();
-            }
+            
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
