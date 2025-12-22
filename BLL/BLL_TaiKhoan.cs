@@ -110,6 +110,8 @@ namespace Dayone.BLL
             //HeThong.LOAITAIKHOAN = null;
             //return false;
         }
+       
+
         public bool DoiMatKhau(string tenDangNhap, string matKhauMoi, string matKhauCu)
         {
             if (!DAL_TaiKhoan.Instance.KiemTraMatKhau(tenDangNhap, matKhauCu))

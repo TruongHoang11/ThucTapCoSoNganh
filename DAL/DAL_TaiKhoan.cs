@@ -25,6 +25,7 @@ namespace Dayone.DAL
         //public object DataProvider { get; private set; }
 
         private DAL_TaiKhoan() { }
+       
 
         public bool Them(string ten, string matkhau, string loai)
         {

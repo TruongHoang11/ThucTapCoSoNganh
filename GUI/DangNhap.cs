@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Dayone.GUI.SinhVien;
 
 namespace Dayone
 {
@@ -71,6 +72,35 @@ namespace Dayone
             //                    MessageBoxIcon.Warning);
             //}
 
+            string tendangnhap = txbTenDangNhap.Text;
+            string matkhau = txbMatKhau.Text;
+
+            bool ok = BLL_TaiKhoan.Instance.DangNhap(tendangnhap, matkhau);
+
+            if (ok)
+            {
+                // DangNhap() đã gán sẵn HeThong.LOAITAIKHOAN
+                HeThong.TENDANGNHAP = tendangnhap;
+
+                txbMatKhau.Clear();
+
+                SinhVien f = new SinhVien();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Tên đăng nhập hoặc mật khẩu không đúng...",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+
+
+           // MessageBox.Show("ROLE = [" + HeThong.LOAITAIKHOAN + "]");
 
 
             //string tendangnhap = txbTenDangNhap.Text;
@@ -93,12 +123,30 @@ namespace Dayone
 
             //}
 
+            //            bool ok = BLL_TaiKhoan.Instance.DangNhap(
+            //    txbTenDangNhap.Text,
+            //    txbMatKhau.Text
+            //);
+
+            //            if (ok)
+            //            {
+            //                // Vai trò đã được gán sẵn trong BLL vào HeThong.LOAITAIKHOAN
+            //                HeThong.TENDANGNHAP = txbTenDangNhap.Text;
+
+            //                SinhVien frm = new SinhVien();
+            //                frm.Show();
+            //                this.Hide();
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Sai tài khoản hoặc mật khẩu");
+            //            }
 
 
-            SinhVien f = new SinhVien();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            //SinhVien f = new SinhVien();
+            //this.Hide();
+            //f.ShowDialog();
+            //this.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -137,7 +137,15 @@ namespace Dayone.GUI
 
         private void QuanLyTaiKhoan_Load(object sender, EventArgs e)
         {
-            btnTaiLai.PerformClick(); //Bấm lại btnLamMoi
+
+            if (HeThong.LOAITAIKHOAN != "Quản trị")
+            {
+                MessageBox.Show("Bạn không có quyền truy cập chức năng này");
+                this.Close();
+                return;
+            }
+
+            btnTaiLai.PerformClick();
             cmbLoaiTaiKhoan.SelectedIndex = 0;
         }
 

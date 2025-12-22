@@ -21,12 +21,25 @@ namespace Dayone.GUI
         {
             InitializeComponent();
         }
-
+        public static class Session
+        {
+            public static string TenDangNhap { get; set; }
+            public static string VaiTro { get; set; } // "Admin" | "CoVanHocTap"
+        }
         private void SinhVien_Load(object sender, EventArgs e)
         {
-
+            PhanQuyen();
             btnLamMoi.PerformClick();
         }
+        private void PhanQuyen()
+        {
+
+            if (HeThong.LOAITAIKHOAN != "Quản trị")
+            {
+                menuQuanLyTaiKhoan.Visible = false;
+            }
+        }
+
 
         string duongDanAnh = "";
         string tenAnh = "";
@@ -723,6 +736,14 @@ namespace Dayone.GUI
         private void quảnLýLớpHọcPhầnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LopHocPhan f = new LopHocPhan();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
+
+        private void quảnLýTàiKhoảnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            QuanLyTaiKhoan f = new QuanLyTaiKhoan();
             this.Hide();
             f.ShowDialog();
             this.Show();
