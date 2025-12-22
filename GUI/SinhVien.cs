@@ -708,6 +708,19 @@ namespace Dayone.GUI
 
         private void cbbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbbMaKhoa.SelectedValue == null)
+            {
+                cbbMaLop.DataSource = null;
+                return;
+            }
+
+            string maKhoa = cbbMaKhoa.SelectedValue.ToString();
+            DataTable dsLop = BLL_Lop.Instance.TimTheoKhoa(maKhoa);
+
+            cbbMaLop.DataSource = dsLop;
+            cbbMaLop.DisplayMember = "TenLop";
+            cbbMaLop.ValueMember = "MaLop";
+            cbbMaLop.SelectedIndex = -1;
         }
 
 

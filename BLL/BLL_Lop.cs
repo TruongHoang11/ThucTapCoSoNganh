@@ -42,5 +42,10 @@ namespace Dayone.BLL
         {
             return DAL_Lop.Instance.Xoa(id);
         }
+
+        public DataTable TimTheoKhoa(string maKhoa)
+        {
+            return DAL_Lop.Instance.TimTheoKhoa(maKhoa);
+        }
     }
 }
