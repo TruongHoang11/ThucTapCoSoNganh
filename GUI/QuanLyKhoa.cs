@@ -35,7 +35,11 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Khoa.Instance.Them(makhoa, tenkhoa) == true)
+                    {
+                        MessageBox.Show("Thêm khoa thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnTaiLai.PerformClick();
+                    }                        
                 }
                 catch
                 {
@@ -64,12 +68,38 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Khoa.Instance.Sua(makhoa, tenkhoa, id) == true)
+                    {
+                        MessageBox.Show("Sửa khoa thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnTaiLai.PerformClick();
+                    }                      
                 }
                 catch
                 {
-                    MessageBox.Show("Mã khoa đã tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bool trungMaKhoa = false;
+
+                    foreach (DataGridViewRow row in dgvKhoa.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        string maKhoaTrongGrid = row.Cells["Column2"].Value.ToString();
+                        int idTrongGrid = Convert.ToInt32(row.Cells["Column1"].Value);
+
+                        if (maKhoaTrongGrid == makhoa && idTrongGrid != id)
+                        {
+                            trungMaKhoa = true;
+                            break;
+                        }
+                    }
+
+                    if (trungMaKhoa) // Mã khoa mới sửa nó đã tồn tại trong DataGrid
+                        MessageBox.Show("Mã khoa đã tồn tại.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        MessageBox.Show("Bạn không thể sửa mã khoa này.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
             }
         }
 
@@ -83,7 +113,11 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Khoa.Instance.Xoa(id) == true)
+                    {
+                        MessageBox.Show("Xóa khoa thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnTaiLai.PerformClick();
+                    }                       
                 }
                 catch
                 {

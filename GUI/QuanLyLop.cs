@@ -48,7 +48,12 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Lop.Instance.Them(malop, tenlop, soluong, makhoa) == true)
-                        btnTaiLai.PerformClick();
+                    {
+                        MessageBox.Show("Thêm lớp thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        btnTaiLai.PerformClick();                      
+                    }
+                        
                 }
                 catch
                 {
@@ -77,12 +82,63 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Lop.Instance.Sua(malop, tenlop, soluong,makhoa,id) == true)
+                    {
                         btnTaiLai.PerformClick();
+                        MessageBox.Show("Sửa lớp thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                        
                 }
                 catch
                 {
-                    MessageBox.Show("Mã lớp  đã tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    bool trungMaLop = false;
+                    bool trungTenLop = false;
+                    bool trungMaVaTen = false;
+
+                    foreach (DataGridViewRow row in dgvLop.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        int idTrongGrid = Convert.ToInt32(row.Cells[0].Value);
+
+                        string maLopTrongGrid = row.Cells[1].Value?.ToString();
+                        string tenLopTrongGrid = row.Cells[2].Value?.ToString();
+
+                        if (maLopTrongGrid == null || tenLopTrongGrid == null) continue;
+                        if (idTrongGrid == id) continue;
+
+                        if (maLopTrongGrid == malop && tenLopTrongGrid == tenlop)
+                        {
+                            trungMaVaTen = true;
+                            break;
+                        }
+
+                        if (maLopTrongGrid == malop)
+                        {
+                            trungMaLop = true;
+                        }
+
+                        if (tenLopTrongGrid == tenlop)
+                        {
+                            trungTenLop = true;
+                        }
+                    }
+
+                    if (trungMaVaTen)
+                        MessageBox.Show("Mã lớp và tên lớp đã tồn tại.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else if (trungMaLop)
+                        MessageBox.Show("Mã lớp đã tồn tại.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else if (trungTenLop)
+                        MessageBox.Show("Tên lớp đã tồn tại.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        MessageBox.Show("Bạn không thể sửa lớp này.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
+
             }
         }
 
@@ -96,7 +152,11 @@ namespace Dayone.GUI
                 try
                 {
                     if (BLL_Lop.Instance.Xoa(id) == true)
+                    {
+                        MessageBox.Show("Xóa lớp thành công.", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnTaiLai.PerformClick();
+                    }                        
                 }
                 catch
                 {
