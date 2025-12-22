@@ -10,6 +10,28 @@ namespace Dayone.DAL
             private set => instance = value;
         }
         private DAL_LopHocPhan() { }
+        public DataTable LayThongTinSinhVienTrongLop(string maLopHP, string maSV)
+        {
+            string sql = @"
+        SELECT sv.MaSV, sv.TenSV, sv.NgaySinh, sv.GioiTinh, sv.QueQuan
+        FROM DangKyMon dk
+        JOIN SinhVien sv ON dk.MaSV = sv.MaSV
+        WHERE dk.MaLopHocPhan = @maLopHP
+          AND sv.MaSV = @maSV";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(
+                sql, new object[] { maLopHP, maSV }
+            );
+        }
+        public DataTable GetLopHocPhanByMon(string maMH)
+        {
+            string sql = @"SELECT MaLopHocPhan, TenLopHocPhan
+                   FROM LopHocPhan
+                   WHERE MaMH = @maMH";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maMH });
+        }
+
 
         public DataTable DanhSach()
         {

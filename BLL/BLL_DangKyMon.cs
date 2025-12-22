@@ -30,11 +30,26 @@ namespace Dayone.BLL
             );
         }
 
+
         // ================= DANH SÁCH =================
         //public DataTable DanhSachTheoSV(string maSV)
         //{
         //    return DAL_DangKyMon.Instance.DanhSachTheoSV(maSV);
         //}
+        public DataTable GetSinhVienByLopHocPhan(string maLopHP)
+        {
+            return DAL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLopHP);
+        }
+        public bool Xoa(int id)
+        {
+            return DAL_DangKyMon.Instance.Xoa(id);
+        }
+        public bool Sua(int id, string maSV, string maLHP, DateTime ngayDK)
+        {
+            return DAL_DangKyMon.Instance.Sua(id, maSV, maLHP, ngayDK);
+        }
+
+      
 
         public DataTable GetLopHocPhan()
         {

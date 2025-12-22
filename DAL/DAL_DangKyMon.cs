@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
+
 
 namespace Dayone.DAL
 {
@@ -16,13 +18,33 @@ namespace Dayone.DAL
             }
         }
 
+        public DataTable GetSinhVienByLopHocPhan(string maLopHP)
+        {
+            string sql = @"
+        SELECT 
+            dk.Id,
+            sv.MaSV,
+            sv.TenSV,
+            lhp.MaLopHocPhan,
+            lhp.TenLopHocPhan,
+            mh.TenMH,
+            dk.NgayDangKy
+        FROM DangKyMon dk
+        JOIN SinhVien sv ON dk.MaSV = sv.MaSV
+        JOIN LopHocPhan lhp ON dk.MaLopHocPhan = lhp.MaLopHocPhan
+        JOIN MonHoc mh ON lhp.MaMH = mh.MaMH
+        WHERE dk.MaLopHocPhan = @maLHP";
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, new object[] { maLopHP });
+        }
+
         // ================= ĐĂNG KÝ MÔN =================
         public bool DangKy(string MaSV, string MaLopHocPhan, DateTime NgayDangKy)
         {
             string sql = @"INSERT INTO DangKyMon(MaSV, MaLopHocPhan, NgayDangKy)
                            VALUES (@MaSV, @MaLopHocPhan, @NgayDangKy)";
 
-            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaLopHocPhan , NgayDangKy });
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { MaSV, MaLopHocPhan, NgayDangKy });
         }
 
         // ================= KIỂM TRA TRÙNG =================
@@ -62,9 +84,30 @@ namespace Dayone.DAL
 
             return DAL_KetNoi.Instance.ExcuteQuery(
                 sql,
-                new object[] {  }
+                new object[] { }
             );
         }
+      
+
+        public bool Xoa(int id)
+        {
+            string sql = "DELETE FROM DangKyMon WHERE Id = @id";
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[] { id });
+        }
+        public bool Sua(int id, string maSV, string maLHP, DateTime ngayDK)
+        {
+            string sql = @"UPDATE DangKyMon
+                   SET MaSV = @maSV,
+                       MaLopHocPhan = @maLHP,
+                       NgayDangKy = @ngayDK
+                   WHERE Id = @id";
+
+            return DAL_KetNoi.Instance.ExecuteNonQuery(sql, new object[]
+            {
+        maSV, maLHP, ngayDK, id
+            });
+        }
+
 
         // ================= LOAD LỚP HỌC PHẦN =================
         public DataTable GetLopHocPhan()

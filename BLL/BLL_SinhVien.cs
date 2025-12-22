@@ -18,6 +18,11 @@ namespace Dayone.BLL
             private set => instance = value;
 
         }
+        public DataTable GetSinhVienTheoLop(string maLop)
+        {
+            return DAL_SinhVien.Instance.GetSinhVienTheoLop(maLop);
+        }
+
         private BLL_SinhVien() { }
         public DataTable DanhSach()
         {
