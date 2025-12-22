@@ -56,6 +56,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoVanHocTap)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +83,7 @@
             this.dgvCoVanHocTap.RowHeadersWidth = 51;
             this.dgvCoVanHocTap.RowTemplate.Height = 30;
             this.dgvCoVanHocTap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCoVanHocTap.Size = new System.Drawing.Size(863, 368);
+            this.dgvCoVanHocTap.Size = new System.Drawing.Size(864, 368);
             this.dgvCoVanHocTap.TabIndex = 9;
             this.dgvCoVanHocTap.TabStop = false;
             this.dgvCoVanHocTap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCoVanHocTap_CellClick);
@@ -152,6 +153,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnTimKiem);
             this.panel1.Controls.Add(this.cmbMaKhoa);
             this.panel1.Controls.Add(this.cmbMaLop);
             this.panel1.Controls.Add(this.btnXoa);
@@ -174,7 +176,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(863, 167);
+            this.panel1.Size = new System.Drawing.Size(864, 167);
             this.panel1.TabIndex = 8;
             // 
             // cmbMaKhoa
@@ -354,11 +356,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID:";
             // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Location = new System.Drawing.Point(587, 115);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(102, 28);
+            this.btnTimKiem.TabIndex = 17;
+            this.btnTimKiem.TabStop = false;
+            this.btnTimKiem.Text = "Tìm kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
             // CoVanHocTap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 535);
+            this.ClientSize = new System.Drawing.Size(864, 535);
             this.Controls.Add(this.dgvCoVanHocTap);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -404,5 +417,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbID;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnTimKiem;
     }
 }

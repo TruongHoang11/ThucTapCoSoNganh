@@ -72,6 +72,9 @@ namespace Dayone
             //                    MessageBoxIcon.Warning);
             //}
 
+
+            //commented 
+
             string tendangnhap = txbTenDangNhap.Text;
             string matkhau = txbMatKhau.Text;
 
@@ -98,9 +101,9 @@ namespace Dayone
                     MessageBoxIcon.Warning
                 );
             }
+            //đuôi
 
-
-           // MessageBox.Show("ROLE = [" + HeThong.LOAITAIKHOAN + "]");
+            // MessageBox.Show("ROLE = [" + HeThong.LOAITAIKHOAN + "]");
 
 
             //string tendangnhap = txbTenDangNhap.Text;

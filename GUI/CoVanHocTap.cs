@@ -245,6 +245,74 @@ namespace Dayone.GUI
             dgvCoVanHocTap.ClearSelection();
         }
 
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tenCV = txbTenCoVan.Text.Trim();
+
+                DateTime? ngaySinh = null;
+
+                // Chỉ lọc ngày sinh nếu user có thay đổi ngày
+                if (dtpkNgaySinh.Value.Date != DateTime.Now.Date)
+                {
+                    ngaySinh = dtpkNgaySinh.Value.Date;
+                }
+
+
+                string maLop = cmbMaLop.SelectedIndex != -1
+                    ? cmbMaLop.SelectedValue.ToString()
+                    : null;
+
+                string maKhoa = cmbMaKhoa.SelectedIndex != -1
+                    ? cmbMaKhoa.SelectedValue.ToString()
+                    : null;
+
+                if (string.IsNullOrEmpty(tenCV) &&
+                    ngaySinh == null &&
+                    maLop == null &&
+                    maKhoa == null)
+                {
+                    MessageBox.Show(
+                        "Vui lòng nhập ít nhất một điều kiện tìm kiếm!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+
+                DataTable dt = BLL_CoVanHocTap.Instance.TimKiem(
+                    tenCV,
+                    ngaySinh,
+                    maLop,
+                    maKhoa
+                );
+
+                dgvCoVanHocTap.DataSource = dt;
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Không tìm thấy cố vấn phù hợp!",
+                        "Kết quả",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Lỗi tìm kiếm: " + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+
+        }
+
         //private void btnXoa_Click_1(object sender, EventArgs e)
         //{
         //    int id = int.Parse(txbID.Text);

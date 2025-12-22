@@ -72,6 +72,21 @@ namespace Dayone.BLL
         {
             return DAL.DAL_CoVanHocTap.Instance.Sua(macovan, tencovan, ngaysinh, gioitinh, makhoa, malop, id);
         }
+        public DataTable TimKiem(
+            string tenCV,
+            DateTime? ngaySinh,
+            string maLop,
+            string maKhoa
+        )
+        {
+            return DAL.DAL_CoVanHocTap.Instance.TimKiem(
+                tenCV,
+                ngaySinh,
+                maLop,
+                maKhoa
+            );
+        }
+
 
         public bool Xoa(int id)
         {
