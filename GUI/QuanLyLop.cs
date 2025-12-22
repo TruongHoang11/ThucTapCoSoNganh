@@ -24,7 +24,17 @@ namespace Dayone.GUI
             btnTaiLai.PerformClick();
         }
 
-        
+        private void ClearForm()
+        {
+            txbID.Clear();
+
+            txbMaLop.Clear();
+            txbTenLop.Clear();
+            numSoLuong.Text = "";
+            cmbMaKhoa.SelectedValue = -1;
+
+        }
+
 
         private void btnTaiLai_Click(object sender, EventArgs e)
         {
@@ -32,7 +42,9 @@ namespace Dayone.GUI
             cmbMaKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
             cmbMaKhoa.DisplayMember = "TenKhoa";
             cmbMaKhoa.ValueMember = "MaKhoa";
-            
+            ClearForm();
+
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)

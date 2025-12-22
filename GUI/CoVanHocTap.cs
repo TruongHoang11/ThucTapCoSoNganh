@@ -313,6 +313,23 @@ namespace Dayone.GUI
 
         }
 
+        private void cmbMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbMaKhoa.SelectedValue == null)
+            {
+                cmbMaLop.DataSource = null;
+                return;
+            }
+
+            string maKhoa = cmbMaKhoa.SelectedValue.ToString();
+            DataTable dsLop = BLL_Lop.Instance.TimTheoKhoa(maKhoa);
+
+            cmbMaLop.DataSource = dsLop;
+            cmbMaLop.DisplayMember = "TenLop";
+            cmbMaLop.ValueMember = "MaLop";
+            cmbMaLop.SelectedIndex = -1;
+        }
+
         //private void btnXoa_Click_1(object sender, EventArgs e)
         //{
         //    int id = int.Parse(txbID.Text);

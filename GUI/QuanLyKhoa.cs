@@ -129,6 +129,14 @@ namespace Dayone.GUI
         private void btnTaiLai_Click(object sender, EventArgs e)
         {
             dgvKhoa.DataSource = BLL_Khoa.Instance.DanhSach();
+            ClearForm();
+        }
+        private void ClearForm()
+        {
+            txbID.Clear();
+            txbMaKhoa.Clear();
+            txbTenKhoa.Clear();
+
         }
 
         private void dgvKhoa_CellClick_1(object sender, DataGridViewCellEventArgs e)
