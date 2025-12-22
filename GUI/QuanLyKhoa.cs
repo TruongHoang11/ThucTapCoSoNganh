@@ -57,7 +57,7 @@ namespace Dayone.GUI
             string makhoa = txbMaKhoa.Text;
             string tenkhoa = txbTenKhoa.Text;
 
-            if (makhoa.Length == 0 && tenkhoa.Length == 0)
+            if (makhoa.Length == 0 || tenkhoa.Length == 0)
                 MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {

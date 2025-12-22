@@ -49,6 +49,7 @@
             this.numSoLuong = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).BeginInit();
@@ -217,6 +218,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnTimKiem);
             this.panel1.Controls.Add(this.cmbMaKhoa);
             this.panel1.Controls.Add(this.numSoLuong);
             this.panel1.Controls.Add(this.btnTaiLai);
@@ -270,6 +272,16 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Tên Khoa:";
             // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Location = new System.Drawing.Point(436, 112);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(93, 29);
+            this.btnTimKiem.TabIndex = 5;
+            this.btnTimKiem.Text = "Tìm kiếm ";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
             // QuanLyLop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -313,5 +325,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Button btnTimKiem;
     }
 }

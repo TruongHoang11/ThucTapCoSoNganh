@@ -99,7 +99,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1550, 157);
+            this.panel1.Size = new System.Drawing.Size(1439, 157);
             this.panel1.TabIndex = 6;
             // 
             // btnTimKiem
@@ -341,7 +341,7 @@
             this.dgvQuanLyDiem.RowHeadersWidth = 51;
             this.dgvQuanLyDiem.RowTemplate.Height = 30;
             this.dgvQuanLyDiem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuanLyDiem.Size = new System.Drawing.Size(1550, 383);
+            this.dgvQuanLyDiem.Size = new System.Drawing.Size(1439, 383);
             this.dgvQuanLyDiem.TabIndex = 7;
             this.dgvQuanLyDiem.TabStop = false;
             this.dgvQuanLyDiem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyDiem_CellClick);
@@ -460,7 +460,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1550, 540);
+            this.ClientSize = new System.Drawing.Size(1439, 540);
             this.Controls.Add(this.dgvQuanLyDiem);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
