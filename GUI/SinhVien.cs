@@ -178,7 +178,7 @@ namespace Dayone.GUI
                     File.Copy(duongDanAnh, folder + tenAnh, true);
                 }
 
-                bool kq = BLL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht, tenAnh);
+                bool kq = BLL_SinhVien.Instance.Them(masv, tensv, ngaysinh, gioitinh, quequan, ngaynhaphoc, malop, makhoa, macvht, duongDanAnh);
 
                 if (kq)
                 {
@@ -273,7 +273,7 @@ namespace Dayone.GUI
 
                 if (!string.IsNullOrEmpty(tenAnh))
                 {
-                    anh = tenAnh;
+                    anh = duongDanAnh;
 
                 }
                 else
@@ -288,7 +288,7 @@ namespace Dayone.GUI
                 // ==== GỌI BLL ====
                 bool result = BLL_SinhVien.Instance.Sua(
                     masv, tensv, ngaysinh, gioitinh, quequan,
-                    ngaynhaphoc, malop, makhoa, macovan, anh, id
+                    ngaynhaphoc, malop, makhoa, macovan, duongDanAnh, id
                 );
 
                 if (result)
