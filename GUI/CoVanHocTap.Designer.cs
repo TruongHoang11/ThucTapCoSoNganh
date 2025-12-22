@@ -37,6 +37,7 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTimKiem = new System.Windows.Forms.Button();
             this.cmbMaKhoa = new System.Windows.Forms.ComboBox();
             this.cmbMaLop = new System.Windows.Forms.ComboBox();
             this.btnXoa = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txbID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnTimKiem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoVanHocTap)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -179,6 +179,17 @@
             this.panel1.Size = new System.Drawing.Size(864, 167);
             this.panel1.TabIndex = 8;
             // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.Location = new System.Drawing.Point(587, 115);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(102, 28);
+            this.btnTimKiem.TabIndex = 17;
+            this.btnTimKiem.TabStop = false;
+            this.btnTimKiem.Text = "Tìm kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
             // cmbMaKhoa
             // 
             this.cmbMaKhoa.FormattingEnabled = true;
@@ -186,6 +197,7 @@
             this.cmbMaKhoa.Name = "cmbMaKhoa";
             this.cmbMaKhoa.Size = new System.Drawing.Size(187, 30);
             this.cmbMaKhoa.TabIndex = 7;
+            this.cmbMaKhoa.SelectedIndexChanged += new System.EventHandler(this.cmbMaKhoa_SelectedIndexChanged);
             // 
             // cmbMaLop
             // 
@@ -355,17 +367,6 @@
             this.label1.Size = new System.Drawing.Size(36, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID:";
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.Location = new System.Drawing.Point(587, 115);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(102, 28);
-            this.btnTimKiem.TabIndex = 17;
-            this.btnTimKiem.TabStop = false;
-            this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // CoVanHocTap
             // 

@@ -249,15 +249,15 @@ namespace Dayone.GUI
             dgvDangKyMon.DataSource =
                 BLL_DangKyMon.Instance.GetSinhVienByLopHocPhan(maLHP);
         }
-        private void LoadLopHocPhanByMon(string maMH)
-        {
-            var dt = BLL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
+        //private void LoadLopHocPhanByMon(string maMH)
+        //{
+        //    var dt = BLL_LopHocPhan.Instance.GetLopHocPhanByMon(maMH);
 
-            cmbMaHocPhan.DataSource = dt;
-            cmbMaHocPhan.DisplayMember = "TenLopHocPhan";   // HIỆN TÊN
-            cmbMaHocPhan.ValueMember = "MaLopHocPhan";    // GIỮ MÃ ĐỂ XỬ LÝ
-            cmbMaHocPhan.SelectedIndex = -1;
-        }
+        //    cmbMaHocPhan.DataSource = dt;
+        //    cmbMaHocPhan.DisplayMember = "TenLopHocPhan";   // HIỆN TÊN
+        //    cmbMaHocPhan.ValueMember = "MaLopHocPhan";    // GIỮ MÃ ĐỂ XỬ LÝ
+        //    cmbMaHocPhan.SelectedIndex = -1;
+        //}
 
         private void TenLop_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -349,7 +349,7 @@ namespace Dayone.GUI
             LoadMonHoc();
             LoadLopCoDinh();
             LoadLopHocPhan();
-
+            //LoadLopHocPhanByMon();
             isResetting = true;
 
             // LƯU FULL DATA
