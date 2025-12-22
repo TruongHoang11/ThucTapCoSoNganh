@@ -780,7 +780,7 @@ namespace Dayone.GUI
         //}
 
 
-        //Comment trong file SinhVien
+        //Comment trong file SinhVien lan 2
 
 
     }
