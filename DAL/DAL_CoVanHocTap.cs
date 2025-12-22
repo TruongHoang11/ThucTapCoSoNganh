@@ -76,6 +76,51 @@ namespace Dayone.DAL
 
             return dt.Rows.Count > 0; // Có dòng → trùng
         }
+        public DataTable TimKiem(
+          string tenCV,
+          DateTime? ngaySinh,
+          string maLop,
+          string maKhoa
+      )
+        {
+            string sql = @"
+        SELECT cv.*
+        FROM CoVanHocTap cv
+        INNER JOIN Lop l ON cv.MaLop = l.MaLop
+        INNER JOIN Khoa k ON cv.MaKhoa = k.MaKhoa
+        WHERE 1 = 1
+    ";
+
+            List<object> param = new List<object>();
+
+            if (!string.IsNullOrEmpty(tenCV))
+            {
+                sql += " AND cv.TenCVHT LIKE @TenCV";
+                param.Add("%" + tenCV + "%");
+            }
+
+            if (ngaySinh.HasValue)
+            {
+                sql += " AND CONVERT(date, cv.NgaySinh) = @NgaySinh";
+                param.Add(ngaySinh.Value.Date);
+            }
+
+            if (!string.IsNullOrEmpty(maLop))
+            {
+                sql += " AND cv.MaLop = @MaLop";
+                param.Add(maLop);
+            }
+
+            if (!string.IsNullOrEmpty(maKhoa))
+            {
+                sql += " AND cv.MaKhoa = @MaKhoa";
+                param.Add(maKhoa);
+            }
+
+            return DAL_KetNoi.Instance.ExcuteQuery(sql, param.ToArray());
+        }
+
+
         public bool KiemTraTrungKhiSua(string maCVHT, int id)
         {
             string sql = "select * from CoVanHocTap where MaCVHT = @MaCVHT and Id <> @Id";
