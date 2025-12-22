@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,17 @@ namespace Dayone.DAL
         {
             string sql = "select * from Lop";
             return DAL_KetNoi.Instance.ExcuteQuery(sql);
+        }
+
+        public DataTable TimTheoKhoa(string maKhoa)
+        {
+            string query = "SELECT * FROM Lop WHERE MaKhoa = @makhoa";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@makhoa", maKhoa)
+            };
+
+            return DAL_KetNoi.Instance.ExecuteQuery(query, parameters);
         }
     }
 }

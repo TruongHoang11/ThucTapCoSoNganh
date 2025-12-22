@@ -80,7 +80,7 @@
             this.dgvQuanLyMonHoc.RowHeadersWidth = 51;
             this.dgvQuanLyMonHoc.RowTemplate.Height = 30;
             this.dgvQuanLyMonHoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuanLyMonHoc.Size = new System.Drawing.Size(746, 284);
+            this.dgvQuanLyMonHoc.Size = new System.Drawing.Size(758, 337);
             this.dgvQuanLyMonHoc.TabIndex = 8;
             this.dgvQuanLyMonHoc.TabStop = false;
             this.dgvQuanLyMonHoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyMonHoc_CellClick_1);
@@ -161,7 +161,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(746, 157);
+            this.panel1.Size = new System.Drawing.Size(758, 157);
             this.panel1.TabIndex = 7;
             // 
             // numThucHanh
@@ -306,7 +306,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(746, 441);
+            this.ClientSize = new System.Drawing.Size(758, 494);
             this.Controls.Add(this.dgvQuanLyMonHoc);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -3,6 +3,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -125,6 +126,8 @@ namespace Dayone.DAL
             string sql = "SELECT COUNT(*) FROM SinhVien WHERE MaSV = @masv";
             return (int)DAL_KetNoi.Instance.ExecuteScalar(sql, new object[] { masv }) > 0;
         }
+
+        
 
     }
 }
